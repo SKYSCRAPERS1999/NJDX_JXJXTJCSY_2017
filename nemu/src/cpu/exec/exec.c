@@ -4,6 +4,7 @@
 typedef struct {
   DHelper decode;
   EHelper execute;
+  // both of them are &void(int*)
   int width;
 } opcode_entry;
 
