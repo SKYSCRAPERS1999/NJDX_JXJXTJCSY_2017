@@ -55,12 +55,15 @@ static int cmd_info(char *args)
 
 static int cmd_x(char *args)
 { 
-    char *arg = strtok(NULL, " ");
+    char *arg1 = strtok(NULL, " ");
+	char *arg2 = strtok(NULL, " ");
 	uint32_t N, EXPR;
-	printf("%s\n", arg);
-	if (arg != NULL)
+	printf("%s\n", arg1);
+	printf("%s\n", arg2);
+	if (arg1 != NULL && arg2 != NULL)
 	{
-		sscanf(arg, " %d 0x%d", &N, &EXPR);
+		sscanf(arg1, "%d", &N);
+		sscanf(arg2, "0x%d", &EXPR);
 		printf("0x%d", EXPR);
 		for (uint32_t i = 0; i < N; i++){
 			uint32_t DEST = paddr_read(EXPR + i, 4);
