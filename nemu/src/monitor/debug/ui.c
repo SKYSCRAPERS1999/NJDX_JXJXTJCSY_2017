@@ -62,7 +62,7 @@ static int cmd_x(char *args)
 	//printf("%s\n", arg2);
 	if (arg1 != NULL && arg2 != NULL)
 	{
-		sscanf(arg1, "%d", &N);
+		sscanf(arg1, "%u", &N);
 		sscanf(arg2, "0x%x", &EXPR);
 		assert(N >= 0 && EXPR >= 0);
 		printf("0x%x:", EXPR);
