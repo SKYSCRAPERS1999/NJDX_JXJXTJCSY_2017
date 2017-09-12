@@ -46,7 +46,7 @@ static int cmd_info(char *args)
 		char a[8][4] = {"EAX", "ECX", "EDX", "EBX", "ESP", "EBP", "ESI", "EDI"};
 		for (uint32_t i = R_EAX; i <= R_EDI; i++)
 		{
-			printf("%s = %x  ", a[i], reg_l(i)); 
+			printf("%s = 0x%x  ", a[i], reg_l(i)); 
 		}
 		printf("\n");
 	}
@@ -63,7 +63,7 @@ static int cmd_x(char *args)
 		printf("0x%d", EXPR);
 		for (uint32_t i = 0; i < N; i++){
 			uint32_t DEST = paddr_read(EXPR + i, 4);
-			printf(" %d", DEST);
+			printf(" 0x%x", DEST);
 		}
 		printf("\n");
 	}
