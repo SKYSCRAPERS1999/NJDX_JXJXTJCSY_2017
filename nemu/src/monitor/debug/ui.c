@@ -63,8 +63,8 @@ static int cmd_x(char *args)
 	if (arg1 != NULL && arg2 != NULL)
 	{
 		sscanf(arg1, "%d", &N);
-		sscanf(arg2, "0x%d", &EXPR);
-		printf("0x%d", EXPR);
+		sscanf(arg2, "0x%x", &EXPR);
+		printf("0x%x:", EXPR);
 		for (uint32_t i = 0; i < N; i++){
 			uint32_t DEST = paddr_read(EXPR + i, 4);
 			printf(" 0x%x", DEST);
