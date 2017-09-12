@@ -59,7 +59,7 @@ static int cmd_x(char *args)
 	uint32_t N, EXPR;
 	if (arg != NULL)
 	{
-		sscanf(arg, "%d 0x%d", &N, &EXPR);
+		sscanf(arg, " %d 0x%d", &N, &EXPR);
 		printf("0x%d", EXPR);
 		for (uint32_t i = 0; i < N; i++){
 			uint32_t DEST = paddr_read(EXPR + i, 4);
