@@ -46,7 +46,7 @@ static int cmd_info(char *args)
 		char a[8][4] = {"EAX", "ECX", "EDX", "EBX", "ESP", "EBP", "ESI", "EDI"};
 		for (uint32_t i = R_EAX; i <= R_EDI; i++)
 		{
-			printf("%s = %d  ", a[i], reg_l(i)); 
+			printf("%s = %x  ", a[i], reg_l(i)); 
 		}
 		printf("\n");
 	}
