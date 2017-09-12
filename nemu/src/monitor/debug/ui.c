@@ -66,7 +66,7 @@ static int cmd_x(char *args)
 		sscanf(arg2, "0x%x", &EXPR);
 		printf("0x%x:", EXPR);
 		for (uint32_t i = 0; i < N; i++){
-			uint32_t DEST = paddr_read(EXPR + i, 4);
+			uint32_t DEST = paddr_read(EXPR + 4 * i, 4);
 			printf(" 0x%x", DEST);
 		}
 		printf("\n");
