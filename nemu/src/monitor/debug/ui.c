@@ -57,14 +57,14 @@ static int cmd_x(char *args)
 { 
     char *arg1 = strtok(NULL, " ");
 	char *arg2 = strtok(NULL, " ");
-	uint32_t N, EXPR;
+	uint32_t EXPR; int N;
 	//printf("%s\n", arg1);
 	//printf("%s\n", arg2);
 	if (arg1 != NULL && arg2 != NULL)
 	{
-		sscanf(arg1, "%u", &N);
+		sscanf(arg1, "%d", &N);
 		sscanf(arg2, "0x%x", &EXPR);
-		assert(N >= 0 && EXPR >= 0);
+		assert(N >= 0);
 		printf("0x%x:", EXPR);
 		for (uint32_t i = 0; i < N; i++){
 			uint32_t DEST = paddr_read(EXPR + 4 * i, 4);
