@@ -37,15 +37,18 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_info(char *args)
-{
-	char a[8][4] = {"EAX", "ECX", "EDX", "EBX", "ESP", "EBP", "ESI", "EDI"};
-	for (uint32_t i = R_EAX; i <= R_EDI; i++)
+{	
+    char *arg = strtok(NULL, " ");
+	if (strcmp(arg, "r") == 0)
 	{
-		printf("%s = %d\t", a[i], reg_l(i)); 
+		char a[8][4] = {"EAX", "ECX", "EDX", "EBX", "ESP", "EBP", "ESI", "EDI"};
+		for (uint32_t i = R_EAX; i <= R_EDI; i++)
+		{
+			printf("%s = %d\t", a[i], reg_l(i)); 
+		}
+		printf("\n");
 	}
-	printf("\n");
 	return 0;
-
 }
 static int cmd_help(char *args);
 
@@ -60,7 +63,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Take i steps", cmd_si},
-  { "info r", "Get info of registers", cmd_info}, 
+  { "info", "Get info", cmd_info}, 
  /* TODO: Add more commands */
 
 };
