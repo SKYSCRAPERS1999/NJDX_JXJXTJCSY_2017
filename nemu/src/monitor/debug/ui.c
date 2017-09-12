@@ -7,6 +7,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+static int cmd_x_cnt = 1;
+
 void cpu_exec(uint64_t);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
@@ -51,6 +53,20 @@ static int cmd_info(char *args)
 	return 0;
 }
 
+static int cmd_x(char *args)
+{ 
+    char *arg = strtok(NULL, " ");
+	uint32_t N, EXPR;
+	if (arg != NULL)
+	{
+		sscanf(arg, "%d 0x%d", &N, &EXPR);
+		uint32_t DEST = paddr_read(EXPR, N);
+		printf("$%d = %d\n", cmd_x_cnt, DEST);
+		cmd_x_cnt++;
+	}
+	return 0;
+}
+
 static int cmd_help(char *args);
 
 static int cmd_si(char *args);
@@ -65,7 +81,8 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Take i steps", cmd_si},
   { "info", "Get info, use r to acquire registers", cmd_info}, 
- /* TODO: Add more commands */
+  { "x", "Scan memory", cmd_x},
+/* TODO: Add more commands */
 
 };
 
