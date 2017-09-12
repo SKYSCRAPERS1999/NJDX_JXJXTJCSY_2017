@@ -39,7 +39,7 @@ static int cmd_q(char *args) {
 static int cmd_info(char *args)
 {	
     char *arg = strtok(NULL, " ");
-	if (strcmp(arg, "r") == 0)
+	if (arg != NULL && strcmp(arg, "r") == 0)
 	{
 		char a[8][4] = {"EAX", "ECX", "EDX", "EBX", "ESP", "EBP", "ESI", "EDI"};
 		for (uint32_t i = R_EAX; i <= R_EDI; i++)
