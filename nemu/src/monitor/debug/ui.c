@@ -36,7 +36,20 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+static int cmd_info(char *args)
+{
+	char a[8][4] = {"EAX", "ECX", "EDX", "EBX", "ESP", "EBP", "ESI", "EDI"};
+	for (uint32_t i = R_EAX; i <= R_EDI; i++)
+	{
+		printf("%s = %d\t", a[i], reg_l(i)); 
+	}
+	printf("\n");
+	return 0;
+
+}
 static int cmd_help(char *args);
+
+static int cmd_si(char *args);
 
 static struct {
   char *name;
@@ -46,8 +59,9 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
-  /* TODO: Add more commands */
+  { "si", "Take i steps", cmd_si},
+  { "info r", "Get info of registers", cmd_info} 
+ /* TODO: Add more commands */
 
 };
 
@@ -74,6 +88,20 @@ static int cmd_help(char *args) {
     printf("Unknown command '%s'\n", arg);
   }
   return 0;
+}
+
+static int cmd_si(char* args)
+{
+    char *arg = strtok(NULL, " ");
+	int n = 1;
+	if (arg == NULL){
+		cpu_exec(n);
+	}
+	else {
+		sscanf(arg, "%d", &n);
+		cpu_exec(n);
+	}
+	return 0;
 }
 
 void ui_mainloop(int is_batch_mode) {
@@ -114,3 +142,6 @@ void ui_mainloop(int is_batch_mode) {
     if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
   }
 }
+
+
+
