@@ -58,8 +58,8 @@ static int cmd_x(char *args)
     char *arg1 = strtok(NULL, " ");
 	char *arg2 = strtok(NULL, " ");
 	uint32_t N, EXPR;
-	printf("%s\n", arg1);
-	printf("%s\n", arg2);
+	//printf("%s\n", arg1);
+	//printf("%s\n", arg2);
 	if (arg1 != NULL && arg2 != NULL)
 	{
 		sscanf(arg1, "%d", &N);
