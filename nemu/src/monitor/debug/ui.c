@@ -57,6 +57,7 @@ static int cmd_x(char *args)
 { 
     char *arg = strtok(NULL, " ");
 	uint32_t N, EXPR;
+	printf("%s\n", arg);
 	if (arg != NULL)
 	{
 		sscanf(arg, " %d 0x%d", &N, &EXPR);
