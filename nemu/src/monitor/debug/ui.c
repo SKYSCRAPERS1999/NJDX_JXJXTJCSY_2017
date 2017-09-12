@@ -7,7 +7,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-static int cmd_x_cnt = 1;
+// static int cmd_x_cnt = 1;
 
 void cpu_exec(uint64_t);
 
@@ -60,9 +60,12 @@ static int cmd_x(char *args)
 	if (arg != NULL)
 	{
 		sscanf(arg, "%d 0x%d", &N, &EXPR);
-		uint32_t DEST = paddr_read(EXPR, N);
-		printf("$%d = %d\n", cmd_x_cnt, DEST);
-		cmd_x_cnt++;
+		printf("0x%d", EXPR);
+		for (uint32_t i = 0; i < N; i++){
+			uint32_t DEST = paddr_read(EXPR + i, 4);
+			printf(" %d", DEST);
+		}
+		printf("\n");
 	}
 	return 0;
 }
