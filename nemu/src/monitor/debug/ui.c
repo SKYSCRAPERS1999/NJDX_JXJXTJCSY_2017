@@ -65,7 +65,7 @@ static int cmd_x(char *args)
 		sscanf(arg2, "0x%x", &EXPR);
 		assert(N >= 0);
 		for (uint32_t i = 0; i < N; i++){
-		    if (i % 4 == 0) {if (i) {printf("\n");} printf("0x%08x:", EXPR);}
+		    if (i % 4 == 0) {if (i) {printf("\n");} printf("0x%08x:", EXPR + 4 * i);}
 			uint8_t DEST = vaddr_read(EXPR + i, 1);
 			printf("%02x ", DEST);
 		}
