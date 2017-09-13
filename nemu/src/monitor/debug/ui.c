@@ -48,7 +48,6 @@ static int cmd_info(char *args)
 		{
 			printf("%s : 0x%x\n", a[i], reg_l(i)); 
 		}
-		printf("\n");
 	}
 	return 0;
 }
@@ -65,11 +64,10 @@ static int cmd_x(char *args)
 		sscanf(arg1, "%d", &N);
 		sscanf(arg2, "0x%x", &EXPR);
 		assert(N >= 0);
-		printf("0x%x:", EXPR);
 		for (uint32_t i = 0; i < N; i++){
-		    if (i % 4 == 0) {if (i) {printf("\n");} printf("0x%x:", EXPR);}
+		    if (i % 4 == 0) {if (i) {printf("\n");} printf("0x%08x:", EXPR);}
 			uint8_t DEST = vaddr_read(EXPR + i, 1);
-			printf("%x ", DEST);
+			printf("%02x ", DEST);
 		}
 		printf("\n");
 	}
