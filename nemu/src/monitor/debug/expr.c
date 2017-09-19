@@ -210,7 +210,15 @@ int eval(uint32_t p, uint32_t q)
 					case TK_PLUS:
 					case TK_MINUS:
 					{
-						
+					    uint32_t j = i - 1;
+						while (j > p && (tokens[op].type == TK_MINUS || tokens[op].type == TK_PLUS))
+						{
+							j--;
+						}
+						if (tokens[op].type == TK_MULTIPLY || tokens[op].type == TK_DIVIDE)
+						{
+							break;
+						}
 						if (first_pm == -1) {first_pm = i;}
 						break;
 					}
@@ -235,10 +243,16 @@ int eval(uint32_t p, uint32_t q)
 		}else{ assert(0);}
         
 		printf("op = %d\n", op);
-        if (op == p && tokens[op].type == TK_MINUS)
+        if (op == p)
 		{
-			num_sign = -num_sign;
-			return eval(p + 1, q);
+			if (tokens[op].type == TK_MINUS)
+			{
+				num_sign = -num_sign;
+				return eval(p + 1, q);
+			}else if (tokens[op].type == TK_PLUS)
+			{
+				return eval(p + 1, q);
+			}
 		}
 
 		int val1 = eval(p, op - 1);
