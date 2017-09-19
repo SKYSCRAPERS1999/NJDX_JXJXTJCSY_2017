@@ -186,7 +186,7 @@ int eval(uint32_t p, uint32_t q)
 	else 
     {
 		// calculate op
-		uint32_t op = 0;
+		uint32_t op = p;
 		int cnt = 0;
 		int first_md = -1, first_pm = -1;
 		for (uint32_t i = p; i <= q; i++)
