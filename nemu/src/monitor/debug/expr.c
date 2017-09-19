@@ -125,7 +125,7 @@ uint32_t expr(char *e, bool *success) {
     return 0;
   }
   /* TODO: Insert codes to evaluate the expression. */
-  int ans = eval(0, nr_token);
+  int ans = eval(0, nr_token - 1);
   printf(" %d\n", ans);	
   *success = true;
 
