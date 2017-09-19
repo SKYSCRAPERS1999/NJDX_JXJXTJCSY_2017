@@ -24,15 +24,15 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
 
-  {" +", TK_NOTYPE},    // spaces
-  {"==", TK_EQ},        // equal
+  {" +", TK_NOTYPE},		// spaces
+  {"==", TK_EQ},			// equal
   {"\\+", TK_PLUS},         // plus
-  {"\\-", TK_MINUS},    // minus
-  {"\\*", TK_MULTIPLY},         // time
+  {"\\-", TK_MINUS},		// minus
+  {"\\*", TK_MULTIPLY},	    // time
   {"\\/",  TK_DIVIDE}, 	    // divide
-  {"\\(", TK_SP_L},             // small left parenthesis
-  {"\\)", TK_SP_R},             // small right parenthesis
-  {"[0-9]+", TK_NUM},           // number
+  {"\\(", TK_SP_L},         // small left parenthesis
+  {"\\)", TK_SP_R},         // small right parenthesis
+  {"[0-9]+", TK_NUM},       // number
 
 };
 
@@ -186,7 +186,7 @@ int eval(uint32_t p, uint32_t q)
 	else 
     {
 		// calculate op
-		uint32_t op = p;
+		int op = p;
 		int cnt = 0;
 		int first_md = -1, first_pm = -1;
 		for (uint32_t i = p; i <= q; i++)
