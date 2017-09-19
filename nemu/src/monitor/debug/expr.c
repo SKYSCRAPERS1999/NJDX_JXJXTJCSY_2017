@@ -96,24 +96,23 @@ static bool make_token(char *e) {
 					tokens[nr_token].type = rules[i].token_type;
 				    for (uint32_t j = 0; j < 32; j++)
 					{
-						tokens[nr_token].str[j] = '\0';
+						tokens[i].str[j] = '\0';
 					}
 				    for (uint32_t j = 0; j < substr_len && j < 32; j++)
 					{
-						tokens[nr_token].str[j] = *(substr_start + j);
+						tokens[i].str[j] = *(substr_start + j);
 					}
 					break;
 				}		
 				default: 
 				{
-					tokens[nr_token].type = rules[i].token_type;  
+					tokens[i].type = rules[i].token_type;  
 				}
         }
 		nr_token++;
 		break;
       }
     }
-
     if (i == NR_REGEX) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
