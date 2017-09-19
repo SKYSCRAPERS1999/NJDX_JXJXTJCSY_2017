@@ -9,8 +9,8 @@
 enum {
   TK_NOTYPE = 256, TK_EQ, 
   TK_PLUS, TK_MINUS, TK_TIME, TK_MULTIPLY, TK_DIVIDE,
-  SP_L, SP_R, MP_L, MP_R, LP_L, LP_R,
-  LESS, MORE, NUM,
+  TK_SP_L, TK_SP_R, TK_MP_L, TK_MP_R, TK_LP_L, TK_LP_R,
+  TK_LESS, TK_MORE, TK_NUM,
   /* TODO: Add more token types */
 
 };
@@ -30,21 +30,23 @@ static struct rule {
   {"\\-", TK_MINUS},    // minus
   {"\\*", TK_MULTIPLY},         // time
   {"\\/",  TK_DIVIDE}, 	    // divide
-  {"\\(", SP_L},             // small left parenthesis
-  {"\\)", SP_R},             // small right parenthesis
-  {"\\[", MP_L},             // medium left parenthesis
-  {"\\]", MP_R},             // medium right parenthesis
-  {"\\{", LP_L},             // large left parenthesis
-  {"\\}", LP_R},             // large right parenthesis
-  {"\\<", LESS},             // less
-  {"\\>", MORE},             // more
-  {"[0-9]+", NUM},           // number
+  {"\\(", TK_SP_L},             // small left parenthesis
+  {"\\)", TK_SP_R},             // small right parenthesis
+  {"\\[", TK_MP_L},             // medium left parenthesis
+  {"\\]", TK_MP_R},             // medium right parenthesis
+  {"\\{", TK_LP_L},             // large left parenthesis
+  {"\\}", TK_LP_R},             // large right parenthesis
+  {"\\<", TK_LESS},             // less
+  {"\\>", TK_MORE},             // more
+  {"[0-9]+", TK_NUM},           // number
 
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
 
 static regex_t re[NR_REGEX];
+
+int eval(uint32_t p, uint32_t q);
 
 /* Rules are used for many times.
  * Therefore we compile them only once before any usage.
@@ -95,21 +97,22 @@ static bool make_token(char *e) {
          */
         
         switch (rules[i].token_type) {
-				case NUM: 
+				case TK_NUM: 
 				{	
 					tokens[nr_token].type = rules[i].token_type; 	
 				    for (uint32_t i = 0; i < substr_len && i < 32; i++)
 					{
 						tokens[nr_token].str[i] = e[i];
 					}
+					break;
 				}		
 				default: 
 				{
 					tokens[nr_token].type = rules[i].token_type;  
 				}
-
         }
-        break;
+		nr_token++;
+		break;
       }
     }
 
@@ -129,7 +132,100 @@ uint32_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+  int ans = eval(0, nr_token);
+  printf(" %d\n", ans);	
 
   return 0;
+}
+
+
+bool check_parentheses (uint32_t p, uint32_t q)
+{
+	if (p > q) return 0;
+	bool ok = (tokens[p].type == TK_SP_L && tokens[q].type == TK_SP_R);
+    if (ok == 0) return 0;
+	int cnt = 0;
+	bool flag = 1;
+    for (uint32_t i = p + 1; i <= q - 1; i++)
+	{
+		if (tokens[i].type == TK_SP_L) cnt++;
+		if (tokens[i].type == TK_SP_R) cnt--;
+		if (cnt < 0) 
+		{
+			flag = 0;
+			break;
+		}
+	}
+	return flag;
+}
+
+int eval(uint32_t p, uint32_t q)
+{
+	if (p > q)
+	{
+		assert(0);
+	}
+	else if (p == q)
+	{
+		uint32_t len = strlen(tokens[p].str);
+		int num = 0;
+		for (uint32_t i = 0; i < len; i++)
+		{
+			num = 10 * num + tokens[p].str[i];
+		}
+		return num;
+	}
+    else if (check_parentheses(p, q) == true)
+	{
+		return eval(p + 1, q - 1);
+	}
+	else 
+    {
+		// calculate op
+		uint32_t op = 0;
+		int cnt = 0;
+		int first_md = -1, first_pm = -1;
+		for (uint32_t i = p; i <= q; i++)
+		{
+			 if (tokens[i].type == TK_SP_L) { cnt++;}
+			 else if (tokens[i].type == TK_SP_R) { cnt--;}
+			 else if (cnt == 0)
+			 {
+				switch (tokens[i].type)
+				{
+					case TK_PLUS:
+					case TK_MINUS:
+					{
+						if (first_pm == -1) {first_pm = p;}
+						break;
+					}
+					case TK_MULTIPLY:
+					case TK_DIVIDE:
+					{
+						if (first_md == -1)	{first_md = p;}
+					}
+					default: assert(0);
+				}
+			 }
+		}
+		if (first_pm != -1) 
+		{
+			op = first_pm;
+		}else if (first_md == -1)
+		{
+			op = first_md;
+		}else{ assert(0);}
+
+		int val1 = eval(p, op - 1);
+		int val2 = eval(op + 1, q);
+
+		switch (tokens[op].type)
+		{
+			case '+': return val1 + val2;
+			case '-': return val1 - val2;
+			case '*': return val1 * val2;
+			case '/': return val1 / val2;
+			default: assert(0);
+		}
+	}
 }
