@@ -193,13 +193,13 @@ int eval(uint32_t p, uint32_t q)
 					case TK_PLUS:
 					case TK_MINUS:
 					{
-						if (first_pm == -1) {first_pm = p;}
+						if (first_pm == -1) {first_pm = i;}
 						break;
 					}
 					case TK_MULTIPLY:
 					case TK_DIVIDE:
 					{
-						if (first_md == -1)	{first_md = p;}
+						if (first_md == -1)	{first_md = i;}
 						break;
 					}
 					case TK_NUM: {break; }
