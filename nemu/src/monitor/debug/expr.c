@@ -236,7 +236,7 @@ int eval(uint32_t p, uint32_t q)
 		printf("op = %d\n", op);
         if (op == p && tokens[op].type == TK_MINUS)
 		{
-			num_sign = -1;
+			num_sign = -num_sign;
 			return eval(p + 1, q);
 		}
 
