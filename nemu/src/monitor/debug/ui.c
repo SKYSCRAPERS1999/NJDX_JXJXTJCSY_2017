@@ -74,6 +74,13 @@ static int cmd_x(char *args)
 	return 0;
 }
 
+static int cmd_p(char *args)
+{	
+	bool success = false;
+	expr(args, &success);
+	return success;
+}
+
 static int cmd_help(char *args);
 
 static int cmd_si(char *args);
@@ -89,6 +96,7 @@ static struct {
   { "si", "Take i steps", cmd_si},
   { "info", "Get info, use r to acquire registers", cmd_info}, 
   { "x", "Scan memory", cmd_x},
+  { "p", "Print expression", cmd_p},
 /* TODO: Add more commands */
 
 };
