@@ -32,7 +32,7 @@ static struct rule {
   {"\\/",  TK_DIVIDE}, 	    // divide
   {"\\(", TK_SP_L},             // small left parenthesis
   {"\\)", TK_SP_R},             // small right parenthesis
-  {"[0-9]{1,32}", TK_NUM},           // number
+  {"[0-9]+", TK_NUM},           // number
 
 };
 
