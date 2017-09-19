@@ -124,7 +124,6 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-
   /* TODO: Insert codes to evaluate the expression. */
   int ans = eval(0, nr_token);
   printf(" %d\n", ans);	
@@ -156,6 +155,7 @@ bool check_parentheses (uint32_t p, uint32_t q)
 
 int eval(uint32_t p, uint32_t q)
 {
+	Log("Length = %d\n", q - p + 1);
 	if (p > q)
 	{
 		assert(0);
