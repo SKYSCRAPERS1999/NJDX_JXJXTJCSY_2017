@@ -76,7 +76,7 @@ static int cmd_x(char *args)
 
 static int cmd_p(char *args)
 {
-	printf("%s\n", args);
+	printf("%s #\n", args);
 	bool success = false;
 	expr(args, &success);
 	return success;
