@@ -71,9 +71,9 @@ static bool make_token(char *e) {
   int position = 0;
   int i;
   regmatch_t pmatch;
-
+  
   nr_token = 0;
-
+  
   while (e[position] != '\0') {
     /* Try all rules one by one. */
     for (i = 0; i < NR_REGEX; i ++) {
@@ -93,7 +93,11 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
 				case TK_NUM: 
 				{	
-					tokens[nr_token].type = rules[i].token_type; 	
+					tokens[nr_token].type = rules[i].token_type;
+				    for (uint32_t i = 0; i < 32; i++)
+					{
+						tokens[nr_token].str[i] = '\0';
+					}
 				    for (uint32_t i = 0; i < substr_len && i < 32; i++)
 					{
 						tokens[nr_token].str[i] = e[i];
