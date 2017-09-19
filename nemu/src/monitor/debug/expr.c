@@ -222,7 +222,8 @@ int eval(uint32_t p, uint32_t q)
 		{
 			op = first_md;
 		}else{ assert(0);}
-
+        
+		printf("op = %d\n", op);
 		int val1 = eval(p, op - 1);
 		int val2 = eval(op + 1, q);
         printf("val1 = %d, val2 =  %d\n", val1, val2);
