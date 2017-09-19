@@ -84,7 +84,7 @@ static bool make_token(char *e) {
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
-
+				
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
@@ -162,12 +162,12 @@ bool check_parentheses (uint32_t p, uint32_t q)
 
 int eval(uint32_t p, uint32_t q)
 {
-    printf("Length = %d\n", q - p + 1);
-	for (int i = p; i <= q; i++) printf("%d ", tokens[i].type);
-	printf("\n");
+    // printf("Length = %d\n", q - p + 1);
+	// for (int i = p; i <= q; i++) printf("%d ", tokens[i].type);
+	// printf("\n");
 	if (p > q)
 	{
-		assert(0);
+		return 0;
 	}
 	else if (p == q)
 	{
