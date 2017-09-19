@@ -179,11 +179,19 @@ int eval(uint32_t p, uint32_t q)
 		{
 			num = 10 * num + (tokens[p].str[i] - '0');
 		}
-		return num;
+		if (num_sign == -1)
+		{
+			num_sign = 1;
+			return num;
+		}else{return num;}
 	}
     else if (check_parentheses(p, q) == true)
 	{
-		return eval(p + 1, q - 1);
+		if (num_sign == -1)
+		{
+			num_sign = 1;
+			return -eval(p + 1, q - 1);
+		}else{return eval(p + 1, q - 1);}
 	}
 	else 
     {
