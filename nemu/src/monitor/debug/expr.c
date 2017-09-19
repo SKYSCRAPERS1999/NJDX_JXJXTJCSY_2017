@@ -205,6 +205,7 @@ int eval(uint32_t p, uint32_t q)
 						if (first_md == -1)	{first_md = i;}
 						break;
 					}
+					case TK_NOTYPE:
 					case TK_NUM: {break; }
 					default: assert(0);
 				}
