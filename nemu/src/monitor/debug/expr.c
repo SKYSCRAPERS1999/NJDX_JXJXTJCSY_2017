@@ -160,6 +160,8 @@ bool check_parentheses (uint32_t p, uint32_t q)
 	return flag;
 }
 
+static int num_sign = 1;
+
 int eval(uint32_t p, uint32_t q)
 {
     // printf("Length = %d\n", q - p + 1);
@@ -224,17 +226,37 @@ int eval(uint32_t p, uint32_t q)
 		}else{ assert(0);}
         
 		printf("op = %d\n", op);
+        if (op == p && tokens[op].type == TK_MINUS)
+		{
+			num_sign = -1;
+			return eval(p + 1, q);
+		}
+
 		int val1 = eval(p, op - 1);
 		int val2 = eval(op + 1, q);
         printf("val1 = %d, val2 =  %d\n", val1, val2);
-
-		switch (tokens[op].type)
+		
+		if (num_sign == -1)
 		{
-			case TK_PLUS: return val1 + val2;
-			case TK_MINUS: return val1 - val2;
-			case TK_MULTIPLY: return val1 * val2;
-			case TK_DIVIDE: return val1 / val2;
-			default: assert(0);
+			switch (tokens[op].type)
+			{
+				case TK_PLUS: return -val1 + val2;
+				case TK_MINUS: return -val1 - val2;
+				case TK_MULTIPLY: return -val1 * val2;
+				case TK_DIVIDE: return -val1 / val2;
+				default: assert(0);
+			}
+		}
+		else
+		{
+			switch (tokens[op].type)
+			{
+				case TK_PLUS: return val1 + val2;
+				case TK_MINUS: return val1 - val2;
+				case TK_MULTIPLY: return val1 * val2;
+				case TK_DIVIDE: return val1 / val2;
+				default: assert(0);
+			}
 		}
 	}
 }
