@@ -106,7 +106,7 @@ static bool make_token(char *e) {
 				}		
 				default: 
 				{
-					tokens[i].type = rules[i].token_type;  
+					tokens[nr_token].type = rules[i].token_type;  
 				}
         }
 		nr_token++;
