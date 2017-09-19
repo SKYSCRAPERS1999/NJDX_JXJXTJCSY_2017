@@ -220,10 +220,10 @@ int eval(uint32_t p, uint32_t q)
 
 		switch (tokens[op].type)
 		{
-			case '+': return val1 + val2;
-			case '-': return val1 - val2;
-			case '*': return val1 * val2;
-			case '/': return val1 / val2;
+			case TK_PLUS: return val1 + val2;
+			case TK_MINUS: return val1 - val2;
+			case TK_MULTIPLY: return val1 * val2;
+			case TK_DIVIDE: return val1 / val2;
 			default: assert(0);
 		}
 	}
