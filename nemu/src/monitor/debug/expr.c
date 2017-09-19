@@ -182,7 +182,7 @@ int eval(uint32_t p, uint32_t q)
 		if (num_sign == -1)
 		{
 			num_sign = 1;
-			return num;
+			return -num;
 		}else{return num;}
 	}
     else if (check_parentheses(p, q) == true)
