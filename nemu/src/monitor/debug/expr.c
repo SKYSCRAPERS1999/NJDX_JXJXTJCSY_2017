@@ -200,7 +200,9 @@ int eval(uint32_t p, uint32_t q)
 					case TK_DIVIDE:
 					{
 						if (first_md == -1)	{first_md = p;}
+						break;
 					}
+					case TK_NUM: {break; }
 					default: assert(0);
 				}
 			 }
