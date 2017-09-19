@@ -96,11 +96,11 @@ static bool make_token(char *e) {
 					tokens[nr_token].type = rules[i].token_type;
 				    for (uint32_t j = 0; j < 32; j++)
 					{
-						tokens[i].str[j] = '\0';
+						tokens[nr_token].str[j] = '\0';
 					}
 				    for (uint32_t j = 0; j < substr_len && j < 32; j++)
 					{
-						tokens[i].str[j] = *(substr_start + j);
+						tokens[nr_token].str[j] = *(substr_start + j);
 					}
 					break;
 				}		
