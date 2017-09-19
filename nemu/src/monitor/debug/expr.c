@@ -107,7 +107,7 @@ static bool make_token(char *e) {
 						tokens[nr_token].str[j] = *(substr_start + j);
 					}
 					break;
-				}		
+				}
 				default: 
 				{
 					tokens[nr_token].type = rules[i].token_type;  
@@ -210,6 +210,7 @@ int eval(uint32_t p, uint32_t q)
 					case TK_PLUS:
 					case TK_MINUS:
 					{
+						
 						if (first_pm == -1) {first_pm = i;}
 						break;
 					}
