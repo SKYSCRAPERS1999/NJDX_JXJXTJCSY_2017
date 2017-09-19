@@ -126,7 +126,7 @@ uint32_t expr(char *e, bool *success) {
   }
   /* TODO: Insert codes to evaluate the expression. */
   int ans = eval(0, nr_token - 1);
-  printf(" %d\n", ans);	
+  printf("%d\n", ans);	
   *success = true;
 
   return 0;
@@ -210,7 +210,7 @@ int eval(uint32_t p, uint32_t q)
 		if (first_pm != -1) 
 		{
 			op = first_pm;
-		}else if (first_md == -1)
+		}else if (first_md != -1)
 		{
 			op = first_md;
 		}else{ assert(0);}
