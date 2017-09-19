@@ -9,7 +9,7 @@
 enum {
   TK_NOTYPE = 256, TK_EQ, 
   TK_PLUS, TK_MINUS, TK_TIME, TK_MULTIPLY, TK_DIVIDE,
-  TK_SP_L, TK_SP_R, TK_MP_L, TK_MP_R, TK_LP_L, TK_LP_R,
+  TK_SP_L, TK_SP_R, 
   TK_LESS, TK_MORE, TK_NUM,
   /* TODO: Add more token types */
 
