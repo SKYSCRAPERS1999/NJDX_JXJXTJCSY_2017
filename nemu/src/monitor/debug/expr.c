@@ -32,12 +32,6 @@ static struct rule {
   {"\\/",  TK_DIVIDE}, 	    // divide
   {"\\(", TK_SP_L},             // small left parenthesis
   {"\\)", TK_SP_R},             // small right parenthesis
-  {"\\[", TK_MP_L},             // medium left parenthesis
-  {"\\]", TK_MP_R},             // medium right parenthesis
-  {"\\{", TK_LP_L},             // large left parenthesis
-  {"\\}", TK_LP_R},             // large right parenthesis
-  {"\\<", TK_LESS},             // less
-  {"\\>", TK_MORE},             // more
   {"[0-9]+", TK_NUM},           // number
 
 };
