@@ -94,13 +94,13 @@ static bool make_token(char *e) {
 				case TK_NUM: 
 				{	
 					tokens[nr_token].type = rules[i].token_type;
-				    for (uint32_t i = 0; i < 32; i++)
+				    for (uint32_t j = 0; j < 32; j++)
 					{
-						tokens[nr_token].str[i] = '\0';
+						tokens[nr_token].str[j] = '\0';
 					}
-				    for (uint32_t i = 0; i < substr_len && i < 32; i++)
+				    for (uint32_t j = 0; j < substr_len && j < 32; j++)
 					{
-						tokens[nr_token].str[i] = e[i];
+						tokens[nr_token].str[j] = *(substr_start + j);
 					}
 					break;
 				}		
