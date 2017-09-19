@@ -215,7 +215,7 @@ int eval(uint32_t p, uint32_t q)
 						{
 							j--;
 						}
-						if (tokens[op].type == TK_MULTIPLY || tokens[op].type == TK_DIVIDE)
+						if (tokens[j].type == TK_MULTIPLY || tokens[j].type == TK_DIVIDE)
 						{
 							break;
 						}
