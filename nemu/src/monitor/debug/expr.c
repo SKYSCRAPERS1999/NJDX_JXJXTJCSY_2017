@@ -168,7 +168,7 @@ int eval(uint32_t p, uint32_t q)
 		int num = 0;
 		for (uint32_t i = 0; i < len; i++)
 		{
-			num = 10 * num + tokens[p].str[i];
+			num = 10 * num + (tokens[p].str[i] - '0');
 		}
 		return num;
 	}
