@@ -54,14 +54,14 @@ static struct rule {
   {"\\$[e|E][s|S][i|I]", TK_ESI}, // read esi
   {"\\$[e|E][b|B][p|P]", TK_EBP}, // read ebp
   {"\\$[e|E][d|D][i|I]", TK_EDI}, // read edi
-  {"\\$[e|E][a|A][x|X]", TK_AX}, // read ax
-  {"\\$[e|E][b|B][x|X]", TK_BX}, // read bx
-  {"\\$[e|E][c|C][x|X]", TK_CX}, // read cx
-  {"\\$[e|E][d|D][x|X]", TK_DX}, // read dx
-  {"\\$[e|E][a|A][x|X]", TK_AL}, // read al
-  {"\\$[e|E][b|B][x|X]", TK_BL}, // read bl
-  {"\\$[e|E][c|C][x|X]", TK_CL}, // read cl
-  {"\\$[e|E][d|D][x|X]", TK_DL}, // read dl
+  {"\\$[a|A][x|X]", TK_AX}, // read ax
+  {"\\$[b|B][x|X]", TK_BX}, // read bx
+  {"\\$[c|C][x|X]", TK_CX}, // read cx
+  {"\\$[d|D][x|X]", TK_DX}, // read dx
+  {"\\$[a|A][l|L]", TK_AL}, // read al
+  {"\\$[b|B][l|L]", TK_BL}, // read bl
+  {"\\$[c|C][l|L]", TK_CL}, // read cl
+  {"\\$[d|D][l|L]", TK_DL}, // read dl
 
 };
 
