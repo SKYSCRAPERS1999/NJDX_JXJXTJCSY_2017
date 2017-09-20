@@ -128,6 +128,19 @@ static bool make_token(char *e) {
 					}
 					break;
 				}
+				case TK_HEXNUM:
+				{
+					tokens[nr_token].type = rules[i].token_type;
+				    for (uint32_t j = 0; j < 32; j++)
+					{
+						tokens[nr_token].str[j] = '\0';
+					}
+				    for (uint32_t j = 0; j < substr_len - 2 && j < 32; j++)
+					{
+						tokens[nr_token].str[j] = *(substr_start + j + 2);
+					}
+					break;
+				}
 				default: 
 				{
 					tokens[nr_token].type = rules[i].token_type;  
@@ -206,6 +219,16 @@ int eval(uint32_t p, uint32_t q)
 			case TK_EBP: return reg_l(5);
 			case TK_ESI: return reg_l(6);
 			case TK_EDI: return reg_l(7);
+			case TK_HEXNUM:
+			{
+				uint32_t len = strlen(tokens[p].str);
+				int num = 0;
+				for (uint32_t i = 0; i < len; i++)
+				{
+					num = 16 * num + (tokens[p].str[i] - '0');
+				}
+				return num;
+			}
 			case TK_NUM:
 			{
 				uint32_t len = strlen(tokens[p].str);
@@ -298,6 +321,7 @@ int eval(uint32_t p, uint32_t q)
 					case TK_EBP: 
 					case TK_ESI: 
 					case TK_EDI:
+					case TK_HEXNUM:
 					case TK_NUM: {break; }
 					default: assert(0);
 				}
