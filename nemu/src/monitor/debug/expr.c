@@ -242,6 +242,8 @@ int eval(uint32_t p, uint32_t q)
 				}
 			 }
 		}
+
+		printf("last_ao = %d # last_pm = %d # last_md = %d # first_single = %d\n", last_ao, last_pm, last_md , first_single);
 		if (last_ao != -1)
 		{
 			op = last_ao;
