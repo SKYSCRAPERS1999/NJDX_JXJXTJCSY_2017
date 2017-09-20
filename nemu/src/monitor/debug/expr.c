@@ -290,6 +290,14 @@ int eval(uint32_t p, uint32_t q)
 						break;
 					}
 					case TK_NOTYPE:
+					case TK_EAX: 
+					case TK_ECX:
+					case TK_EDX:
+					case TK_EBX:
+					case TK_ESP: 
+					case TK_EBP: 
+					case TK_ESI: 
+					case TK_EDI:
 					case TK_NUM: {break; }
 					default: assert(0);
 				}
