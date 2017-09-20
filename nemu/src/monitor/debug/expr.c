@@ -209,9 +209,11 @@ int eval(uint32_t p, uint32_t q)
 					}
 					case TK_NOT:
 					{
-						if (first_single != -1) {break;}
-					    first_single = i;
-						break;
+						if (first_single == -1)
+						{
+							first_single = i;
+							break;
+						}
 					}
 					case TK_PLUS:
 					case TK_MINUS:
@@ -228,9 +230,10 @@ int eval(uint32_t p, uint32_t q)
 								first_single = i;
 								break;
 							}
+						}else{
+							last_pm = i;
+							break;
 						}
-						last_pm = i;
-						break;
 					}
 					case TK_MULTIPLY:
 					case TK_DIVIDE:
