@@ -48,6 +48,7 @@ static int cmd_info(char *args)
 		{
 			printf("%s : 0x%x\n", a[i], reg_l(i)); 
 		}
+		printf("EIP : 0x%x\n", cpu.eip);
 	}
 	return 0;
 }
