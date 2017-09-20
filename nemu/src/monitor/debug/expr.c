@@ -187,7 +187,7 @@ bool check_parentheses (uint32_t p, uint32_t q)
 
 int eval(uint32_t p, uint32_t q)
 {
-    printf("p = %d, q = %d\n", q , p);
+    printf("p = %d, q = %d\n", p , q);
 	for (int i = p; i <= q; i++) printf("%d ", tokens[i].type);
 	printf("\n");
 	if (p > q)
