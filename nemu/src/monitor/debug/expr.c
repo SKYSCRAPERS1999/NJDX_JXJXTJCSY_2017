@@ -168,7 +168,7 @@ uint32_t expr(char *e, bool *success, char type) {
   int ans = eval(0, nr_token - 1);
   switch (type)
   {
-	case 'd': { printf("%d\n", ans); break;}
+	case 'd': { printf("%u\n", ans); break;}
 	case 'h':
 	case 'x': { printf("0x%x\n", ans); break;}
   }
