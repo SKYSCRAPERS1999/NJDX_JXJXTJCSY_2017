@@ -300,8 +300,8 @@ int eval(uint32_t p, uint32_t q)
 		}
 
 		printf("last_ao = %d # last_pm = %d # last_md = %d # first_single = %d\n", last_ao, last_pm, last_md , first_single);
-		for (int i = 0; i < 8; i++)
-				printf("reg_l(%d) = %d\n", i, reg_l(i));
+		//for (int i = 0; i < 8; i++)
+		//		printf("reg_l(%d) = %d\n", i, reg_l(i));
 		// the priority are listed from lowest to highest
 		//
 		if (last_ao != -1)
