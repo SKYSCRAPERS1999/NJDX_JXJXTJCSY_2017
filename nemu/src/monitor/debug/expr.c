@@ -231,8 +231,11 @@ int eval(uint32_t p, uint32_t q)
 								break;
 							//}
 						}else{
-							last_pm = i;
-							break;
+							if (last_pm == -1 || (last_pm != -1 && (i > p && (tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_PLUS))))
+							{
+								last_pm = i;
+								break;
+							}
 						}
 					}
 					case TK_MULTIPLY:
