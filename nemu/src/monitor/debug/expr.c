@@ -7,11 +7,12 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, 
-  TK_PLUS, TK_MINUS, TK_TIME, TK_MULTIPLY, TK_DIVIDE,
+  TK_NOTYPE = 256,
+  TK_EQ, TK_UEQ, TK_LESS, TK_MORE, TK_LE, TK_ME, 
+  TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE,
   TK_SP_L, TK_SP_R, 
-  TK_LESS, TK_MORE, TK_NUM,
-  TK_AND, TK_OR, TK_UEQ, TK_NOT,
+  TK_NUM,
+  TK_AND, TK_OR, TK_NOT,
   /* TODO: Add more token types */
 
 };
@@ -27,6 +28,11 @@ static struct rule {
 
   {" +", TK_NOTYPE},		// spaces
   {"==", TK_EQ},			// equal
+  {"!=", TK_UEQ},           // unequal
+  {">=", TK_ME},            // more than or equal
+  {"<=", TK_LE},            // less than or equal
+  {">", TK_MORE},           // more than
+  {"<", TK_LESS},           // less than
   {"\\+", TK_PLUS},         // plus
   {"\\-", TK_MINUS},		// minus
   {"\\*", TK_MULTIPLY},	    // time
@@ -36,7 +42,6 @@ static struct rule {
   {"[0-9]+", TK_NUM},       // number
   {"&&", TK_AND},           // logical and
   {"\\|\\|", TK_OR},            // logical or
-  {"!=", TK_UEQ},           // unequal
   {"!", TK_NOT},            // logical not
 };
 
@@ -192,7 +197,7 @@ int eval(uint32_t p, uint32_t q)
 		// calculate op
 		int op = p;
 		int cnt = 0;
-		int last_md = -1, last_pm = -1, last_ao = -1, first_single = -1;
+		int last_md = -1, last_pm = -1, last_cmp = -1, last_ao = -1, first_single = -1;
 		for (uint32_t i = p; i <= q; i++)
 		{
 			 if (tokens[i].type == TK_SP_L) { cnt++;}
@@ -213,6 +218,16 @@ int eval(uint32_t p, uint32_t q)
 						{
 							first_single = i;
 						}
+						break;
+					}
+					case TK_LESS:
+					case TK_MORE:
+					case TK_LE:
+					case TK_ME:
+					case TK_UEQ:
+					case TK_EQ:
+					{
+						last_cmp = i;
 						break;
 					}
 					case TK_PLUS:
@@ -243,9 +258,15 @@ int eval(uint32_t p, uint32_t q)
 		}
 
 		printf("last_ao = %d # last_pm = %d # last_md = %d # first_single = %d\n", last_ao, last_pm, last_md , first_single);
+
+		// the priority are listed from lowest to highest
+		//
 		if (last_ao != -1)
 		{
 			op = last_ao;
+		}else if (last_cmp != -1)
+		{
+			op = last_cmp;
 		}else if (last_pm != -1) 
 		{
 			op = last_pm;
@@ -275,6 +296,12 @@ int eval(uint32_t p, uint32_t q)
 			case TK_MINUS: return val1 - val2;
 			case TK_MULTIPLY: return val1 * val2;
 			case TK_DIVIDE: return val1 / val2;
+			case TK_EQ: return val1 == val2;
+			case TK_UEQ: return val1 != val2;
+			case TK_MORE: return val1 > val2;
+			case TK_LESS: return val1 < val2;
+			case TK_ME: return val1 >= val2;
+			case TK_LE: return val1 <= val2;
 			default: assert(0);
 		}
 	}
