@@ -20,4 +20,23 @@ void init_wp_pool() {
 
 /* TODO: Implement the functionality of watchpoint */
 
+WP* new_wp()
+{
+	WP* p = free_;
+	if (p == NULL)
+	{
+		assert(0);
+	}else{
+		free_ = free_->next;
+		p->have_value = false;
+		p->val_old = p->val_new = 0;
+		p->next = NULL;
+		return p;
+	}
+}
 
+void free_wp(WP* wp)
+{
+	wp->next = free_;
+	free_ = wp;
+}
