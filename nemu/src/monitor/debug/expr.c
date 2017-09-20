@@ -35,7 +35,7 @@ static struct rule {
   {"\\)", TK_SP_R},         // small right parenthesis
   {"[0-9]+", TK_NUM},       // number
   {"&&", TK_AND},           // logical and
-  {"||", TK_OR},            // logical or
+  {"\\||", TK_OR},            // logical or
   {"!=", TK_UEQ},           // unequal
   {"!", TK_NOT},            // logical not
 };
