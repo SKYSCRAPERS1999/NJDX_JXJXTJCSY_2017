@@ -13,6 +13,7 @@ enum {
   TK_SP_L, TK_SP_R, 
   TK_NUM,
   TK_AND, TK_OR, TK_NOT,
+  TK_EAX, TK_EBX, TK_ECX, TK_EDX, TK_ESP, TK_ESI, TK_EBP, TK_EDI,
   /* TODO: Add more token types */
 
 };
@@ -43,6 +44,15 @@ static struct rule {
   {"&&", TK_AND},           // logical and
   {"\\|\\|", TK_OR},            // logical or
   {"!", TK_NOT},            // logical not
+  {"$[e|E][a|A][x|X]", TK_EAX}, // read eax
+  {"$[e|E][b|B][x|X]", TK_EBX}, // read ebx
+  {"$[e|E][c|C][x|X]", TK_ECX}, // read ecx
+  {"$[e|E][d|D][x|X]", TK_EDX}, // read edx
+  {"$[e|E][s|S][p|P]", TK_ESP}, // read esp
+  {"$[e|E][s|S][i|I]", TK_ESI}, // read esi
+  {"$[e|E][b|B][p|P]", TK_EBP}, // read ebp
+  {"$[e|E][d|D][i|I]", TK_EDI}, // read edi
+
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -260,6 +270,21 @@ int eval(uint32_t p, uint32_t q)
 					}
 					case TK_NOTYPE:
 					case TK_NUM: {break; }
+					case TK_EAX:
+					case TK_EBX:
+					case TK_ECX:
+					case TK_EDX:
+					case TK_ESP:
+					case TK_ESI:
+					case TK_EBP:
+					case TK_EDI:
+					{
+						if (first_single == -1 && i == p)
+						{
+							first_single = i;
+						}
+						break;
+					}
 					default: assert(0);
 				}
 			 }
@@ -289,6 +314,14 @@ int eval(uint32_t p, uint32_t q)
 				case TK_MINUS: return -eval(p + 1, q);
 				case TK_NOT: return (!(eval(p + 1, q)));
 				case TK_MULTIPLY: return vaddr_read(eval(p + 1, q), 4);
+				case TK_EAX: return reg_l(0); 
+				case TK_ECX: return reg_l(1);
+				case TK_EDX: return reg_l(2);
+				case TK_EBX: return reg_l(3);
+				case TK_ESP: return reg_l(4);
+				case TK_EBP: return reg_l(5);
+				case TK_ESI: return reg_l(6);
+				case TK_EDI: return reg_l(7);
 			}
 		}else{ assert(0);}
         
