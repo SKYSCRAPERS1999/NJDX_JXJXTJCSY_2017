@@ -209,7 +209,7 @@ int eval(uint32_t p, uint32_t q)
 					}
 					case TK_NOT:
 					{
-						if (first_single == -1)
+						if (first_single == -1 && i == p)
 						{
 							first_single = i;
 							break;
@@ -218,18 +218,18 @@ int eval(uint32_t p, uint32_t q)
 					case TK_PLUS:
 					case TK_MINUS:
 					{   
-						if (first_single == -1)
+						if (first_single == -1 && i == p)
 						{
-							uint32_t j = i;
-							while (j > p && (tokens[j].type == TK_PLUS || tokens[j].type == TK_MINUS))
-							{
-								j--;
-							}
-							if (j >= p && (tokens[j].type == TK_MULTIPLY || tokens[j].type == TK_DIVIDE))
-							{
+							//uint32_t j = i;
+							//while (j > p && (tokens[j].type == TK_PLUS || tokens[j].type == TK_MINUS))
+							//{
+							//	j--;
+							//}
+							//if (j >= p && (tokens[j].type == TK_MULTIPLY || tokens[j].type == TK_DIVIDE))
+							//{
 								first_single = i;
 								break;
-							}
+							//}
 						}else{
 							last_pm = i;
 							break;
@@ -249,11 +249,7 @@ int eval(uint32_t p, uint32_t q)
 		}
 		if (last_ao != -1)
 		{
-			switch (tokens[last_ao].type)
-			{
-				case TK_AND: return eval(p, last_ao - 1) && eval(last_ao + 1, q);
-				case TK_OR: return eval(p, last_ao - 1) || eval(last_ao + 1, q);
-			}
+			op = last_ao;
 		}else if (last_pm != -1) 
 		{
 			op = last_pm;
@@ -271,13 +267,15 @@ int eval(uint32_t p, uint32_t q)
 		}
 		{ assert(0);}
         
-		printf("op = %d\n", op);
+		//printf("op = %d\n", op);
 
 		int val1 = eval(p, op - 1);
 		int val2 = eval(op + 1, q);
         printf("val1 = %d, val2 =  %d\n", val1, val2);
 		switch (tokens[op].type)
 		{
+			case TK_AND: return val1 && val2;
+			case TK_OR: return val1 || val2;
 			case TK_PLUS: return val1 + val2;
 			case TK_MINUS: return val1 - val2;
 			case TK_MULTIPLY: return val1 * val2;
