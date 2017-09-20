@@ -209,7 +209,6 @@ int eval(uint32_t p, uint32_t q)
 					case TK_PLUS:
 					case TK_MINUS:
 					{
-						if (first_pm != -1) {break;}
 						uint32_t j = i;
 						while (j > p && (tokens[j].type == TK_PLUS || tokens[j].type == TK_MINUS))
 						{
@@ -225,7 +224,6 @@ int eval(uint32_t p, uint32_t q)
 					case TK_MULTIPLY:
 					case TK_DIVIDE:
 					{
-						if (first_md != -1) {break;}
 						first_md = i;
 						break;
 					}
