@@ -245,7 +245,8 @@ uint32_t eval(uint32_t p, uint32_t q)
 				uint32_t num = 0;
 				for (uint32_t i = 0; i < len; i++)
 				{
-					num = 16 * num + (tokens[p].str[i] - '0');
+					uint32_t inc = (tokens[p].str[i] - '0' > 10) ? (tokens[p].str[i] - 'a' + 10) : (tokens[p].str[i] - '0');
+					num = 16 * num + inc;
 				}
 				return num;
 			}
@@ -255,7 +256,7 @@ uint32_t eval(uint32_t p, uint32_t q)
 				uint32_t num = 0;
 				for (uint32_t i = 0; i < len; i++)
 				{
-					num = 10 * num + (tokens[p].str[i] - '0');
+					num = 10 * num + tokens[p].str[i];
 				}
 				return num;
 			}
