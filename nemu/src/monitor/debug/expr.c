@@ -392,7 +392,7 @@ uint32_t eval(uint32_t p, uint32_t q)
 
 		uint32_t val1 = eval(p, op - 1);
 		uint32_t val2 = eval(op + 1, q);
-        printf("val1 = %d, val2 =  %d\n", val1, val2);
+        //printf("val1 = %d, val2 =  %d\n", val1, val2);
 		switch (tokens[op].type)
 		{
 			case TK_AND: return val1 && val2;
