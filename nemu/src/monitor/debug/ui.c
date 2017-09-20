@@ -7,8 +7,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-// static int cmd_x_cnt = 1;
-
+static uint32_t cmd_p_cnt = 1;
 void cpu_exec(uint64_t);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
@@ -84,6 +83,8 @@ static int cmd_x(char *args)
 static int cmd_p(char *args)
 {
 	bool success = false;
+	printf("$%d = ", cmd_p_cnt);
+	cmd_p_cnt++;
 	expr(args, &success, 'd');
 	return success;
 }
@@ -91,12 +92,16 @@ static int cmd_p(char *args)
 static int cmd_px(char *args)
 {
 	bool success = false;
+	printf("$%d = ", cmd_p_cnt);
+	cmd_p_cnt++;
 	expr(args, &success, 'x');
 	return success;
 }
 static int cmd_pd(char *args)
 {
 	bool success = false;
+	printf("$%d = ", cmd_p_cnt);
+	cmd_p_cnt++;
 	expr(args, &success, 'd');
 	return success;
 }
