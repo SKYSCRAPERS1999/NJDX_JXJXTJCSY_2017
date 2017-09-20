@@ -11,7 +11,7 @@ enum {
   TK_EQ, TK_UEQ, TK_LESS, TK_MORE, TK_LE, TK_ME, 
   TK_PLUS, TK_MINUS, TK_MULTIPLY, TK_DIVIDE,
   TK_SP_L, TK_SP_R, 
-  TK_NUM,
+  TK_NUM, TK_HEXNUM,
   TK_AND, TK_OR, TK_NOT,
   TK_EAX, TK_EBX, TK_ECX, TK_EDX, TK_ESP, TK_ESI, TK_EBP, TK_EDI,
   /* TODO: Add more token types */
@@ -41,6 +41,7 @@ static struct rule {
   {"\\(", TK_SP_L},         // small left parenthesis
   {"\\)", TK_SP_R},         // small right parenthesis
   {"[0-9]+", TK_NUM},       // number
+  {"0x[0-9|a-f|A-F]+", TK_HEXNUM},      // hex number
   {"&&", TK_AND},           // logical and
   {"\\|\\|", TK_OR},            // logical or
   {"!", TK_NOT},            // logical not
