@@ -220,18 +220,10 @@ int eval(uint32_t p, uint32_t q)
 					{   
 						if (first_single == -1 && i == p)
 						{
-							//uint32_t j = i;
-							//while (j > p && (tokens[j].type == TK_PLUS || tokens[j].type == TK_MINUS))
-							//{
-							//	j--;
-							//}
-							//if (j >= p && (tokens[j].type == TK_MULTIPLY || tokens[j].type == TK_DIVIDE))
-							//{
-								first_single = i;
-								break;
-							//}
+							first_single = i;
+							break;
 						}else{
-							if (last_pm == -1 || (last_pm != -1 && (i > p && !(tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_PLUS))))
+							if (last_pm == -1 || (last_pm != -1 && (i > p && !(tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_PLUS || tokens[i - 1].type == TK_NOT) )))
 							{
 								last_pm = i;
 								break;
