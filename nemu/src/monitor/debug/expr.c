@@ -33,7 +33,6 @@ static struct rule {
   {"\\(", TK_SP_L},         // small left parenthesis
   {"\\)", TK_SP_R},         // small right parenthesis
   {"[0-9]+", TK_NUM},       // number
-
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -210,13 +209,24 @@ int eval(uint32_t p, uint32_t q)
 					case TK_PLUS:
 					case TK_MINUS:
 					{
-						if (first_pm == -1) {first_pm = i;}
+						if (first_pm != -1) {break;}
+						uint32_t j = i;
+						while (j > p && (tokens[j].type == TK_PLUS || tokens[j].type == TK_MINUS))
+						{
+							j--;
+						}
+						if (j >= p && (tokens[j].type == TK_MULTIPLY || tokens[j].type == TK_DIVIDE))
+						{
+							break;
+						}
+						first_pm = i;
 						break;
 					}
 					case TK_MULTIPLY:
 					case TK_DIVIDE:
 					{
-						if (first_md == -1)	{first_md = i;}
+						if (first_md != -1) {break;}
+						first_md = i;
 						break;
 					}
 					case TK_NOTYPE:
