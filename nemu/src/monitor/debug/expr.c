@@ -223,7 +223,7 @@ int eval(uint32_t p, uint32_t q)
 							first_single = i;
 							break;
 						}else{
-							if (last_pm == -1 || (last_pm != -1 && (i > p && !(tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_PLUS || tokens[i - 1].type == TK_NOT) )))
+							if (i > p && !(tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_PLUS || tokens[i - 1].type == TK_NOT) )
 							{
 								last_pm = i;
 								break;
