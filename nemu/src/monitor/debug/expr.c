@@ -6,6 +6,8 @@
 #include <sys/types.h>
 #include <regex.h>
 
+extern uint32_t cmd_p_cnt;
+
 enum {
   TK_NOTYPE = 256,
   TK_EQ, TK_UEQ, TK_LESS, TK_MORE, TK_LE, TK_ME, 
@@ -175,6 +177,7 @@ uint32_t expr(char *e, bool *success, char type) {
   }
   /* TODO: Insert codes to evaluate the expression. */
   int ans = eval(0, nr_token - 1);
+  printf("$%d = ", cmd_p_cnt);
   switch (type)
   {
 	case 'd': { printf("%u\n", ans); break;}
