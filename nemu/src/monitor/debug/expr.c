@@ -14,6 +14,7 @@ enum {
   TK_NUM, TK_HEXNUM,
   TK_AND, TK_OR, TK_NOT,
   TK_EAX, TK_EBX, TK_ECX, TK_EDX, TK_ESP, TK_ESI, TK_EBP, TK_EDI,
+  TK_AX, TK_BX, TK_CX, TK_DX, TK_AL, TK_BL, TK_CL, TK_DL,
   /* TODO: Add more token types */
 
 };
@@ -53,6 +54,14 @@ static struct rule {
   {"\\$[e|E][s|S][i|I]", TK_ESI}, // read esi
   {"\\$[e|E][b|B][p|P]", TK_EBP}, // read ebp
   {"\\$[e|E][d|D][i|I]", TK_EDI}, // read edi
+  {"\\$[e|E][a|A][x|X]", TK_AX}, // read ax
+  {"\\$[e|E][b|B][x|X]", TK_BX}, // read bx
+  {"\\$[e|E][c|C][x|X]", TK_CX}, // read cx
+  {"\\$[e|E][d|D][x|X]", TK_DX}, // read dx
+  {"\\$[e|E][a|A][x|X]", TK_AL}, // read al
+  {"\\$[e|E][b|B][x|X]", TK_BL}, // read bl
+  {"\\$[e|E][c|C][x|X]", TK_CL}, // read cl
+  {"\\$[e|E][d|D][x|X]", TK_DL}, // read dl
 
 };
 
@@ -219,6 +228,17 @@ uint32_t eval(uint32_t p, uint32_t q)
 			case TK_EBP: return reg_l(5);
 			case TK_ESI: return reg_l(6);
 			case TK_EDI: return reg_l(7);
+			
+			case TK_AX: return reg_w(0); 
+			case TK_CX: return reg_w(1);
+			case TK_DX: return reg_w(2);
+			case TK_BX: return reg_w(3);
+			
+			case TK_AL: return reg_b(0); 
+			case TK_CL: return reg_b(1);
+			case TK_DL: return reg_b(2);
+			case TK_BL: return reg_b(3);
+
 			case TK_HEXNUM:
 			{
 				uint32_t len = strlen(tokens[p].str);
@@ -321,6 +341,14 @@ uint32_t eval(uint32_t p, uint32_t q)
 					case TK_EBP: 
 					case TK_ESI: 
 					case TK_EDI:
+					case TK_AX:
+					case TK_BX:
+					case TK_CX:
+					case TK_DX:
+					case TK_AL:
+					case TK_BL:
+					case TK_CL:
+					case TK_DL:
 					case TK_HEXNUM:
 					case TK_NUM: {break; }
 					default: assert(0);
