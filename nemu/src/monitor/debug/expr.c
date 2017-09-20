@@ -60,7 +60,7 @@ static struct rule {
 
 static regex_t re[NR_REGEX];
 
-int eval(uint32_t p, uint32_t q);
+uint32_t eval(uint32_t p, uint32_t q);
 
 /* Rules are used for many times.
  * Therefore we compile them only once before any usage.
@@ -198,7 +198,7 @@ bool check_parentheses (uint32_t p, uint32_t q)
 	return flag;
 }
 
-int eval(uint32_t p, uint32_t q)
+uint32_t eval(uint32_t p, uint32_t q)
 {
     printf("p = %d, q = %d\n", p , q);
 	for (int i = p; i <= q; i++) printf("%d ", tokens[i].type);
@@ -222,7 +222,7 @@ int eval(uint32_t p, uint32_t q)
 			case TK_HEXNUM:
 			{
 				uint32_t len = strlen(tokens[p].str);
-				int num = 0;
+				uint32_t num = 0;
 				for (uint32_t i = 0; i < len; i++)
 				{
 					num = 16 * num + (tokens[p].str[i] - '0');
@@ -232,7 +232,7 @@ int eval(uint32_t p, uint32_t q)
 			case TK_NUM:
 			{
 				uint32_t len = strlen(tokens[p].str);
-				int num = 0;
+				uint32_t num = 0;
 				for (uint32_t i = 0; i < len; i++)
 				{
 					num = 10 * num + (tokens[p].str[i] - '0');
@@ -358,8 +358,8 @@ int eval(uint32_t p, uint32_t q)
         
 		//printf("op = %d\n", op);
 
-		int val1 = eval(p, op - 1);
-		int val2 = eval(op + 1, q);
+		uint32_t val1 = eval(p, op - 1);
+		uint32_t val2 = eval(op + 1, q);
         printf("val1 = %d, val2 =  %d\n", val1, val2);
 		switch (tokens[op].type)
 		{
