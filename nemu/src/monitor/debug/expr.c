@@ -40,19 +40,19 @@ static struct rule {
   {"\\/",  TK_DIVIDE}, 	    // divide
   {"\\(", TK_SP_L},         // small left parenthesis
   {"\\)", TK_SP_R},         // small right parenthesis
-  {"[0-9]+", TK_NUM},       // number
   {"0x[0-9|a-f|A-F]+", TK_HEXNUM},      // hex number
+  {"[0-9]+", TK_NUM},       // number
   {"&&", TK_AND},           // logical and
   {"\\|\\|", TK_OR},            // logical or
   {"!", TK_NOT},            // logical not
-  {"$[e|E][a|A][x|X]", TK_EAX}, // read eax
-  {"$[e|E][b|B][x|X]", TK_EBX}, // read ebx
-  {"$[e|E][c|C][x|X]", TK_ECX}, // read ecx
-  {"$[e|E][d|D][x|X]", TK_EDX}, // read edx
-  {"$[e|E][s|S][p|P]", TK_ESP}, // read esp
-  {"$[e|E][s|S][i|I]", TK_ESI}, // read esi
-  {"$[e|E][b|B][p|P]", TK_EBP}, // read ebp
-  {"$[e|E][d|D][i|I]", TK_EDI}, // read edi
+  {"\\$[e|E][a|A][x|X]", TK_EAX}, // read eax
+  {"\\$[e|E][b|B][x|X]", TK_EBX}, // read ebx
+  {"\\$[e|E][c|C][x|X]", TK_ECX}, // read ecx
+  {"\\$[e|E][d|D][x|X]", TK_EDX}, // read edx
+  {"\\$[e|E][s|S][p|P]", TK_ESP}, // read esp
+  {"\\$[e|E][s|S][i|I]", TK_ESI}, // read esi
+  {"\\$[e|E][b|B][p|P]", TK_EBP}, // read ebp
+  {"\\$[e|E][d|D][i|I]", TK_EDI}, // read edi
 
 };
 
