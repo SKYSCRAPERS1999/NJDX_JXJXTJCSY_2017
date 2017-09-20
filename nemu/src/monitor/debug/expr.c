@@ -210,7 +210,7 @@ int eval(uint32_t p, uint32_t q)
 					case TK_PLUS:
 					case TK_MINUS:
 					{
-					    uint32_t j = i - 1;
+					    uint32_t j = i;
 						while (j > p && (tokens[op].type == TK_MINUS || tokens[op].type == TK_PLUS))
 						{
 							j--;
