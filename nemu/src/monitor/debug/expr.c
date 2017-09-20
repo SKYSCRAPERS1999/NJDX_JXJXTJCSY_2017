@@ -191,6 +191,29 @@ int eval(uint32_t p, uint32_t q)
 	}
 	else if (p == q)
 	{
+		switch (tokens[p].type)
+		{
+			case TK_EAX: return reg_l(0); 
+			case TK_ECX: return reg_l(1);
+			case TK_EDX: return reg_l(2);
+			case TK_EBX: return reg_l(3);
+			case TK_ESP: return reg_l(4);
+			case TK_EBP: return reg_l(5);
+			case TK_ESI: return reg_l(6);
+			case TK_EDI: return reg_l(7);
+			case TK_NUM:
+			{
+				uint32_t len = strlen(tokens[p].str);
+				int num = 0;
+				for (uint32_t i = 0; i < len; i++)
+				{
+					num = 10 * num + (tokens[p].str[i] - '0');
+				}
+				return num;
+			}
+			
+		}
+
 		uint32_t len = strlen(tokens[p].str);
 		int num = 0;
 		for (uint32_t i = 0; i < len; i++)
@@ -271,21 +294,6 @@ int eval(uint32_t p, uint32_t q)
 					}
 					case TK_NOTYPE:
 					case TK_NUM: {break; }
-					case TK_EAX:
-					case TK_EBX:
-					case TK_ECX:
-					case TK_EDX:
-					case TK_ESP:
-					case TK_ESI:
-					case TK_EBP:
-					case TK_EDI:
-					{
-						if (first_single == -1 && i == p)
-						{
-							first_single = i;
-						}
-						break;
-					}
 					default: assert(0);
 				}
 			 }
@@ -316,14 +324,6 @@ int eval(uint32_t p, uint32_t q)
 				case TK_MINUS: return -eval(p + 1, q);
 				case TK_NOT: return (!(eval(p + 1, q)));
 				case TK_MULTIPLY: return vaddr_read(eval(p + 1, q), 4);
-				case TK_EAX: return reg_l(0); 
-				case TK_ECX: return reg_l(1);
-				case TK_EDX: return reg_l(2);
-				case TK_EBX: return reg_l(3);
-				case TK_ESP: return reg_l(4);
-				case TK_EBP: return reg_l(5);
-				case TK_ESI: return reg_l(6);
-				case TK_EDI: return reg_l(7);
 			}
 		}else{ assert(0);}
         
