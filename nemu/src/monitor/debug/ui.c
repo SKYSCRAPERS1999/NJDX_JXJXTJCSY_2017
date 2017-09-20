@@ -62,8 +62,13 @@ static int cmd_x(char *args)
 	//printf("%s\n", arg2);
 	if (arg1 != NULL && arg2 != NULL)
 	{
-		sscanf(arg1, "%d", &N);
-		sscanf(arg2, "0x%x", &EXPR);
+		if (strlen(arg1) >= 2 && arg1[0] == '0' && arg1[1] == 'x') { sscanf(arg1, "0x%x", &N);}
+		else {sscanf(arg1, "%d", &N);}
+
+		if (strlen(arg2) >= 2 && arg2[0] == '0' && arg2[1] == 'x') { sscanf(arg2, "0x%x", &EXPR);}
+		else {sscanf(arg2, "%d", &EXPR);}
+
+	    //sscanf(arg2, "0x%x", &EXPR);
 		assert(N >= 0);
 		for (uint32_t i = 0; i < N; i++){
 		    if (i % 4 == 0) {if (i) {printf("\n");} printf("0x%08x:", EXPR + i);}
@@ -92,7 +97,7 @@ static int cmd_px(char *args)
 static int cmd_pd(char *args)
 {
 	bool success = false;
-	expr(args, &success, 'x');
+	expr(args, &success, 'd');
 	return success;
 }
 
@@ -152,7 +157,8 @@ static int cmd_si(char* args)
 		cpu_exec(n);
 	}
 	else {
-		sscanf(arg, "%d", &n);
+		if (strlen(arg) >= 2 && arg[0] == '0' && arg[1] == 'x') { sscanf(arg, "0x%x", &n);}
+		else { sscanf(arg, "%d", &n);}
 		cpu_exec(n);
 	}
 	return 0;
