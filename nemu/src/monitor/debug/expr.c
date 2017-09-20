@@ -237,7 +237,7 @@ int eval(uint32_t p, uint32_t q)
 						{
 							first_single = i;
 						}else{
-							if (i > p && !(tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_PLUS || tokens[i - 1].type == TK_NOT) )
+							if (i > p && !(tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_PLUS || tokens[i - 1].type == TK_NOT || tokens[i - 1].type == TK_MULTIPLY ))
 							{
 								last_pm = i;
 							}
@@ -247,7 +247,15 @@ int eval(uint32_t p, uint32_t q)
 					case TK_MULTIPLY:
 					case TK_DIVIDE:
 					{
-						last_md = i;
+						if (first_single == -1 && i == p)
+						{
+							first_single = i;
+						}else{
+							if (i > p && !(tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_PLUS || tokens[i - 1].type == TK_NOT || tokens[i - 1].type == TK_MULTIPLY ))
+							{
+								last_md = i;
+							}
+						}
 						break;
 					}
 					case TK_NOTYPE:
@@ -280,6 +288,7 @@ int eval(uint32_t p, uint32_t q)
 				case TK_PLUS: return eval(p + 1, q);
 				case TK_MINUS: return -eval(p + 1, q);
 				case TK_NOT: return (!(eval(p + 1, q)));
+				case TK_MULTIPLY: return vaddr_read(eval(p + 1, q), 4);
 			}
 		}else{ assert(0);}
         
