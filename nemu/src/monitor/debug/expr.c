@@ -146,14 +146,19 @@ static bool make_token(char *e) {
   return true;
 }
 
-uint32_t expr(char *e, bool *success) {
+uint32_t expr(char *e, bool *success, char type) {
   if (!make_token(e)) {
     *success = false;
     return 0;
   }
   /* TODO: Insert codes to evaluate the expression. */
   int ans = eval(0, nr_token - 1);
-  printf("%d\n", ans);	
+  switch (type)
+  {
+	case 'd': { printf("%d\n", ans); break;}
+	case 'h':
+	case 'x': { printf("0x%x\n", ans); break;}
+  }
   *success = true;
 
   return 0;

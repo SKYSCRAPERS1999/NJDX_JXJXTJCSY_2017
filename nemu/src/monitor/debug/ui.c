@@ -75,11 +75,24 @@ static int cmd_x(char *args)
 	return 0;
 }
 
+// three types of cmd_p
 static int cmd_p(char *args)
 {
-	//printf("%s #\n", args);
 	bool success = false;
-	expr(args, &success);
+	expr(args, &success, 'd');
+	return success;
+}
+
+static int cmd_px(char *args)
+{
+	bool success = false;
+	expr(args, &success, 'x');
+	return success;
+}
+static int cmd_pd(char *args)
+{
+	bool success = false;
+	expr(args, &success, 'x');
 	return success;
 }
 
@@ -99,6 +112,9 @@ static struct {
   { "info", "Get info, use r to acquire registers", cmd_info}, 
   { "x", "Scan memory", cmd_x},
   { "p", "Print expression", cmd_p},
+  { "p/x", "Print expression (hex)", cmd_px},
+  { "p/d", "Print expression (decimal)", cmd_pd},
+
 /* TODO: Add more commands */
 
 };
