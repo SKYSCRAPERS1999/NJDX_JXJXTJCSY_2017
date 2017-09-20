@@ -160,7 +160,8 @@ bool check_parentheses (uint32_t p, uint32_t q)
 	return flag;
 }
 
-static int num_sign = 1;
+static int num_sign_lhs = 1;
+static int num_sign_rhs = 1;
 
 int eval(uint32_t p, uint32_t q)
 {
@@ -179,17 +180,17 @@ int eval(uint32_t p, uint32_t q)
 		{
 			num = 10 * num + (tokens[p].str[i] - '0');
 		}
-		if (num_sign == -1)
+		if (num_sign_lhs == -1)
 		{
-			num_sign = 1;
+			num_sign_lhs = 1;
 			return -num;
 		}else{return num;}
 	}
     else if (check_parentheses(p, q) == true)
 	{
-		if (num_sign == -1)
+		if (num_sign_lhs == -1)
 		{
-			num_sign = 1;
+			num_sign_lhs = 1;
 			return -eval(p + 1, q - 1);
 		}else{return eval(p + 1, q - 1);}
 	}
@@ -217,6 +218,7 @@ int eval(uint32_t p, uint32_t q)
 						}
 						if (tokens[j].type == TK_MULTIPLY || tokens[j].type == TK_DIVIDE)
 						{
+							num_sign_rhs = -num_sign_rhs;
 							break;
 						}
 						if (first_pm == -1) {first_pm = i;}
@@ -247,7 +249,7 @@ int eval(uint32_t p, uint32_t q)
 		{
 			if (tokens[op].type == TK_MINUS)
 			{
-				num_sign = -num_sign;
+				num_sign_lhs = -num_sign_lhs;
 				return eval(p + 1, q);
 			}else if (tokens[op].type == TK_PLUS)
 			{
@@ -259,26 +261,58 @@ int eval(uint32_t p, uint32_t q)
 		int val2 = eval(op + 1, q);
         printf("val1 = %d, val2 =  %d\n", val1, val2);
 		
-		if (num_sign == -1)
+		if (num_sign_lhs == -1)
 		{
-			switch (tokens[op].type)
+			num_sign_lhs = 1;
+			if (num_sign_rhs == -1)
 			{
-				case TK_PLUS: return -val1 + val2;
-				case TK_MINUS: return -val1 - val2;
-				case TK_MULTIPLY: return -val1 * val2;
-				case TK_DIVIDE: return -val1 / val2;
-				default: assert(0);
+				num_sign_rhs = 1;
+				switch (tokens[op].type)
+				{
+					case TK_PLUS: return -val1 - val2;
+					case TK_MINUS: return -val1 + val2;
+					case TK_MULTIPLY: return val1 * val2;
+					case TK_DIVIDE: return val1 / val2;
+					default: assert(0);
+				}
+			}
+			else
+			{
+				switch (tokens[op].type)
+				{
+					case TK_PLUS: return -val1 + val2;
+					case TK_MINUS: return -val1 - val2;
+					case TK_MULTIPLY: return -val1 * val2;
+					case TK_DIVIDE: return -val1 / val2;
+					default: assert(0);
+				}
+	
 			}
 		}
 		else
-		{
-			switch (tokens[op].type)
+		{  
+			if (num_sign_rhs == -1)
 			{
-				case TK_PLUS: return val1 + val2;
-				case TK_MINUS: return val1 - val2;
-				case TK_MULTIPLY: return val1 * val2;
-				case TK_DIVIDE: return val1 / val2;
-				default: assert(0);
+				num_sign_rhs = 1;
+				switch (tokens[op].type)
+				{
+					case TK_PLUS: return val1 - val2;
+					case TK_MINUS: return val1 + val2;
+					case TK_MULTIPLY: return -val1 * val2;
+					case TK_DIVIDE: return -val1 / val2;
+					default: assert(0);
+				}
+			}
+			else
+			{
+				switch (tokens[op].type)
+				{
+					case TK_PLUS: return val1 + val2;
+					case TK_MINUS: return val1 - val2;
+					case TK_MULTIPLY: return val1 * val2;
+					case TK_DIVIDE: return val1 / val2;
+					default: assert(0);
+				}
 			}
 		}
 	}
