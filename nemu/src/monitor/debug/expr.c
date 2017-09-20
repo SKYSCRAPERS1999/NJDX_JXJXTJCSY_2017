@@ -11,6 +11,7 @@ enum {
   TK_PLUS, TK_MINUS, TK_TIME, TK_MULTIPLY, TK_DIVIDE,
   TK_SP_L, TK_SP_R, 
   TK_LESS, TK_MORE, TK_NUM,
+  TK_AND, TK_OR, TK_UEQ, TK_NOT,
   /* TODO: Add more token types */
 
 };
@@ -33,6 +34,10 @@ static struct rule {
   {"\\(", TK_SP_L},         // small left parenthesis
   {"\\)", TK_SP_R},         // small right parenthesis
   {"[0-9]+", TK_NUM},       // number
+  {"&&", TK_AND},           // logical and
+  {"||", TK_OR},            // logical or
+  {"!=", TK_UEQ},           // unequal
+  {"!", TK_NOT},            // logical not
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -197,7 +202,7 @@ int eval(uint32_t p, uint32_t q)
 		// calculate op
 		int op = p;
 		int cnt = 0;
-		int first_md = -1, first_pm = -1;
+		int last_md = -1, last_pm = -1, last_ao = -1;
 		for (uint32_t i = p; i <= q; i++)
 		{
 			 if (tokens[i].type == TK_SP_L) { cnt++;}
@@ -206,6 +211,12 @@ int eval(uint32_t p, uint32_t q)
 			 {
 				switch (tokens[i].type)
 				{
+					case TK_AND:
+					case TK_OR:
+					{
+						last_ao = i;
+						break;
+					}
 					case TK_PLUS:
 					case TK_MINUS:
 					{
@@ -218,13 +229,13 @@ int eval(uint32_t p, uint32_t q)
 						{
 							break;
 						}
-						first_pm = i;
+						last_pm = i;
 						break;
 					}
 					case TK_MULTIPLY:
 					case TK_DIVIDE:
 					{
-						first_md = i;
+						last_md = i;
 						break;
 					}
 					case TK_NOTYPE:
@@ -233,12 +244,19 @@ int eval(uint32_t p, uint32_t q)
 				}
 			 }
 		}
-		if (first_pm != -1) 
+		if (last_ao != -1)
 		{
-			op = first_pm;
-		}else if (first_md != -1)
+			switch (tokens[last_ao].type)
+			{
+				case TK_AND: return eval(p, last_ao - 1) && eval(last_ao + 1, q);
+				case TK_OR: return eval(p, last_ao - 1) || eval(last_ao + 1, q);
+			}
+		}else if (last_pm != -1) 
 		{
-			op = first_md;
+			op = last_pm;
+		}else if (last_md != -1)
+		{
+			op = last_md;
 		}else{ assert(0);}
         
 		printf("op = %d\n", op);
