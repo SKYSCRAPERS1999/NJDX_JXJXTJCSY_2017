@@ -264,8 +264,7 @@ int eval(uint32_t p, uint32_t q)
 				case TK_MINUS: return -eval(p + 1, q);
 				case TK_NOT: return !eval(p + 1, q);
 			}
-		}
-		{ assert(0);}
+		}else{ assert(0);}
         
 		//printf("op = %d\n", op);
 
