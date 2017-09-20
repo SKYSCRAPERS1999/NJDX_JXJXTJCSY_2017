@@ -212,8 +212,8 @@ int eval(uint32_t p, uint32_t q)
 						if (first_single == -1 && i == p)
 						{
 							first_single = i;
-							break;
 						}
+						break;
 					}
 					case TK_PLUS:
 					case TK_MINUS:
@@ -221,14 +221,13 @@ int eval(uint32_t p, uint32_t q)
 						if (first_single == -1 && i == p)
 						{
 							first_single = i;
-							break;
 						}else{
 							if (i > p && !(tokens[i - 1].type == TK_MINUS || tokens[i - 1].type == TK_PLUS || tokens[i - 1].type == TK_NOT) )
 							{
 								last_pm = i;
-								break;
 							}
 						}
+						break;
 					}
 					case TK_MULTIPLY:
 					case TK_DIVIDE:
