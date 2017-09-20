@@ -161,7 +161,6 @@ bool check_parentheses (uint32_t p, uint32_t q)
 }
 
 static int num_sign_lhs = 1;
-static int num_sign_rhs = 1;
 
 int eval(uint32_t p, uint32_t q)
 {
@@ -211,16 +210,6 @@ int eval(uint32_t p, uint32_t q)
 					case TK_PLUS:
 					case TK_MINUS:
 					{
-					    uint32_t j = i;
-						while (j > p && (tokens[op].type == TK_MINUS || tokens[op].type == TK_PLUS))
-						{
-							j--;
-						}
-						if (tokens[j].type == TK_MULTIPLY || tokens[j].type == TK_DIVIDE)
-						{
-							num_sign_rhs = -num_sign_rhs;
-							break;
-						}
 						if (first_pm == -1) {first_pm = i;}
 						break;
 					}
@@ -264,55 +253,24 @@ int eval(uint32_t p, uint32_t q)
 		if (num_sign_lhs == -1)
 		{
 			num_sign_lhs = 1;
-			if (num_sign_rhs == -1)
+			switch (tokens[op].type)
 			{
-				num_sign_rhs = 1;
-				switch (tokens[op].type)
-				{
-					case TK_PLUS: return -val1 - val2;
-					case TK_MINUS: return -val1 + val2;
-					case TK_MULTIPLY: return val1 * val2;
-					case TK_DIVIDE: return val1 / val2;
-					default: assert(0);
-				}
-			}
-			else
-			{
-				switch (tokens[op].type)
-				{
-					case TK_PLUS: return -val1 + val2;
-					case TK_MINUS: return -val1 - val2;
-					case TK_MULTIPLY: return -val1 * val2;
-					case TK_DIVIDE: return -val1 / val2;
-					default: assert(0);
-				}
-	
+				case TK_PLUS: return -val1 + val2;
+				case TK_MINUS: return -val1 - val2;
+				case TK_MULTIPLY: return -val1 * val2;
+				case TK_DIVIDE: return -val1 / val2;
+				default: assert(0);
 			}
 		}
 		else
 		{  
-			if (num_sign_rhs == -1)
+			switch (tokens[op].type)
 			{
-				num_sign_rhs = 1;
-				switch (tokens[op].type)
-				{
-					case TK_PLUS: return val1 - val2;
-					case TK_MINUS: return val1 + val2;
-					case TK_MULTIPLY: return -val1 * val2;
-					case TK_DIVIDE: return -val1 / val2;
-					default: assert(0);
-				}
-			}
-			else
-			{
-				switch (tokens[op].type)
-				{
-					case TK_PLUS: return val1 + val2;
-					case TK_MINUS: return val1 - val2;
-					case TK_MULTIPLY: return val1 * val2;
-					case TK_DIVIDE: return val1 / val2;
-					default: assert(0);
-				}
+				case TK_PLUS: return val1 + val2;
+				case TK_MINUS: return val1 - val2;
+				case TK_MULTIPLY: return val1 * val2;
+				case TK_DIVIDE: return val1 / val2;
+				default: assert(0);
 			}
 		}
 	}
