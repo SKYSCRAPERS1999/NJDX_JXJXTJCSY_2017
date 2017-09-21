@@ -25,13 +25,18 @@ WP* new_wp(char *args)
 	WP* p = free_;
 	if (p == NULL)
 	{
+		Log("Not enough pool!\n");
 		assert(0);
 	}else{
 		free_ = free_->next;
 		p->express = args;
 		bool success = false;
-		p->val_old = expr(args, &success, 'x');
-		if (!success) { assert(0);}
+		p->val_old = expr(p->express, &success, 'x');
+		if (!success) 
+		{
+		  Log("expression failed!\n");
+			assert(0);
+		}
 		p->next = head;
 		head = p;
 		return head;
