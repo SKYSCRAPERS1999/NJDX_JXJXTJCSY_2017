@@ -31,6 +31,7 @@ WP* new_wp(char *args)
 		assert(0);
 	}else{
 		free_ = free_->next;
+		
 		strcpy(p->express, args);
 		bool success = false;
 		//Log("expression = %s\n", p->express);
@@ -40,9 +41,15 @@ WP* new_wp(char *args)
 		  Log("expression failed!\n");
 			assert(0);
 		}
-		p->next = head;
-		head = p;
-		return head;
+	  
+		WP *q = head;
+		while (q->next != NULL)
+		{
+			q = q->next;
+		}
+		q->next = p;
+		p->next = NULL;
+		return p;
 	}
 }
 
