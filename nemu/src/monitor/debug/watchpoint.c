@@ -11,7 +11,8 @@ void init_wp_pool() {
   for (i = 0; i < NR_WP; i ++) {
     wp_pool[i].NO = i;
     wp_pool[i].next = &wp_pool[i + 1];
-  }
+		wp_pool[i].val_old = -1;
+	}
   wp_pool[NR_WP - 1].next = NULL;
 
   head = NULL;
@@ -107,19 +108,18 @@ void dis_wp()
 		printf("No watchpoints!\n");
 	}else{
 		WP *p = head;
-		printf("No.\tExpr\tAns\n");
+		printf("No.\tExpr\tval_old\tval_new\n");
     while (p != NULL)
 		{
-			printf("%d\t%s\n", p->NO, p->express);
+			uint32_t val_old = p->val_old;
 			bool success = false;
-			p->val_old = expr(p->express, &success, 'x' );
 			if (!success) {
 				Log("expr error\n");
 				assert(0);
 			}
-			printf("%d\t%s\t%d\n", p->NO, p->express, p->val_old);
+			p->val_old = expr(p->express, &success, 'x' );
+			printf("%d\t%s\t%d\t%d\n", p->NO, p->express, val_old, p->val_old);
 			p = p->next;
 		}
-
 	}
 }
