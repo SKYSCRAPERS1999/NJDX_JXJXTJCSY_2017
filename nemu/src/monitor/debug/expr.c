@@ -186,7 +186,7 @@ uint32_t expr(char *e, bool *success, char type) {
   }
   *success = true;
 
-  return 0;
+  return ans;
 }
 
 
