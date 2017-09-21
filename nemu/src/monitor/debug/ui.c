@@ -85,7 +85,6 @@ static int cmd_p(char *args)
 {
 	bool success = false;
 	cmd_p_cnt++;
-	Log("args = %s\n", args);
 	expr(args, &success, 'd');
 	return success;
 }
@@ -107,6 +106,7 @@ static int cmd_pd(char *args)
 
 static int cmd_w(char *args)
 {
+	Log("args = %s\n", args);
 	new_wp(args);
   return 0;
 }
