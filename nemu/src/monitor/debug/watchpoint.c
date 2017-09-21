@@ -31,6 +31,7 @@ WP* new_wp(char *args)
 		free_ = free_->next;
 		p->express = args;
 		bool success = false;
+		Log("expression = %s\n", p->express);
 		p->val_old = expr(p->express, &success, 'x');
 		if (!success) 
 		{
