@@ -118,7 +118,7 @@ void dis_wp()
 				assert(0);
 			}
 		  printf("No.\tExpr\tval_old\tval_new\n");
-			printf("%d\t%s\t%d\t%d\n", p->NO, p->express, val_old, p->val_old);
+			printf("%d\t%s\t0x%x\t0x%x\n", p->NO, p->express, val_old, p->val_old);
 			p = p->next;
 		}
 	}
