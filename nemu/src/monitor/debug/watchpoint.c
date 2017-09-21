@@ -32,7 +32,7 @@ WP* new_wp(char *args)
 		free_ = free_->next;
 		strcpy(p->express, args);
 		bool success = false;
-		Log("expression = %s\n", p->express);
+		//Log("expression = %s\n", p->express);
 		p->val_old = expr(p->express, &success, 'x');
 		if (!success) 
 		{
@@ -108,7 +108,6 @@ void dis_wp()
 		printf("No watchpoints!\n");
 	}else{
 		WP *p = head;
-		printf("No.\tExpr\tval_old\tval_new\n");
     while (p != NULL)
 		{
 			uint32_t val_old = p->val_old;
@@ -118,6 +117,7 @@ void dis_wp()
 				Log("expr error\n");
 				assert(0);
 			}
+		  printf("No.\tExpr\tval_old\tval_new\n");
 			printf("%d\t%s\t%d\t%d\n", p->NO, p->express, val_old, p->val_old);
 			p = p->next;
 		}
