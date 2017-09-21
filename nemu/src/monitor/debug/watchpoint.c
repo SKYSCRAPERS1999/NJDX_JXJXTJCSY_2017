@@ -42,13 +42,19 @@ WP* new_wp(char *args)
 			assert(0);
 		}
 	  
-		WP *q = head;
-		while (q->next != NULL)
+		if (head != NULL)
 		{
-			q = q->next;
+			WP *q = head;
+			while (q->next != NULL)
+			{
+				q = q->next;
+			}
+			q->next = p;
+			p->next = NULL;
+		}else{
+			head = p;
+			p->next = NULL;
 		}
-		q->next = p;
-		p->next = NULL;
 		return head;
 	}
 }
