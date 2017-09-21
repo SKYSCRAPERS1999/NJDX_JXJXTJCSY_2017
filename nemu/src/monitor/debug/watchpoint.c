@@ -113,6 +113,10 @@ void dis_wp()
 			printf("%d\t%s\n", p->NO, p->express);
 			bool success = false;
 			p->val_old = expr(p->express, &success, 'x' );
+			if (!success) {
+				Log("expr error\n");
+				assert(0);
+			}
 			printf("%d\t%s\t%d\n", p->NO, p->express, p->val_old);
 			p = p->next;
 		}
