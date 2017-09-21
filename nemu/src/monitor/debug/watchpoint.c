@@ -79,6 +79,9 @@ void free_wp(WP* wp)
 		q->next = wp->next;
 		wp->next = free_;
 		free_ = wp;
+	}else{
+		Log("Not, found!\n");
+		assert(0);
 	}
 }
 

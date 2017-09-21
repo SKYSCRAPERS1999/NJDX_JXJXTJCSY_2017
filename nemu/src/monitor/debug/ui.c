@@ -71,6 +71,7 @@ static int cmd_info(char *args)
 static int cmd_d(char *args)
 {
   int pos = atoi(args);
+	printf("pos = %d\n", pos);
 	WP *p = get_head();
 	if (p == NULL)
 	{
