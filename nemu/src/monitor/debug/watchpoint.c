@@ -49,7 +49,7 @@ WP* new_wp(char *args)
 		}
 		q->next = p;
 		p->next = NULL;
-		return p;
+		return head;
 	}
 }
 
