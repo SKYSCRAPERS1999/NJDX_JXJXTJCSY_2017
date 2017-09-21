@@ -85,6 +85,7 @@ static int cmd_p(char *args)
 {
 	bool success = false;
 	cmd_p_cnt++;
+	Log("args = %s\n", args);
 	expr(args, &success, 'd');
 	return success;
 }
@@ -161,7 +162,7 @@ static int cmd_help(char *args) {
 
 static int cmd_si(char* args)
 {
-    char *arg = strtok(NULL, " ");
+  char *arg = strtok(NULL, " ");
 	int n = 1;
 	if (arg == NULL){
 		cpu_exec(n);
