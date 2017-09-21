@@ -177,7 +177,6 @@ uint32_t expr(char *e, bool *success, char type) {
   }
   /* TODO: Insert codes to evaluate the expression. */
 	uint32_t ans = eval(0, nr_token - 1);
-  printf("$%d = ", cmd_p_cnt);
   switch (type)
   {
 		case 'd': 
