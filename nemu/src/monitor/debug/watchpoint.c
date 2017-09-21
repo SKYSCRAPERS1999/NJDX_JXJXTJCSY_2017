@@ -33,7 +33,7 @@ WP* new_wp(char *args)
 		strcpy(p->express, args);
 		bool success = false;
 		//Log("expression = %s\n", p->express);
-		p->val_old = expr(p->express, &success, 'x');
+		p->val_old = expr(p->express, &success, 'n');
 		if (!success) 
 		{
 		  Log("expression failed!\n");
@@ -85,7 +85,7 @@ bool check_wp()
 	while (p != NULL)
 	{
 		success = false;
-	  new_value = expr(p->express, &success, 'x');
+	  new_value = expr(p->express, &success, 'n');
 		if (!success)
 		{
 			Log("expr error");
@@ -112,7 +112,7 @@ void dis_wp()
 		{
 			uint32_t val_old = p->val_old;
 			bool success = false;
-			p->val_old = expr(p->express, &success, 'x' );
+			p->val_old = expr(p->express, &success, 'n' );
 			if (!success) {
 				Log("expr error\n");
 				assert(0);
