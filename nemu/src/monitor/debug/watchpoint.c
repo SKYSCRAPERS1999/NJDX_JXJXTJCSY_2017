@@ -61,13 +61,13 @@ WP* new_wp(char *args)
 	}
 }
 
-void free_wp(WP* wp)
+bool free_wp(int pos)
 {
 	WP *p = head;
 	WP *q = head;
 	while (p != NULL)
 	{
-		if (p == wp)
+		if (p->NO == pos)
 		{
 			break;
 		}
@@ -76,12 +76,13 @@ void free_wp(WP* wp)
 	}
   if (p != NULL)
 	{
-		q->next = wp->next;
-		wp->next = free_;
-		free_ = wp;
+		q->next = p->next;
+		p->next = free_;
+		free_ = p;
+		return 1;
 	}else{
-		Log("Not, found!\n");
-		assert(0);
+		//printf("Not, found!\n");
+		return 0;
 	}
 }
 

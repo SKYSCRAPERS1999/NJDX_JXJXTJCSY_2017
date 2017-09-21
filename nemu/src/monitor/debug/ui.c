@@ -11,7 +11,7 @@ uint32_t cmd_p_cnt = 0;
 void cpu_exec(uint64_t);
 WP* new_wp(char*);
 WP* get_head();
-void free_wp(WP*);
+bool free_wp(int);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -72,27 +72,12 @@ static int cmd_d(char *args)
 {
   int pos = atoi(args);
 	printf("pos = %d\n", pos);
-	WP *p = get_head();
-	if (p == NULL)
+	bool success = free_wp(pos);	
+	if (success)
 	{
-		printf("Invalid delete, no watchpoints\n");
-		return 0;
-	}
-	int i = 0;
-	for (i = 0; i < pos; i++)
-	{
-		if (p->next != NULL)
-		{
-			p = p->next;	
-		}else{
-			break;
-		}
-	}
-	if (i == pos)
-	{
-		free_wp(p);	
+		printf("Watchpoint at pos %d deleted\n", pos);
 	}else{	
-		printf("Invalid delete, no watchpoint of No.%d\n", pos);
+		printf("Not, found!\n");
 	}
 	return 0;
 }
