@@ -32,7 +32,7 @@ void cpu_exec(uint64_t n) {
     /* TODO: check watchpoints here. */
 	if (check_wp())
 	{
-		printf("watchpoints found\n");
+		printf("Watchpoints found\n");
 		dis_wp();
 		nemu_state = NEMU_STOP;
 		return;
