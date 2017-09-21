@@ -11,6 +11,7 @@ uint32_t cmd_p_cnt = 0;
 void cpu_exec(uint64_t);
 WP* new_wp(char*);
 WP* get_head();
+void free_wp(WP*);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -60,9 +61,37 @@ static int cmd_info(char *args)
 		printf("No.\tExpr\t\tval\t\n");
 		while (p != NULL)
 		{
-			printf("%d\t%s\t\t%d\t\n", p->NO, p->express, p->val_old);
+			printf("%d\t%s\t\t0x%x\t\n", p->NO, p->express, p->val_old);
 			p = p->next;
 		}
+	}
+	return 0;
+}
+
+static int cmd_d(char *args)
+{
+  int pos = atoi(args);
+	WP *p = get_head();
+	if (p == NULL)
+	{
+		printf("Invalid delete, no watchpoints\n");
+		return 0;
+	}
+	int i = 0;
+	for (i = 0; i < pos; i++)
+	{
+		if (p->next != NULL)
+		{
+			p = p->next;	
+		}else{
+			break;
+		}
+	}
+	if (i == pos)
+	{
+		free_wp(p);	
+	}else{	
+		printf("Invalid delete, no watchpoint of No.%d\n", pos);
 	}
 	return 0;
 }
@@ -144,7 +173,8 @@ static struct {
   { "p/x", "Print expression (hex)", cmd_px},
   { "p/d", "Print expression (decimal)", cmd_pd},
   { "w", "Create watchpoint", cmd_w	},
-/* TODO: Add more commands */
+	{ "d", "Delete watchpoint", cmd_d},
+	/* TODO: Add more commands */
 
 };
 
