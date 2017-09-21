@@ -9,6 +9,7 @@
 
 uint32_t cmd_p_cnt = 0;
 void cpu_exec(uint64_t);
+extern WP* new_wp(char*);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -103,6 +104,12 @@ static int cmd_pd(char *args)
 	return success;
 }
 
+static int cmd_w(char *args)
+{
+	new_wp(args);
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static int cmd_si(char *args);
@@ -121,6 +128,7 @@ static struct {
   { "p", "Print expression", cmd_p},
   { "p/x", "Print expression (hex)", cmd_px},
   { "p/d", "Print expression (decimal)", cmd_pd},
+  { "w", "Create watchpoint", cmd_w	},
 
 /* TODO: Add more commands */
 

@@ -20,7 +20,7 @@ void init_wp_pool() {
 
 /* TODO: Implement the functionality of watchpoint */
 
-WP* new_wp()
+WP* new_wp(char *args)
 {
 	WP* p = free_;
 	if (p == NULL)
@@ -28,15 +28,85 @@ WP* new_wp()
 		assert(0);
 	}else{
 		free_ = free_->next;
-		p->have_value = false;
-		p->val_old = p->val_new = 0;
-		p->next = NULL;
-		return p;
+		p->express = args;
+		bool success = false;
+		p->val_old = expr(args, &success, 'x');
+		if (!success) { assert(0);}
+		p->next = head;
+		head = p;
+		return head;
 	}
 }
 
 void free_wp(WP* wp)
 {
-	wp->next = free_;
-	free_ = wp;
+	WP *p = head;
+	WP *q = head;
+	while (p != NULL)
+	{
+		if (p == wp)
+		{
+			break;
+		}
+		q = p;
+		p = p->next;
+	}
+  if (p != NULL)
+	{
+		q->next = wp->next;
+		wp->next = free_;
+		free_ = wp;
+	}
+}
+
+//WP* add_wp(char* args)
+//{
+//	WP* p = new_wp();
+//	p->express = args;
+//	bool success = 0;
+//	p->val_old = expr(args, &success,  'x');
+//	p->next = head->next;
+//	head->next = p;
+//	return p;
+//}
+
+bool check_wp()
+{
+	WP *p = head;
+	bool success = false;
+	uint32_t new_value = 0;
+	while (p != NULL)
+	{
+		success = false;
+	  new_value = expr(p->express, &success, 'x');
+		if (!success)
+		{
+			Log("expr error");
+			assert(0);
+		}else{
+			if (new_value != p->val_old)
+			{
+				return true;
+			}
+		}
+		p = p->next;
+	}
+	return false;
+}
+
+void dis_wp()
+{
+	if (head == NULL)
+	{
+		printf("No watchpoints!\n");
+	}else{
+		WP *p = head;
+		printf("No.\tExpr\tAns\n");
+    while (p != NULL)
+		{
+			printf("%d\t%s\t%d\n", p->NO, p->express, p->val_old);
+			p = p->next;
+		}
+
+	}
 }
