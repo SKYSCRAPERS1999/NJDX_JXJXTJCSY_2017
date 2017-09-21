@@ -124,7 +124,7 @@ void dis_wp()
 					assert(0);
 				}
 				printf("No.   Expr               val_old        val_new        \n");
-				printf("%6d%15s0x%13x\t0x%13x\n", p->NO, p->express, val_old, p->val_old);
+				printf("%-6d%-15s0x%-10x\t0x%-10x\n", p->NO, p->express, val_old, p->val_old);
 			}
 			p = p->next;
 		}
