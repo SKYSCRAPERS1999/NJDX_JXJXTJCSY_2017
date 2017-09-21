@@ -111,6 +111,7 @@ void dis_wp()
 		printf("No watchpoints!\n");
 	}else{
 		WP *p = head;
+		printf("No.   Expr            val_old        val_new        \n");
     while (p != NULL)
 		{
 			if (p->changed)
@@ -123,7 +124,6 @@ void dis_wp()
 					Log("expr error\n");
 					assert(0);
 				}
-				printf("No.   Expr            val_old        val_new        \n");
 				printf("%-6d%-15s0x%-14x\t0x%-10x\n", p->NO, p->express, val_old, p->val_old);
 			}
 			p = p->next;
