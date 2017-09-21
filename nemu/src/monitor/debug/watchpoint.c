@@ -124,7 +124,7 @@ void dis_wp()
 					Log("expr error\n");
 					assert(0);
 				}
-				printf("%-d%-s0x%-x0x%-x\n", p->NO, p->express, val_old, p->val_old);
+				printf("%-d%-6s0x%-20x0x%-11x\n", p->NO, p->express, val_old, p->val_old);
 			}
 			p = p->next;
 		}
