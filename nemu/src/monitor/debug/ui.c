@@ -106,7 +106,7 @@ static int cmd_pd(char *args)
 
 static int cmd_w(char *args)
 {
-	Log("args = %s\n", args);
+	//Log("args = %s\n", args);
 	new_wp(args);
   return 0;
 }
