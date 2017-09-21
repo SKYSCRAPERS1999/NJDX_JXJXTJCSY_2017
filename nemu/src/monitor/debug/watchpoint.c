@@ -29,7 +29,7 @@ WP* new_wp(char *args)
 		assert(0);
 	}else{
 		free_ = free_->next;
-		p->express = args;
+		strcpy(p->express, args);
 		bool success = false;
 		Log("expression = %s\n", p->express);
 		p->val_old = expr(p->express, &success, 'x');
