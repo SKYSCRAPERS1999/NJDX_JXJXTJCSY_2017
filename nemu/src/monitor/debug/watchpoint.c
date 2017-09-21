@@ -76,9 +76,16 @@ bool free_wp(int pos)
 	}
   if (p != NULL)
 	{
-		q->next = p->next;
-		p->next = free_;
-		free_ = p;
+		if (p == head)
+		{
+			head = head->next;
+			p->next = free_;
+			free_ = p;
+		}else{
+			q->next = p->next;
+			p->next = free_;
+			free_ = p;
+		}
 		return 1;
 	}else{
 		//printf("Not, found!\n");
