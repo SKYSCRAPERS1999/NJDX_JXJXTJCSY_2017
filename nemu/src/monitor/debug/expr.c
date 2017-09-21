@@ -180,9 +180,17 @@ uint32_t expr(char *e, bool *success, char type) {
   printf("$%d = ", cmd_p_cnt);
   switch (type)
   {
-		case 'd': { printf("%u\n", ans); break;}
+		case 'd': 
+		{ 
+      printf("$%d = ", cmd_p_cnt);
+			printf("%u\n", ans); break;
+		}
 		case 'h':
-		case 'x': { printf("0x%x\n", ans); break;}
+		case 'x':
+		{
+      printf("$%d = ", cmd_p_cnt);
+			printf("0x%x\n", ans); break;
+		}
 		case 'n': { break;}
   }
   *success = true;
