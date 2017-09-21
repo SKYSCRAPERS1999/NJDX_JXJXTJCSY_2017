@@ -9,7 +9,8 @@
 
 uint32_t cmd_p_cnt = 0;
 void cpu_exec(uint64_t);
-extern WP* new_wp(char*);
+WP* new_wp(char*);
+WP* get_head();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -40,22 +41,35 @@ static int cmd_q(char *args) {
 
 static int cmd_info(char *args)
 {	
-    char *arg = strtok(NULL, " ");
+  char *arg = strtok(NULL, " ");
 	if (arg != NULL && strcmp(arg, "r") == 0)
 	{
 		char a[8][4] = {"EAX", "ECX", "EDX", "EBX", "ESP", "EBP", "ESI", "EDI"};
 		for (uint32_t i = R_EAX; i <= R_EDI; i++)
-		{
+		{ 
 			printf("%s : 0x%x\n", a[i], reg_l(i)); 
 		}
 		printf("EIP : 0x%x\n", cpu.eip);
+	}else if (arg != NULL && strcmp(arg, "w") == 0){
+		WP* p = get_head();
+		if (p == NULL)
+		{
+			printf("No watchpoints!\n");
+			return 0;
+		}
+		printf("No.\tExpr\t\tval\t\n");
+		while (p != NULL)
+		{
+			printf("%d\t%s\t\t%d\t\n", p->NO, p->express, p->val_old);
+			p = p->next;
+		}
 	}
 	return 0;
 }
 
 static int cmd_x(char *args)
 { 
-    char *arg1 = strtok(NULL, " ");
+  char *arg1 = strtok(NULL, " ");
 	char *arg2 = strtok(NULL, " ");
 	uint32_t EXPR; int N;
 	//printf("%s\n", arg1);
@@ -124,13 +138,12 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Take i steps", cmd_si},
-  { "info", "Get info, use r to acquire registers", cmd_info}, 
+  { "info", "Get info, use r to acquire registers, w to acquire watchpoints", cmd_info}, 
   { "x", "Scan memory", cmd_x},
   { "p", "Print expression", cmd_p},
   { "p/x", "Print expression (hex)", cmd_px},
   { "p/d", "Print expression (decimal)", cmd_pd},
   { "w", "Create watchpoint", cmd_w	},
-
 /* TODO: Add more commands */
 
 };
