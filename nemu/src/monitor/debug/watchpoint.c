@@ -113,11 +113,11 @@ void dis_wp()
 		{
 			uint32_t val_old = p->val_old;
 			bool success = false;
+			p->val_old = expr(p->express, &success, 'x' );
 			if (!success) {
 				Log("expr error\n");
 				assert(0);
 			}
-			p->val_old = expr(p->express, &success, 'x' );
 			printf("%d\t%s\t%d\t%d\n", p->NO, p->express, val_old, p->val_old);
 			p = p->next;
 		}
