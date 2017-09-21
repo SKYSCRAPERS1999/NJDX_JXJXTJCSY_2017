@@ -123,8 +123,8 @@ void dis_wp()
 					Log("expr error\n");
 					assert(0);
 				}
-				printf("No.\tExpr\tval_old\tval_new\n");
-				printf("%d\t%s\t0x%x\t0x%x\n", p->NO, p->express, val_old, p->val_old);
+				printf("No.\t\tExpr\t\tval_old\t\tval_new\n");
+				printf("%d\t\t%s\t\t0x%x\t\t0x%x\n", p->NO, p->express, val_old, p->val_old);
 			}
 			p = p->next;
 		}
