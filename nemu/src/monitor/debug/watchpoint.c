@@ -35,14 +35,7 @@ WP* new_wp(char *args)
 	}else{
 		free_ = free_->next;
 		strcpy(p->express, args);
-		bool success = false;
-		uint32_t new_exp = expr(p->express, &success, 'n');
-		if (!success) {
-				Log("expression error\n");
-				return NULL;
-				//assert(0);
-		}
-		p->val_old = new_exp; 
+		p->val_old = 0; 
 		if (head != NULL)
 		{
 			WP *q = head;
