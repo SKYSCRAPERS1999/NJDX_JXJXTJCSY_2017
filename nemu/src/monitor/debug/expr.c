@@ -429,7 +429,15 @@ uint32_t eval(uint32_t p, uint32_t q, bool *success)
 			case TK_PLUS: return val1 + val2;
 			case TK_MINUS: return val1 - val2;
 			case TK_MULTIPLY: return val1 * val2;
-			case TK_DIVIDE: return val1 / val2;
+			case TK_DIVIDE:
+			{
+				if (val2 == 0)
+				{
+					*success = false;
+					return 0;
+				}
+				return val1 / val2;
+			}
 			case TK_EQ: return val1 == val2;
 			case TK_UEQ: return val1 != val2;
 			case TK_MORE: return val1 > val2;
