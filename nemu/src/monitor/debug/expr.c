@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <regex.h>
 
+#define PMEM_SIZE (128 * 1024 * 1024)
 extern uint32_t cmd_p_cnt;
 
 enum {
@@ -409,7 +410,16 @@ uint32_t eval(uint32_t p, uint32_t q, bool *success)
 				case TK_PLUS: return eval(p + 1, q, success);
 				case TK_MINUS: return -eval(p + 1, q, success);
 				case TK_NOT: return (!(eval(p + 1, q, success)));
-				case TK_MULTIPLY: return vaddr_read(eval(p + 1, q, success), 4);
+				case TK_MULTIPLY: 
+				{
+					if (eval(p + 1, q, success) >= PMEM_SIZE)
+					{
+						*success = false;
+						printf("Meomory Limit Exceeded!\n");
+						return 0;
+					}
+					return vaddr_read(eval(p + 1, q, success), 4);
+				}
 			}
 		}else{
 			*success = false;
