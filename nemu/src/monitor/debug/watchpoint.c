@@ -30,20 +30,19 @@ WP* new_wp(char *args)
 	if (p == NULL)
 	{
 		Log("Not enough pool!\n");
-		assert(0);
+		return 0;
+		//assert(0);
 	}else{
 		free_ = free_->next;
-		
 		strcpy(p->express, args);
 		bool success = false;
-		//Log("expression = %s\n", p->express);
-		p->val_old = expr(p->express, &success, 'n');
-		if (!success) 
-		{
-		  Log("expression failed!\n");
-			assert(0);
+		uint32_t new_exp = expr(p->express, &success, 'n');
+		if (!success) {
+				Log("expression error\n");
+				return NULL;
+				//assert(0);
 		}
-	  
+		p->val_old = new_exp; 
 		if (head != NULL)
 		{
 			WP *q = head;
@@ -117,7 +116,8 @@ bool check_wp()
 		if (!success)
 		{
 			Log("expr error");
-			assert(0);
+			return 0;
+			//assert(0);
 		}else{
 			if (new_value != p->val_old)
 			{
@@ -142,14 +142,16 @@ void dis_wp()
 		{
 			if (p->changed)
 			{
+				bool success = false;
+				uint32_t new_exp = expr(p->express, &success, 'n');
+				if (!success) {
+					Log("expression error\n");
+					return;
+					//assert(0);
+				}
 				p->changed = false;
 				uint32_t val_old = p->val_old;
-				bool success = false;
-				p->val_old = expr(p->express, &success, 'n' );
-				if (!success) {
-					Log("expr error\n");
-					assert(0);
-				}
+				p->val_old = new_exp;
 				printf("%d\t%s\t\t0x%x\t0x%x\t\n", p->NO, p->express, val_old, p->val_old);
 			}
 			p = p->next;

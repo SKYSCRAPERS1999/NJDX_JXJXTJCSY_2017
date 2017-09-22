@@ -72,7 +72,7 @@ static struct rule {
 
 static regex_t re[NR_REGEX];
 
-uint32_t eval(uint32_t p, uint32_t q);
+uint32_t eval(uint32_t p, uint32_t q, bool* success);
 
 /* Rules are used for many times.
  * Therefore we compile them only once before any usage.
@@ -177,7 +177,14 @@ uint32_t expr(char *e, bool *success, char type) {
     return 0;
   }
   /* TODO: Insert codes to evaluate the expression. */
-	uint32_t ans = eval(0, nr_token - 1);
+	bool ok = true;
+	uint32_t ans = eval(0, nr_token - 1, &ok);
+  if (ok == false)
+	{
+		printf("Error occured when evaluating expressions\n");
+		*success = false;
+		return 0;
+	}
   switch (type)
   {
 		case 'd': 
@@ -219,11 +226,12 @@ bool check_parentheses (uint32_t p, uint32_t q)
 	return flag;
 }
 
-uint32_t eval(uint32_t p, uint32_t q)
+uint32_t eval(uint32_t p, uint32_t q, bool *success)
 {
     //printf("p = %d, q = %d\n", p , q);
 	//for (int i = p; i <= q; i++) printf("%d ", tokens[i].type);
 	//printf("\n");
+	*success = true;
 	if (p > q)
 	{
 		return 0;
@@ -277,9 +285,9 @@ uint32_t eval(uint32_t p, uint32_t q)
 			default: assert(0);	
 		}
 	}
-    else if (check_parentheses(p, q) == true)
+  else if (check_parentheses(p, q) == true)
 	{
-		return eval(p + 1, q - 1);
+		return eval(p + 1, q - 1, success);
 	}
 	else 
     {
@@ -367,7 +375,12 @@ uint32_t eval(uint32_t p, uint32_t q)
 					case TK_EIP:
 					case TK_HEXNUM:
 					case TK_NUM: {break; }
-					default: assert(0);
+					default: 
+					{
+						*success = false;
+						return 0;
+					}
+					//assert(0);
 				}
 			 }
 		}
@@ -393,17 +406,21 @@ uint32_t eval(uint32_t p, uint32_t q)
 		{
 			switch (tokens[first_single].type)
 			{
-				case TK_PLUS: return eval(p + 1, q);
-				case TK_MINUS: return -eval(p + 1, q);
-				case TK_NOT: return (!(eval(p + 1, q)));
-				case TK_MULTIPLY: return vaddr_read(eval(p + 1, q), 4);
+				case TK_PLUS: return eval(p + 1, q, success);
+				case TK_MINUS: return -eval(p + 1, q, success);
+				case TK_NOT: return (!(eval(p + 1, q, success)));
+				case TK_MULTIPLY: return vaddr_read(eval(p + 1, q, success), 4);
 			}
-		}else{ assert(0);}
+		}else{
+			*success = false;
+			return 0;
+			//assert(0);
+		}
         
 		//printf("op = %d\n", op);
 
-		uint32_t val1 = eval(p, op - 1);
-		uint32_t val2 = eval(op + 1, q);
+		uint32_t val1 = eval(p, op - 1, success);
+		uint32_t val2 = eval(op + 1, q, success);
         //printf("val1 = %d, val2 =  %d\n", val1, val2);
 		switch (tokens[op].type)
 		{
@@ -419,7 +436,11 @@ uint32_t eval(uint32_t p, uint32_t q)
 			case TK_LESS: return val1 < val2;
 			case TK_ME: return val1 >= val2;
 			case TK_LE: return val1 <= val2;
-			default: assert(0);
+			default:
+			{
+				*success = false;
+				return 0;
+			}
 		}
 	}
 }
