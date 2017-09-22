@@ -232,7 +232,6 @@ uint32_t eval(uint32_t p, uint32_t q, bool *success)
     //printf("p = %d, q = %d\n", p , q);
 	//for (int i = p; i <= q; i++) printf("%d ", tokens[i].type);
 	//printf("\n");
-	*success = true;
 	if (p > q)
 	{
 		return 0;

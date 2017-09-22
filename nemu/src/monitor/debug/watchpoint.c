@@ -100,11 +100,11 @@ bool check_wp()
 {
 	bool flag = false;
 	WP *p = head;
-	bool success = false;
+	bool success = true;
 	uint32_t new_value = 0;
 	while (p != NULL)
 	{
-		success = false;
+		success = true;
 	  new_value = expr(p->express, &success, 'n');
 		if (!success)
 		{
@@ -135,7 +135,7 @@ void dis_wp()
 		{
 			if (p->changed)
 			{
-				bool success = false;
+				bool success = true;
 				uint32_t new_exp = expr(p->express, &success, 'n');
 				if (!success) {
 					Log("expression error\n");
