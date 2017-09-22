@@ -17,6 +17,7 @@ enum {
   TK_AND, TK_OR, TK_NOT,
   TK_EAX, TK_EBX, TK_ECX, TK_EDX, TK_ESP, TK_ESI, TK_EBP, TK_EDI,
   TK_AX, TK_BX, TK_CX, TK_DX, TK_AL, TK_BL, TK_CL, TK_DL,
+	TK_EIP,
   /* TODO: Add more token types */
 
 };
@@ -64,7 +65,7 @@ static struct rule {
   {"\\$[b|B][l|L]", TK_BL}, // read bl
   {"\\$[c|C][l|L]", TK_CL}, // read cl
   {"\\$[d|D][l|L]", TK_DL}, // read dl
-
+  {"\\$[e|E][i|I][p|P]", TK_EIP}, // read eip
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -249,6 +250,8 @@ uint32_t eval(uint32_t p, uint32_t q)
 			case TK_CL: return reg_b(1);
 			case TK_DL: return reg_b(2);
 			case TK_BL: return reg_b(3);
+			
+			case TK_EIP: return cpu.eip;
 
 			case TK_HEXNUM:
 			{
@@ -361,6 +364,7 @@ uint32_t eval(uint32_t p, uint32_t q)
 					case TK_BL:
 					case TK_CL:
 					case TK_DL:
+					case TK_EIP:
 					case TK_HEXNUM:
 					case TK_NUM: {break; }
 					default: assert(0);
