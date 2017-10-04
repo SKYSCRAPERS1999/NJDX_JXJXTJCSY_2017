@@ -30,8 +30,72 @@ typedef struct {
 		struct{
 			rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
 		};
+
+		struct{
+			rtlreg_t EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI;
+		};
+
+		struct{
+			rtlreg_t al : 8;
+			rtlreg_t ah : 8;
+			rtlreg_t : 16;
+			rtlreg_t cl : 8;
+			rtlreg_t ch : 8;
+			rtlreg_t : 16;
+			rtlreg_t dl : 8;
+			rtlreg_t dh : 8;
+			rtlreg_t : 16;
+			rtlreg_t bl : 8;
+			rtlreg_t bh : 8;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+		};
+		struct{
+			rtlreg_t AL : 8;
+			rtlreg_t AH : 8;
+			rtlreg_t : 16;
+			rtlreg_t CL : 8;
+			rtlreg_t CH : 8;
+			rtlreg_t : 16;
+			rtlreg_t DL : 8;
+			rtlreg_t DH : 8;
+			rtlreg_t : 16;
+			rtlreg_t BL : 8;
+			rtlreg_t BH : 8;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+		  rtlreg_t : 16;
+		};
 	};
 	vaddr_t eip;
+  union{
+		uint32_t eflags;
+		uint32_t EFLAGS;
+		struct{
+			uint32_t CF : 1;
+			uint32_t :    1;
+			uint32_t :    4;
+			uint32_t ZF : 1;
+			uint32_t SF : 1;
+			uint32_t :    1;
+			uint32_t IF : 1;
+			uint32_t :    1;
+			uint32_t OF : 1;
+		};
+	};
 } CPU_state;
 
 extern CPU_state cpu;
