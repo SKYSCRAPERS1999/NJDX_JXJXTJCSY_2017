@@ -14,8 +14,8 @@ make_EHelper(push) {
 make_EHelper(pop) {
   //TODO();
 	rtl_pop(&id_dest->val);
-	Log("id_dest->val = %d\n", id_dest->val);
 	if (id_dest->type == OP_TYPE_REG){
+	  Log("id_dest->val = %d ## %d\n", id_dest->val, reg_l(id_dest->reg));
 		rtl_sr(id_dest->reg, 4, &id_dest->val);
 	}
   print_asm_template1(pop);
