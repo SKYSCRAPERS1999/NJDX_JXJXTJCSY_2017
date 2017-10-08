@@ -148,6 +148,7 @@ static inline void rtl_push(const rtlreg_t* src1) {
   cpu.esp -= 4;
 	rtlreg_t* address = &cpu.esp;
 	rtl_sm(address, 4, src1);
+	Log("cpu.esp = %d\n", cpu.esp);
 }
 
 static inline void rtl_pop(rtlreg_t* dest) {
