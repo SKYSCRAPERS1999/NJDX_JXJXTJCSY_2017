@@ -128,7 +128,7 @@ void init_qemu_reg() {
 
 void difftest_step(uint32_t eip) {
   union gdb_regs r;
-  bool diff = true;
+  bool diff = false;
 
   if (is_skip_nemu) {
     is_skip_nemu = false;
