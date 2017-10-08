@@ -91,14 +91,15 @@ static int cmd_x(char *args)
 	//printf("%s\n", arg2);
 	if (arg1 != NULL && arg2 != NULL)
 	{
-		if (strlen(arg1) >= 2 && arg1[0] == '0' && arg1[1] == 'x') { sscanf(arg1, "0x%x", &N);}
-		else {sscanf(arg1, "%d", &N);}
+    if (strlen(arg1) >= 2 && arg1[0] == '0' && arg1[1] == 'x') { sscanf(arg1, "0x%x", &N);}
+    else {sscanf(arg1, "%d", &N);}
 
-		if (strlen(arg2) >= 2 && arg2[0] == '0' && arg2[1] == 'x') { sscanf(arg2, "0x%x", &EXPR);}
-		else {sscanf(arg2, "%d", &EXPR);}
-
-	    //sscanf(arg2, "0x%x", &EXPR);
+    //if (strlen(arg2) >= 2 && arg2[0] == '0' && arg2[1] == 'x') { sscanf(arg2, "0x%x", &EXPR);}
+    //else {sscanf(arg2, "%d", &EXPR);}
+		//sscanf(arg2, "0x%x", &EXPR);
 		assert(N >= 0);
+		bool success = false;
+		EXPR = expr(arg2, &success, 'n');
 		for (uint32_t i = 0; i < N; i++){
 		    if (i % 4 == 0) {if (i) {printf("\n");} printf("0x%08x:", EXPR + i);}
 			uint8_t DEST = vaddr_read(EXPR + i, 1);
