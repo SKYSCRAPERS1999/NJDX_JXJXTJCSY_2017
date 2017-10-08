@@ -6,7 +6,8 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push) {
-  //TODO();`
+  //TODO();
+	Log("id_src->type = %d\n", id_src->type);
 	rtl_push(&id_src->val);
   print_asm_template1(push);
 }
