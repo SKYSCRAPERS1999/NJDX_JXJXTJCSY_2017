@@ -13,7 +13,8 @@ make_EHelper(push) {
 
 make_EHelper(pop) {
   //TODO();
-	rtl_pop(&id_src->val);
+	rtl_pop(&id_dest->val);
+	reg_l(id_dest->reg) = id_dest->val;
   print_asm_template1(pop);
 }
 
