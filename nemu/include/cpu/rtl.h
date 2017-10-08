@@ -147,7 +147,8 @@ static inline void rtl_push(const rtlreg_t* src1) {
   //TODO();
   cpu.esp -= 4;
 	rtl_sm(&cpu.esp, 4, src1);
-	Log("cpu.esp = %d ## cpu.ebp = %d\n", cpu.esp, cpu.ebp);
+	uint32_t value = vaddr_read(cpu.esp, 4);
+	Log("cpu.esp = %d ## cpu.ebp = %d ## value = %d\n", cpu.esp, cpu.ebp, value);
 }
 
 static inline void rtl_pop(rtlreg_t* dest) {
