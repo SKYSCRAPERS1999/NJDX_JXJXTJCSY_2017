@@ -154,8 +154,7 @@ static inline void rtl_push(const rtlreg_t* src1) {
 static inline void rtl_pop(rtlreg_t* dest) {
   // dest <- M[esp]
   // esp <- esp + 4
-	uint32_t value = vaddr_read(cpu.esp, 4);
-	rtl_lm(dest, &value, 4);
+	*dest = vaddr_read(cpu.esp, 4);
 	cpu.esp += 4;
 }
 
