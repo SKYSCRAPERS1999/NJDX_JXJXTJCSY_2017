@@ -146,16 +146,17 @@ static inline void rtl_push(const rtlreg_t* src1) {
   // M[esp] <- src1
   //TODO();
   cpu.esp -= 4;
-	vaddr_write(cpu.esp, 4, *src1);
-	//rtl_sm(&cpu.esp, 4, src1);
-	uint32_t value = vaddr_read(cpu.esp, 4);
-	Log("cpu.esp = %d ## cpu.ebp = %d ## value = %d\n", cpu.esp, cpu.ebp, value);
+	//vaddr_write(cpu.esp, 4, *src1);
+	rtl_sm(&cpu.esp, 4, src1);
+	//uint32_t value = vaddr_read(cpu.esp, 4);
+	//Log("cpu.esp = %d ## cpu.ebp = %d ## value = %d\n", cpu.esp, cpu.ebp, value);
 }
 
 static inline void rtl_pop(rtlreg_t* dest) {
   // dest <- M[esp]
   // esp <- esp + 4
-	*dest = vaddr_read(cpu.esp, 4);
+	rtl_lm(dest, &cpu.esp, 4);
+	//*dest = vaddr_read(cpu.esp, 4);
 	cpu.esp += 4;
 }
 
