@@ -7,7 +7,9 @@ make_EHelper(mov) {
 
 make_EHelper(push) {
   //TODO();
-	if (id_src->type == OP_TYPE_REG){ rtl_push(&reg_l(id_src->reg));	}
+	if (id_src->type == OP_TYPE_REG){
+		rtl_push(&reg_l(id_src->reg));	
+	}
   print_asm_template1(push);
 }
 
