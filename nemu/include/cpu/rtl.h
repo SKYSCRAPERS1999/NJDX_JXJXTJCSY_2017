@@ -198,13 +198,13 @@ static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
 	switch(width)
 	{
 		case 1:
-			cpu.ZF = ((*result) & 0xff) == 0x0;
+			cpu.ZF = (((*result) & 0xff) == 0x0);
 			break;
 		case 2:
-			cpu.ZF = ((*result) & 0xffff) == 0x0;
+			cpu.ZF = (((*result) & 0xffff) == 0x0);
 			break;
 		case 4:
-			cpu.ZF = ((*result) & 0xffffffff) == 0x0;
+			cpu.ZF = (((*result) & 0xffffffff) == 0x0);
 			break;
 		default:
 			assert(0);
