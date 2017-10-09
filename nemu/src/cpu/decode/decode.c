@@ -38,7 +38,7 @@ static inline make_DopHelper(SI) {
    */
   //TODO();
   uint32_t tmp = instr_fetch(eip, op->width);
-	Log("tmp_fromFetch = 0x%x\n", tmp);
+	Log("tmp_fromFetch = 0x%x ## width = %d\n", tmp, op->width);
 	uint32_t msb = 0;
 	rtl_msb(&msb, &tmp, op->width);
 	if (msb){
