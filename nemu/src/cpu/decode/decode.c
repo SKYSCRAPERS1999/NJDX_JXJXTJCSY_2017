@@ -42,10 +42,13 @@ static inline make_DopHelper(SI) {
 	uint32_t msb = 0;
 	rtl_msb(&msb, &tmp, op->width);
 	if (msb){
-		tmp |= (0xffffffff & ((1 <<  8 * op->width) - 1) );
+		if (op->width == 1){
+			tmp = tmp | 0xffffff00;
+		}
+		else if (op->width == 4){}
+		else {assert(0);}
 	}
 	op->val = op->simm = tmp;
-	//Log("op->simm = 0x%x\n", op->simm);
 #ifdef DEBUG
   snprintf(op->str, OP_STR_SIZE, "$0x%x", op->simm);
 #endif
