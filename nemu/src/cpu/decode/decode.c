@@ -43,7 +43,7 @@ static inline make_DopHelper(SI) {
 	if (msb){
 		tmp = tmp | (0xffffffff << (8 * op->width));
 	}
-	op->val = op->simm = tmp;
+	op->val = op->simm = (int32_t)tmp;
 #ifdef DEBUG
   snprintf(op->str, OP_STR_SIZE, "$0x%x", op->simm);
 #endif
