@@ -139,9 +139,17 @@ static inline void rtl_not(rtlreg_t* dest) {
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
   //TODO();
-	uint32_t sign = ((*src1) >> (8 * width - 1)) & 0x1;
-	if (sign){
-		(*dest) = (*dest) | (0xffffffff << (8 * width));
+	uint32_t msb = ((*src1) >> (width * 8 - 1)) & 0x1; 
+  (*dest) = (*src1);
+	if (msb){
+		if (width == 1){
+			(*dest) = (*dest) | 0xffffff00;
+		}
+		else if (width == 2){
+			(*dest) = (*dest) | 0xffff0000; 
+		}
+		else if (width == 4){}
+		else {assert(0);}
 	}
 }
 
