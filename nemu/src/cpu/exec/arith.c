@@ -4,11 +4,11 @@ make_EHelper(add) {
   //TODO();
   rtl_add(&t2, &id_dest->val, &id_src->val);
   rtl_get_CF(&t1);
-  operand_write(id_dest, &t2);
+	uint32_t tmp = t2;
 
   rtl_update_ZFSF(&t2, id_dest->width);
 
-  rtl_slt(&t0, &t2, &id_src->val);
+  rtl_sltu(&t0, &t2, &id_src->val);
   rtl_set_CF(&t0);
 
   rtl_xor(&t0, &id_dest->val, &id_src->val);
@@ -18,6 +18,7 @@ make_EHelper(add) {
   rtl_msb(&t0, &t0, id_dest->width);
   rtl_set_OF(&t0);
 
+  operand_write(id_dest, &tmp);
   print_asm_template2(add);
 }
 
@@ -25,7 +26,7 @@ make_EHelper(sub) {
   //TODO();
   rtl_sub(&t2, &id_dest->val, &id_src->val);
   rtl_get_CF(&t1);
-  operand_write(id_dest, &t2);
+	uint32_t tmp = t2;
 
   rtl_update_ZFSF(&t2, id_dest->width);
 
@@ -38,18 +39,32 @@ make_EHelper(sub) {
   rtl_msb(&t0, &t0, id_dest->width);
   rtl_set_OF(&t0);
 
+  operand_write(id_dest, &tmp);
   print_asm_template2(sub);
 }
 
 make_EHelper(cmp) {
   TODO();
-
+	rtl_sltu(&t2, &id_dest->val, &id_src->val);
+	operand_write(id_dest, &t2);
   print_asm_template2(cmp);
+	//NOT COMPLETED
 }
 
 make_EHelper(inc) {
   TODO();
+	t0 = 1;
+	rtl_add(&t2, &id_dest->val, &t0);
+	uint32_t tmp = t2;
+	
+  rtl_update_ZFSF(&t2, id_dest->width);
 
+  rtl_xor(&t1, &id_dest->val, &t2);
+  rtl_msb(&t1, &t1, id_dest->width);
+	rtl_not(&t1);
+  rtl_set_OF(&t1);
+
+	operand_write(id_dest, &tmp);
   print_asm_template1(inc);
 }
 
