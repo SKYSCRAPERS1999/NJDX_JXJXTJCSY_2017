@@ -69,7 +69,7 @@ make_EHelper(sar) {
 }
 
 make_EHelper(shl) {
-  TODO();
+  //TODO();
   // unnecessary to update CF and OF in NEMU
 	uint32_t tmp = id_dest->val;
 	tmp <<= id_src->val;
