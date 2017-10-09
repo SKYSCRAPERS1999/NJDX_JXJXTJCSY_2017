@@ -8,7 +8,7 @@ make_EHelper(test) {
 
 make_EHelper(and) {
   //TODO();
-	Log("dest = %d ## src = %d\n", id_dest->val, id_src->val);
+	//Log("dest = %d ## src = %d\n", id_dest->val, id_src->val);
 	rtl_and(&t2, &id_dest->val, &id_src->val);
 	operand_write(id_dest, &t2);
 		
