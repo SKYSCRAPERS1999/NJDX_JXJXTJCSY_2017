@@ -11,6 +11,8 @@ make_EHelper(push);
 make_EHelper(pop);
 make_EHelper(ret);
 make_EHelper(lea);
+make_EHelper(movsx);
+make_EHelper(movzx);
 
 make_EHelper(sub);
 make_EHelper(add);
