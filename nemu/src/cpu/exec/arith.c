@@ -87,8 +87,18 @@ make_EHelper(dec) {
 }
 
 make_EHelper(neg) {
-  TODO();
+  //TODO();i
+	uint32_t flag = 0;
+	rtl_eq0(&flag, &id_dest->val);
+	if (flag){t0 = 0;}
+	else {t0 = 1;}
+	rtl_set_CF(&t0);
 
+	uint32_t neg_val = id_dest->val;
+	rtl_not(&neg_val);
+  t0 = 1;
+	rtl_add(&neg_val, &neg_val, &t0);
+  operand_write(id_dest, &neg_val); 
   print_asm_template1(neg);
 }
 
