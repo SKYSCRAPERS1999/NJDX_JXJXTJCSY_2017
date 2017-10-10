@@ -42,7 +42,9 @@ static inline make_DopHelper(SI) {
 	rtl_msb(&t0, &t1, op->width);
 	if (t0){
 		if (op->width == 1){
-			t1 = t1 | 0xffffff00;
+			t2 = 0xffffff00;
+			rtl_or(&t1, &t1, &t2);
+			//t1 = t1 | 0xffffff00;
 		}
 		else if (op->width == 4){}
 		else {assert(0);}
