@@ -42,7 +42,7 @@ make_EHelper(cltd) {
   if (decoding.is_operand_size_16) {
     //TODO();
 		t0 = 0;
-		rtl_lr(&t1, R_EAX, 2);
+		rtl_lr(&t1, R_AX, 2);
 		//t1 = reg_w(R_AX);
 		rtl_msb(&t0, &t1, 2);
 		if(t0){
@@ -52,7 +52,7 @@ make_EHelper(cltd) {
 			t2 = 0;
 			//cpu.dx = 0;
 		}
-		rtl_sr(R_AX, 2, &t2);
+		rtl_sr(R_DX, 2, &t2);
   }
   else {
     //TODO();
@@ -67,7 +67,7 @@ make_EHelper(cltd) {
 			//cpu.edx = 0;
 			t2 = 0;
 		}
-		rtl_sr(R_EAX, 4, &t2);
+		rtl_sr(R_EDX, 4, &t2);
   }
 
   print_asm(decoding.is_operand_size_16 ? "cwtl" : "cltd");
