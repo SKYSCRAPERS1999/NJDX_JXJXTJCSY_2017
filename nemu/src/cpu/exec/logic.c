@@ -100,8 +100,8 @@ make_EHelper(setcc) {
 
 make_EHelper(not) {
   //TODO();
-	Log("id_dest->val = %d ## ", id_dest->val);
+	//Log("id_dest->val = %d ## ", id_dest->val);
 	rtl_not(&id_dest->val);
-	Log("%d\n", id_dest->val);
+	//Log("%d\n", id_dest->val);
   print_asm_template1(not);
 }
