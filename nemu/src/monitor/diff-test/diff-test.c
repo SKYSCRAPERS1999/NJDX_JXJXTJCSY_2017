@@ -153,36 +153,36 @@ void difftest_step(uint32_t eip) {
 	{
 		if (cpu.eax != r.eax){
 			diff = true;
-			Log("cpu.eax = %d ## r.eax = %d\n", cpu.eax, r.eax);
+			Log("cpu.eax = 0x%x ## r.eax = 0x%x\n", cpu.eax, r.eax);
 		}
 		if (cpu.ecx != r.ecx){
 			diff = true;
-			Log("cpu.ecx = %d ## r.ecx = %d\n", cpu.ecx, r.ecx);
+			Log("cpu.ecx = 0x%x ## r.ecx = 0x%x\n", cpu.ecx, r.ecx);
 		}
 		if (cpu.edx != r.edx){
 			diff = true;
-			Log("cpu.edx = %d ## r.edx = %d\n", cpu.edx, r.edx);
+			Log("cpu.edx = 0x%x ## r.edx = 0x%x\n", cpu.edx, r.edx);
 		}
 		if (cpu.ebx != r.ebx){
 			diff = true;
-			Log("cpu.ebx = %d ## r.ebx = %d\n", cpu.ebx, r.ebx);
+			Log("cpu.ebx = 0x%x ## r.ebx = 0x%x\n", cpu.ebx, r.ebx);
 		}
 		
 		if (cpu.esp != r.esp){
 			diff = true;
-			Log("cpu.esp = %d ## r.esp = %d\n", cpu.esp, r.esp);
+			Log("cpu.esp = 0x%x ## r.esp = 0x%x\n", cpu.esp, r.esp);
 		}
 		if (cpu.ebp != r.ebp){
 			diff = true;
-			Log("cpu.ebp = %d ## r.ebp = %d\n", cpu.ebp, r.ebp);
+			Log("cpu.ebp = 0x%x ## r.ebp = 0x%x\n", cpu.ebp, r.ebp);
 		}
 		if (cpu.esi != r.esi){
 			diff = true;
-			Log("cpu.esi = %d ## r.esi = %d\n", cpu.esi, r.esi);
+			Log("cpu.esi = 0x%x ## r.esi = 0x%x\n", cpu.esi, r.esi);
 		}
 		if (cpu.edi != r.edi){
 			diff = true;
-			Log("cpu.edi = %d ## r.edi = %d\n", cpu.edi, r.edi);
+			Log("cpu.edi = 0x%x ## r.edi = 0x%x\n", cpu.edi, r.edi);
 		}
 		
 		if (cpu.eip != r.eip){
