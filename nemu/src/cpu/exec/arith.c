@@ -111,7 +111,8 @@ make_EHelper(neg) {
 	rtl_not(&neg_val);
   t0 = 1;
 	rtl_add(&neg_val, &neg_val, &t0);
-  operand_write(id_dest, &neg_val); 
+	uint32_t tmp = (int32_t)neg_val;
+  operand_write(id_dest, &tmp); 
   print_asm_template1(neg);
 }
 
