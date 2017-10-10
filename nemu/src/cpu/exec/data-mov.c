@@ -41,26 +41,33 @@ make_EHelper(leave) {
 make_EHelper(cltd) {
   if (decoding.is_operand_size_16) {
     //TODO();
-		uint32_t msb = 0;
-		uint32_t value = reg_w(R_AX);
-		rtl_msb(&msb, &value, 2);
-		if(msb){
-			cpu.dx = 0xffff;
+		t0 = 0;
+		rtl_lr(&t1, R_EAX, 2);
+		//t1 = reg_w(R_AX);
+		rtl_msb(&t0, &t1, 2);
+		if(t0){
+			t2 = 0xffff;
+			//cpu.dx = 0xffff;
 		}else{
-			cpu.dx = 0;
+			t2 = 0;
+			//cpu.dx = 0;
 		}
+		rtl_sr(R_AX, 2, &t2);
   }
   else {
     //TODO();
-		uint32_t msb = 0;
-		uint32_t value = reg_l(R_EAX);
-		rtl_msb(&msb, &value, 4);
-		if(msb){
-			cpu.edx = 0xffffffff;
+		t0 = 0;
+		rtl_lr(&t1, R_EAX, 4);
+		//t1 = reg_l(R_EAX);
+		rtl_msb(&t0, &t1, 4);
+		if(t0){
+			//cpu.edx = 0xffffffff;
+			t2 = 0xffffffff;
 		}else{
-			cpu.edx = 0;
+			//cpu.edx = 0;
+			t2 = 0;
 		}
-		
+		rtl_sr(R_EAX, 4, &t2);
   }
 
   print_asm(decoding.is_operand_size_16 ? "cwtl" : "cltd");
