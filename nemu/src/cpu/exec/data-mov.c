@@ -43,14 +43,11 @@ make_EHelper(cltd) {
     //TODO();
 		t0 = 0;
 		rtl_lr(&t1, R_AX, 2);
-		//t1 = reg_w(R_AX);
 		rtl_msb(&t0, &t1, 2);
 		if(t0){
 			t2 = 0xffff;
-			//cpu.dx = 0xffff;
 		}else{
 			t2 = 0;
-			//cpu.dx = 0;
 		}
 		rtl_sr(R_DX, 2, &t2);
   }
@@ -58,13 +55,10 @@ make_EHelper(cltd) {
     //TODO();
 		t0 = 0;
 		rtl_lr(&t1, R_EAX, 4);
-		//t1 = reg_l(R_EAX);
 		rtl_msb(&t0, &t1, 4);
 		if(t0){
-			//cpu.edx = 0xffffffff;
 			t2 = 0xffffffff;
 		}else{
-			//cpu.edx = 0;
 			t2 = 0;
 		}
 		rtl_sr(R_EDX, 4, &t2);
