@@ -41,11 +41,11 @@ make_EHelper(ret) {
 
 make_EHelper(call_rm) {
   //TODO();
-	uint32_t tmp;
-	Log("id_dest->val = 0x%x\n", id_dest->val);
-	rtl_lm(&tmp, &id_dest->val, id_dest->width);
-	Log("tmp = 0x%x\n", tmp);
-	decoding.jmp_eip = tmp + *eip;
+	//uint32_t tmp;
+	//Log("id_dest->val = 0x%x\n", id_dest->val);
+	//rtl_lm(&tmp, &id_dest->val, id_dest->width);
+	//Log("tmp = 0x%x\n", tmp);
+	decoding.jmp_eip = id_dest->val;
 
 	rtl_push(&decoding.seq_eip);
 	decoding.is_jmp = 1;
