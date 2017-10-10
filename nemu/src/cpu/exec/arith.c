@@ -80,7 +80,7 @@ make_EHelper(inc) {
 }
 
 make_EHelper(dec) {
-  TODO();
+  //TODO();
 	t0 = 1;
 	rtl_add(&t2, &id_dest->val, &t0);
 	uint32_t tmp = t2;
