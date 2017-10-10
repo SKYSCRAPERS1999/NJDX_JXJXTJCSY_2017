@@ -10,7 +10,8 @@ void _ioe_init() {
 
 unsigned long _uptime() {
   //return 0;
-	boot_time =  inl(RTC_PORT);
+	boot_time ++;
+	outl(RTC_PORT, boot_time);
 	return boot_time;
 }
 
