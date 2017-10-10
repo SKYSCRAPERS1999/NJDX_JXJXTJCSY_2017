@@ -79,6 +79,42 @@ typedef struct {
 			rtlreg_t : 16;
 		  rtlreg_t : 16;
 		};
+		struct{
+			rtlreg_t ax : 16;
+			rtlreg_t : 16;
+			rtlreg_t cx : 16;
+			rtlreg_t : 16;
+			rtlreg_t dx : 16;
+			rtlreg_t : 16;
+			rtlreg_t bx : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+		};
+		struct{
+			rtlreg_t AX : 16;
+			rtlreg_t : 16;
+			rtlreg_t CX : 16;
+			rtlreg_t : 16;
+			rtlreg_t DX : 16;
+			rtlreg_t : 16;
+			rtlreg_t BX : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+			rtlreg_t : 16;
+		};
 	};
 	vaddr_t eip;
   union{
