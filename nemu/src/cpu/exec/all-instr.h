@@ -34,6 +34,7 @@ make_EHelper(idiv);
 make_EHelper(cltd);
 make_EHelper(not);
 make_EHelper(neg);
+make_EHelper(inc);
 
 make_EHelper(cmp);
 

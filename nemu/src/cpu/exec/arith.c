@@ -64,7 +64,7 @@ make_EHelper(cmp) {
 }
 
 make_EHelper(inc) {
-  TODO();
+  //TODO();
 	t0 = 1;
 	rtl_add(&t2, &id_dest->val, &t0);
 	uint32_t tmp = t2;
@@ -73,7 +73,6 @@ make_EHelper(inc) {
 
   rtl_xor(&t1, &id_dest->val, &t2);
   rtl_msb(&t1, &t1, id_dest->width);
-	rtl_not(&t1);
   rtl_set_OF(&t1);
 
 	operand_write(id_dest, &tmp);
