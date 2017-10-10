@@ -37,17 +37,17 @@ static inline make_DopHelper(SI) {
    op->simm = ???
    */
   //TODO();
-  uint32_t tmp = instr_fetch(eip, op->width);
-	uint32_t msb = 0;
-	rtl_msb(&msb, &tmp, op->width);
-	if (msb){
+  t1 = instr_fetch(eip, op->width);
+	t0 = 0;
+	rtl_msb(&t0, &t1, op->width);
+	if (t0){
 		if (op->width == 1){
-			tmp = tmp | 0xffffff00;
+			t1 = t1 | 0xffffff00;
 		}
 		else if (op->width == 4){}
 		else {assert(0);}
 	}
-	op->val = op->simm = tmp;
+	op->val = op->simm = t1;
 #ifdef DEBUG
   snprintf(op->str, OP_STR_SIZE, "$0x%x", op->simm);
 #endif
