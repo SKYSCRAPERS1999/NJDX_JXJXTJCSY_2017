@@ -103,6 +103,5 @@ make_EHelper(not) {
 	t1 = id_dest->val;
 	rtl_not(&t1);
 	operand_write(id_dest, &t1);
-	Log("t1 = 0x%x\n", t1);
   print_asm_template1(not);
 }
