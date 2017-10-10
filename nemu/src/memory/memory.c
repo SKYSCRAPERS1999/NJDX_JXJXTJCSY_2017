@@ -8,14 +8,25 @@
     })
 
 uint8_t pmem[PMEM_SIZE];
+int is_mmio(int);
+uint32_t mmio_read(paddr_t, int, int);
+void mmio_write(paddr_t, int, uint32_t, int); 
 
 /* Memory accessing interfaces */
 
 uint32_t paddr_read(paddr_t addr, int len) {
+	uint32_t map_no = is_mmio(addr);
+	if (map_no != -1){
+		return mmio_read(addr, len, map_no);
+	}
   return pmem_rw(addr, uint32_t) & (~0u >> ((4 - len) << 3));
 }
 
 void paddr_write(paddr_t addr, int len, uint32_t data) {
+	uint32_t map_no = is_mmio(addr);
+	if (map_no != -1){
+		mmio_write(addr, len, data, map_no);
+	}
   memcpy(guest_to_host(addr), &data, len);
 }
 
