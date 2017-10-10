@@ -3,7 +3,6 @@
 make_EHelper(add) {
   //TODO();
   rtl_add(&t2, &id_dest->val, &id_src->val);
-  rtl_get_CF(&t1);
 	//uint32_t tmp = t2;
 
   rtl_update_ZFSF(&t2, id_dest->width);
@@ -25,7 +24,6 @@ make_EHelper(add) {
 make_EHelper(sub) {
   //TODO();
   rtl_sub(&t2, &id_dest->val, &id_src->val);
-  rtl_get_CF(&t1);
 	//uint32_t tmp = t2;
 
   rtl_update_ZFSF(&t2, id_dest->width);
@@ -46,7 +44,6 @@ make_EHelper(sub) {
 make_EHelper(cmp) {
   //TODO();
 	rtl_sub(&t2, &id_dest->val, &id_src->val);
-  rtl_get_CF(&t1);
 
   rtl_update_ZFSF(&t2, id_dest->width);
 
