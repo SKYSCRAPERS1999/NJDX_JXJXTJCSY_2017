@@ -82,7 +82,7 @@ make_EHelper(inc) {
 make_EHelper(dec) {
   //TODO();
 	t0 = 1;
-	rtl_add(&t2, &id_dest->val, &t0);
+	rtl_sub(&t2, &id_dest->val, &t0);
 	uint32_t tmp = t2;
 	
   rtl_update_ZFSF(&t2, id_dest->width);
