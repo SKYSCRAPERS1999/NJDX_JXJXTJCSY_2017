@@ -40,7 +40,13 @@ make_EHelper(ret) {
 }
 
 make_EHelper(call_rm) {
-  TODO();
+  //TODO();
+	uint32_t tmp;
+	rtl_lm(&tmp, &id_dest->val, id_dest->width);
+	decoding.jmp_eip = tmp + *eip;
+
+	rtl_push(&decoding.seq_eip);
+	decoding.is_jmp = 1;
 
   print_asm("call *%s", id_dest->str);
 }
