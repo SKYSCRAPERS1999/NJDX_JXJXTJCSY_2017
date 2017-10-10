@@ -69,11 +69,22 @@ make_EHelper(cltd) {
 
 make_EHelper(cwtl) {
   if (decoding.is_operand_size_16) {
-    TODO();
-  }
-  else {
-    TODO();
-  }
+    //TODO();
+		t0 = 0;
+		rtl_lr(&t1, R_AX, 2);
+		rtl_msb(&t0, &t1, 2);
+		if(t0){
+			t2 = 0xffff;
+		}else{
+			t2 = 0;
+		}
+		rtl_sr(R_AH, 2, &t2);
+	}else {
+		//TODO();
+		rtl_lr(&t1, R_AX, 2);
+		rtl_sext(&t2, &t1, 2);
+		rtl_sr(R_EAX, 4, &t2);
+	}
 
   print_asm(decoding.is_operand_size_16 ? "cbtw" : "cwtl");
 }
