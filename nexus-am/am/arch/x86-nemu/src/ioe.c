@@ -2,6 +2,7 @@
 #include <x86.h>
 
 #define RTC_PORT 0x48   // Note that this is not standard
+#define I8042_DATA_PORT 0x60
 static unsigned long boot_time;
 
 void _ioe_init() {
@@ -35,5 +36,7 @@ void _draw_sync() {
 }
 
 int _read_key() {
-  return _KEY_NONE;
+	uint32_t code = inl(I8042_DATA_PORT);
+	return code;
+  //return _KEY_NONE;
 }
