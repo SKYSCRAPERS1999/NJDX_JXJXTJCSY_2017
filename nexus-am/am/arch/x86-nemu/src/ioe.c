@@ -30,9 +30,8 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
     uint32_t yy = i / _screen.width;
 		uint32_t xx = i % _screen.width;
 		if (xx >= x && xx <= x + w && yy >= y && yy <= y + h){
-			fb[i] = (*pixels);
+			memcpy(fb + i, pixels, 4);
 			pixels++;
-			//memcpy(fb + i, pixels + i, 4);
 		}
   }
 }
