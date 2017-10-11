@@ -42,7 +42,7 @@ void _draw_sync() {
 
 int _read_key() {
 	uint8_t ok = inb(I8042_STATUS_PORT);
-	uint32_t code = _KEY_NONE;
+	int code = _KEY_NONE;
 	if (ok){
 		code = inl(I8042_DATA_PORT);
 	}
