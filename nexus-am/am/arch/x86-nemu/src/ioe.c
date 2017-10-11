@@ -4,7 +4,6 @@
 #define RTC_PORT 0x48   // Note that this is not standard
 #define I8042_DATA_PORT 0x60
 static unsigned long boot_time;
-
 void _ioe_init() {
   boot_time = inl(RTC_PORT);
 }
@@ -33,7 +32,6 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
 		if (xx >= x && xx <= x + w && yy >= y && yy <= y + h){
 			fb[i] = pixels[i];
 		}
-		//fb[i] = i;
   }
 	memcpy((void*)0x40000, fb, sizeof(fb));
 }
