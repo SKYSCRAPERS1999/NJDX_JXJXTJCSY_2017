@@ -29,7 +29,7 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
   for (i = 0; i < _screen.width * _screen.height; i++) {
     uint32_t yy = i / _screen.width;
 		uint32_t xx = i % _screen.width;
-		if (xx >= x && xx <= x + w && yy >= y && yy <= y + h){
+		if (xx >= x && xx < x + w && yy >= y && yy < y + h){
 			memcpy(fb + i, pixels, 4);
 			pixels++;
 		}
