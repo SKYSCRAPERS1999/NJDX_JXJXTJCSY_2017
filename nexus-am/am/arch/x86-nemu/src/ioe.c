@@ -13,7 +13,7 @@ unsigned long _uptime() {
   //return 0;
 	boot_time ++;
 	outl(RTC_PORT, boot_time);
-	return boot_time / 1000;
+	return boot_time;
 }
 
 uint32_t* const fb = (uint32_t *)0x40000;
