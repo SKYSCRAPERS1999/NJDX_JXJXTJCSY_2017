@@ -8,7 +8,7 @@
     })
 
 uint8_t pmem[PMEM_SIZE];
-int is_mmio(int);
+int is_mmio(paddr_t);
 uint32_t mmio_read(paddr_t, int, int);
 void mmio_write(paddr_t, int, uint32_t, int); 
 
@@ -26,6 +26,7 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 	int32_t map_no = is_mmio(addr);
 	if (map_no != -1){
 		mmio_write(addr, len, data, map_no);
+		return;
 	}
   memcpy(guest_to_host(addr), &data, len);
 }
