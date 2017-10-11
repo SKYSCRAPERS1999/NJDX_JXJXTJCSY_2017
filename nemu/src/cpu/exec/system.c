@@ -58,7 +58,7 @@ make_EHelper(in) {
 
 make_EHelper(out) {
   //TODO();
-	if (id_src->width == 1){
+	if (id_dest->width == 1){
 		pio_write((uint16_t)id_dest->val, 4,  (uint32_t)id_src->val);
 	}else{
 		pio_write(id_dest->val, 4, (uint32_t)id_src->val);
