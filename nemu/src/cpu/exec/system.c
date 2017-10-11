@@ -46,7 +46,7 @@ void pio_write(ioaddr_t, int, uint32_t);
 
 make_EHelper(in) {
   //TODO();
-	t1 = (uint16_t)pio_read(id_src->val, 1);
+	t1 = (uint16_t)pio_read(id_src->val, id_src->width);
 	id_dest->val = t1;
 	operand_write(id_dest, &id_dest->val);
   
