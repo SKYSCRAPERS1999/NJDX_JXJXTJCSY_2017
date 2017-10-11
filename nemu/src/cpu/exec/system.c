@@ -58,7 +58,11 @@ make_EHelper(in) {
 
 make_EHelper(out) {
   //TODO();
-	pio_write((uint16_t)id_dest->val, id_src->width, (uint32_t)id_src->val);
+	if (id_src->width == 1){
+		pio_write((uint16_t)id_dest->val, 4,  (uint32_t)id_src->val);
+	}else{
+		pio_write(id_dest->val, 4, (uint32_t)id_src->val);
+	}
 
   print_asm_template2(out);
 
