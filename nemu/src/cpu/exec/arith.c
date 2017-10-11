@@ -105,7 +105,8 @@ make_EHelper(neg) {
 
 	t1 = -(int32_t)id_dest->val;
 	//Log("neg_val = 0x%x\n", t1);
-	id_dest->val = t1; 
+	id_dest->val = t1;
+	operand_write(id_dest, &id_dest->val);
   print_asm_template1(neg);
 }
 
