@@ -31,10 +31,11 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
 		uint32_t xx = i % _screen.width;
 		if (xx >= x && xx <= x + w && yy >= y && yy <= y + h){
 			//fb[i] = pixels[i];
-			memcpy(fb + i, pixels + i, 4);
+			//memcpy(fb + i, pixels + i, 4);
+			fb[i] = pixels[i];
 		}
   }
-	//memcpy((void*)0x40000, fb, 300 * 400 * 4);
+	memcpy((void*)0x40000, fb, 300 * 400 * 4);
 }
 
 void _draw_sync() {
