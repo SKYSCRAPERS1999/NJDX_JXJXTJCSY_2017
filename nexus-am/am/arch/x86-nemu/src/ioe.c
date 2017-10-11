@@ -35,7 +35,7 @@ void _draw_rect(const uint32_t *pixels, int x, int y, int w, int h) {
 			fb[i] = pixels[i];
 		}
   }
-	memcpy((void*)0x40000, fb, 300 * 400 * 4);
+	memcpy((void*)0x40000, fb, 300 * 400 * sizeof(int));
 }
 
 void _draw_sync() {
