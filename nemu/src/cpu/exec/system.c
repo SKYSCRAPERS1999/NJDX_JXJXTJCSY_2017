@@ -58,9 +58,7 @@ make_EHelper(in) {
 
 make_EHelper(out) {
   //TODO();
-	t1 = 0;
-	rtl_lr(&t1, R_AL, 1);
-	pio_write(id_dest->val, id_src->width, t1);
+	pio_write(id_dest->val, id_src->width, (uint32_t)id_src->val);
 
   print_asm_template2(out);
 
