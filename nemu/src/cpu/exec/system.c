@@ -36,7 +36,6 @@ make_EHelper(int) {
 	raise_intr(id_dest->val, decoding.seq_eip);
 	rtl_pop(&cpu.eip);
 	rtl_pop(&cpu.EFLAGS);
-	decoding.is_jmp = 0;
 	Log("ENTERED\n");
   print_asm("int %s", id_dest->str);
 
