@@ -12,6 +12,7 @@ make_EHelper(lidt) {
 		t2 = t2 & 0x00ffffff;
 	}
 	cpu.IDT_base = t2;
+	Log("cpu.IDT_base = 0x%x", cpu.IDT_base);
 	print_asm_template1(lidt);
 }
 
