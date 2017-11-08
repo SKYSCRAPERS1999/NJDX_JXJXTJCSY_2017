@@ -8,7 +8,6 @@ make_EHelper(lidt) {
 	print_asm_template1(lidt);
 	
 	t1 = vaddr_read(id_dest->addr, 2);
-	Log("t1 = 0x%x\n", t1);
 	cpu.IDT_lim = t1;
 	t2 = vaddr_read(id_dest->addr + 2, 4);
 	if (id_dest->width == 2){
@@ -36,11 +35,12 @@ make_EHelper(mov_cr2r) {
 
 make_EHelper(int) {
   //TODO();
+  print_asm("int %s", id_dest->str);
+	
 	raise_intr(id_dest->val, decoding.seq_eip);
 	rtl_pop(&cpu.eip);
 	rtl_pop(&cpu.EFLAGS);
 	Log("ENTERED\n");
-  print_asm("int %s", id_dest->str);
 
 #ifdef DIFF_TEST
   diff_test_skip_nemu();
