@@ -1,10 +1,10 @@
 #include "cpu/exec.h"
-
+void raise_intr(uint8_t, vaddr_t);
 void diff_test_skip_qemu();
 void diff_test_skip_nemu();
 
 make_EHelper(lidt) {
-  TODO();
+  //TODO();
 	rtl_lm(&t1, &id_dest->val, 2);
 	cpu.IDT_lim = t1;
 	rtl_lm(&t2, &id_dest->val + 2, 4);
@@ -32,8 +32,8 @@ make_EHelper(mov_cr2r) {
 }
 
 make_EHelper(int) {
-  TODO();
-
+  //TODO();
+	raise_intr(id_dest->val, 0);
 
   print_asm("int %s", id_dest->str);
 
