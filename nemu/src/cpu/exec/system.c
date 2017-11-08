@@ -35,12 +35,13 @@ make_EHelper(mov_cr2r) {
 
 make_EHelper(int) {
   //TODO();
-  print_asm("int %s", id_dest->str);
-	
 	raise_intr(id_dest->val, decoding.seq_eip);
 	rtl_pop(&cpu.eip);
+	decoding.seq_eip = cpu.eip;
+	decoding.is_jmp = 0;
 	rtl_pop(&cpu.EFLAGS);
 	Log("ENTERED\n");
+  print_asm("int %s", id_dest->str);
 
 #ifdef DIFF_TEST
   diff_test_skip_nemu();
