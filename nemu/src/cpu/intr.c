@@ -13,6 +13,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 	uint32_t idta = (idt_data[0] & 0xffff) | (idt_data[1] & 0xffff0000);
 	//decoding.jmp_eip = idta;
 	cpu.eip = idta;
+	decoding.seq_eip = cpu.eip + 2;
 	//rtl_push(&cpu.EFLAGS);
 	rtl_push(&ret_addr);
 	//decoding.is_jmp = 1;
