@@ -32,7 +32,7 @@ make_EHelper(mov_cr2r) {
 }
 
 make_EHelper(int) {
-  //TODO();
+  TODO();
 	raise_intr(id_dest->val, 0);
 
   print_asm("int %s", id_dest->str);

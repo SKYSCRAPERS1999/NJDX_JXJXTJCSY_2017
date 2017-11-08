@@ -6,7 +6,6 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
    * That is, use ``NO'' to index the IDT.
    */
   //TODO();
-	ret_addr = cpu.eip;
 	rtl_push(&cpu.EFLAGS);
 	rtl_push(&ret_addr);
 	uint32_t base = cpu.IDT_base;
