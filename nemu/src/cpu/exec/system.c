@@ -9,7 +9,7 @@ make_EHelper(lidt) {
 	Log("t1 = 0x%x\n", t1);
 	cpu.IDT_lim = t1;
 	t2 = vaddr_read(id_dest->val + 2, 4);
-	Log("t2 = 0x%u\n", t2);
+	Log("t2 = 0x%x\n", t2);
 	
 	t0 = vaddr_read(id_dest->val + 2, 2);
 	t1 = vaddr_read(id_dest->val + 4, 2);
