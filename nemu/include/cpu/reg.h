@@ -132,6 +132,18 @@ typedef struct {
 			uint32_t OF : 1;
 		};
 	};
+	union{
+		uint32_t idt_base;
+		uint32_t IDT_base;
+	};
+	union{
+		uint16_t idt_lim;
+		uint16_t IDT_lim;
+	};
+	union{
+		uint16_t CS;
+		uint16_t cs;
+	};
 } CPU_state;
 
 extern CPU_state cpu;
@@ -140,7 +152,6 @@ static inline int check_reg_index(int index) {
   assert(index >= 0 && index < 8);
   return index;
 }
-
 #define reg_l(index) (cpu.gpr[check_reg_index(index)]._32)
 #define reg_w(index) (cpu.gpr[check_reg_index(index)]._16)
 #define reg_b(index) (cpu.gpr[check_reg_index(index) & 0x3]._8[index >> 2])

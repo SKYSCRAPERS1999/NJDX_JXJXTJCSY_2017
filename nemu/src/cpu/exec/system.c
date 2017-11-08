@@ -5,8 +5,14 @@ void diff_test_skip_nemu();
 
 make_EHelper(lidt) {
   TODO();
-
-  print_asm_template1(lidt);
+	rtl_lm(&t1, &id_dest->val, 2);
+	cpu.IDT_lim = t1;
+	rtl_lm(&t2, &id_dest->val + 2, 4);
+	if (id_dest->width == 2){
+		t2 = t2 & 0x00ffffff;
+	}
+	cpu.IDT_base = t2;
+	print_asm_template1(lidt);
 }
 
 make_EHelper(mov_r2cr) {
@@ -27,6 +33,7 @@ make_EHelper(mov_cr2r) {
 
 make_EHelper(int) {
   TODO();
+
 
   print_asm("int %s", id_dest->str);
 
