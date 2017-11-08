@@ -6,15 +6,15 @@ void diff_test_skip_nemu();
 make_EHelper(lidt) {
   //TODO();
 	t1 = vaddr_read(id_dest->val, 2);
-	Log("t1 = 0x%08x\n", t1);
+	Log("t1 = 0x%x\n", t1);
 	cpu.IDT_lim = t1;
 	t2 = vaddr_read(id_dest->val + 2, 4);
-	Log("t2 = 0x%08x\n", t2);
+	Log("t2 = 0x%x\n", t2);
 	
 	t0 = vaddr_read(id_dest->val + 2, 2);
 	t1 = vaddr_read(id_dest->val + 4, 2);
-	Log("0x%08x\n", t0);
-	Log("0x%08x\n", t1);
+	Log("0x%x\n", t0);
+	Log("0x%x\n", t1);
 	if (id_dest->width == 2){
 		t2 = t2 & 0x00ffffff;
 	}
