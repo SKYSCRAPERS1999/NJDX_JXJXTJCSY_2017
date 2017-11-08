@@ -7,10 +7,10 @@ make_EHelper(lidt) {
   //TODO();
 	print_asm_template1(lidt);
 	
-	t1 = vaddr_read(id_dest->val, 2);
+	t1 = vaddr_read(id_dest->addr, 2);
 	Log("t1 = 0x%x\n", t1);
 	cpu.IDT_lim = t1;
-	t2 = vaddr_read(id_dest->val + 2, 4);
+	t2 = vaddr_read(id_dest->addr + 2, 4);
 	if (id_dest->width == 2){
 		t2 = t2 & 0x00ffffff;
 	}
