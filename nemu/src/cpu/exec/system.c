@@ -5,6 +5,7 @@ void diff_test_skip_nemu();
 
 make_EHelper(lidt) {
   //TODO();
+	Log("id_dest.val = 0x%x\n", id_dest->val);
 	rtl_lm(&t1, &id_dest->val, 2);
 	cpu.IDT_lim = t1;
 	rtl_lm(&t2, &id_dest->val + 2, 4);
