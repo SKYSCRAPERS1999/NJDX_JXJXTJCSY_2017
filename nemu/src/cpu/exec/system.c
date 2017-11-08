@@ -34,6 +34,7 @@ make_EHelper(mov_cr2r) {
 make_EHelper(int) {
   //TODO();
 	raise_intr(id_dest->val, cpu.eip);
+	Log("ENTERED\n");
 	rtl_pop(&cpu.eip);
 	rtl_pop(&cpu.EFLAGS);
   print_asm("int %s", id_dest->str);
