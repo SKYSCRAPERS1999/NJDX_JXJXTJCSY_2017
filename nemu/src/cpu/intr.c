@@ -8,6 +8,9 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   //TODO();
 	rtl_push(&cpu.EFLAGS);
 	rtl_push(&ret_addr);
+	Log("cpu.eip = 0x%x\n", cpu.eip);
+	Log("ret_addr = 0x%x\n", ret_addr);
+
 	uint32_t base = cpu.IDT_base;
 	uint32_t idt_data[2];
 	idt_data[0] = vaddr_read(base + 8 * NO, 4);
