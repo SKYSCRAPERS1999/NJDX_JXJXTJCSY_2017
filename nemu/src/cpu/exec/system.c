@@ -36,7 +36,7 @@ make_EHelper(mov_cr2r) {
 make_EHelper(int) {
   //TODO();
 	raise_intr(id_dest->val, decoding.seq_eip);
-	decoding.is_jmp = 0;
+	//decoding.is_jmp = 0;
 	rtl_pop(&decoding.seq_eip);
 	cpu.eip = decoding.seq_eip;
 	rtl_pop(&cpu.EFLAGS);
