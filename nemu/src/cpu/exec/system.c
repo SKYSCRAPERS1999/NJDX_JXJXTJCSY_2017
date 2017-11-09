@@ -47,7 +47,8 @@ make_EHelper(int) {
 make_EHelper(iret) {
   //TODO();
 	rtl_pop(&t1);
-	cpu.eip = t1;
+	decoding.seq_eip = t1;
+	decoding.is_jmp = 0;
 	rtl_pop(&t1);
 	cpu.cs = (uint16_t)t1;
 	rtl_pop(&t1);
