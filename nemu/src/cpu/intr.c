@@ -17,8 +17,8 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 	uint32_t idta = (idt_data[0] & 0xffff) | (idt_data[1] & 0xffff0000);
 	decoding.is_jmp = 1;
 	decoding.jmp_eip = idta;
-	Log("ret_addr = 0x%08x\n", ret_addr);
-	Log("eip = 0x%08x\n", cpu.eip);
+	//Log("ret_addr = 0x%08x\n", ret_addr);
+	//Log("eip = 0x%08x\n", cpu.eip);
 }
 
 void dev_raise_intr() {

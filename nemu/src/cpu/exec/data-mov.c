@@ -19,8 +19,35 @@ make_EHelper(pop) {
 }
 
 make_EHelper(pusha) {
-  TODO();
-
+  //TODO();
+	if (id_dest->width == 2)
+	{
+		rtl_push((uint32_t*)&reg_w(R_EAX));
+		rtl_push((uint32_t*)&reg_w(R_ECX));
+		rtl_push((uint32_t*)&reg_w(R_EDX));
+		rtl_push((uint32_t*)&reg_w(R_EBX));
+		t1 = reg_w(R_ESP);
+		rtl_push(&t1);
+		t1 = reg_w(R_EBP);
+		rtl_push(&t1);
+		t1 = reg_w(R_ESI);
+		rtl_push(&t1);
+		t1 = reg_w(R_EDI);
+		rtl_push(&t1);
+	}else if (id_dest->width == 4){
+		rtl_push(&reg_l(R_EAX));
+		rtl_push(&reg_l(R_ECX));
+		rtl_push(&reg_l(R_EDX));
+		rtl_push(&reg_l(R_EBX));
+		t1 = reg_l(R_ESP);
+		rtl_push(&t1);
+		t1 = reg_l(R_EBP);
+		rtl_push(&t1);
+		t1 = reg_l(R_ESI);
+		rtl_push(&t1);
+		t1 = reg_l(R_EDI);
+		rtl_push(&t1);
+	}
   print_asm("pusha");
 }
 

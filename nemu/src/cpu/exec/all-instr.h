@@ -11,6 +11,7 @@ make_EHelper(int);
 make_EHelper(lidt);
 
 make_EHelper(push);
+make_EHelper(pusha);
 make_EHelper(pop);
 make_EHelper(ret);
 make_EHelper(lea);
