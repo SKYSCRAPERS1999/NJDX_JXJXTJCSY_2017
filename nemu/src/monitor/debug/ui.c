@@ -51,6 +51,10 @@ static int cmd_info(char *args)
 			printf("%s : 0x%x\n", a[i], reg_l(i)); 
 		}
 		printf("EIP : 0x%x\n", cpu.eip);
+		printf("ZF : 0x%x\n", cpu.ZF);
+		printf("SF : 0x%x\n", cpu.SF);
+		printf("CF : 0x%x\n", cpu.CF);
+		printf("OF : 0x%x\n", cpu.OF);
 	}else if (arg != NULL && strcmp(arg, "w") == 0){
 		WP* p = get_head();
 		if (p == NULL)
