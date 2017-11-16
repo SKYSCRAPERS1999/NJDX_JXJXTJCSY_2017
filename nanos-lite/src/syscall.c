@@ -27,7 +27,7 @@ _RegSet* do_syscall(_RegSet *r) {
 			break;
 		}
 		case SYS_exit: {
-			//SYSCALL_ARG1(r) = SYS_exit;
+			SYSCALL_ARG1(r) = SYS_exit;
 			Log("status = %d\n", a[1]);
 			_halt(a[1]);
 			break;
