@@ -22,10 +22,8 @@ _RegSet* do_syscall(_RegSet *r) {
 					_putc(buf[i]);
 				}
 				SYSCALL_ARG1(r) = count;
-			}else{
-				SYSCALL_ARG1(r) = -1;
 			}
-			Log("SYSCALL_ARG2 = %d\n", SYSCALL_ARG2(r));
+			//Log("SYSCALL_ARG2 = %d\n", SYSCALL_ARG2(r));
 			break;
 		}
 		case SYS_exit: {
