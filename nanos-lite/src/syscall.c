@@ -3,14 +3,24 @@
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
   a[0] = SYSCALL_ARG1(r);
-
+	a[1] = SYSCALL_ARG2(r);
+	a[2] = SYSCALL_ARG3(r);
+	a[3] = SYSCALL_ARG4(r);
   switch (a[0]) {
 		case SYS_none: {
 			SYSCALL_ARG1(r) = 1;	
 			break;
 		}
 		case SYS_write: {
-			SYSCALL_ARG1(r) = SYS_write;
+			int fd = a[1];
+			char *buf = (char*)a[2];
+			size_t count = a[3];
+			if (fd == 1 || fd == 2){
+				for (int i = 0; i < count; i++){
+					_putc(buf[i]);
+				}
+			}
+			SYSCALL_ARG1(r) = count;
 			break;
 		}
 		case SYS_exit: {

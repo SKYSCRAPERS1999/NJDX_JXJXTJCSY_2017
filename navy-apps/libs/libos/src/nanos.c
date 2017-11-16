@@ -34,9 +34,8 @@ int _write(int fd, void *buf, size_t count){
 			_putc((char)(buf + i));
 		}
 	}
-	*/
-  _exit(SYS_write);
-	return count;
+  */
+	_exit(SYS_write);
 }
 
 void *_sbrk(intptr_t increment){
