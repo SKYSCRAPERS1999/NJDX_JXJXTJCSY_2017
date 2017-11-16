@@ -191,7 +191,7 @@ void difftest_step(uint32_t eip) {
 		}
     
 		if (((cpu.eflags >> 6)&1) != ((r.eflags >> 6)&1)){
-			Log("cpu.zf = 0x%x ## r.zf = 0x%x\n", (cpu.eflags >> 6)&1 , (r.eflags >> 6)&1);
+			//Log("cpu.zf = 0x%x ## r.zf = 0x%x\n", (cpu.eflags >> 6)&1 , (r.eflags >> 6)&1);
 		}
 		
 	}
