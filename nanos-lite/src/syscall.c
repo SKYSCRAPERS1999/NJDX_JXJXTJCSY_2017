@@ -23,6 +23,7 @@ _RegSet* do_syscall(_RegSet *r) {
 				}
 			}
 			SYSCALL_ARG1(r) = i;
+			Log("SYSCALL_ARG1 = %d\n)", SYSCALL_ARG1(r));
 			break;
 		}
 		case SYS_exit: {
