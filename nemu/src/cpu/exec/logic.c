@@ -73,8 +73,8 @@ make_EHelper(shl) {
   // unnecessary to update CF and OF in NEMU
 	t1 = id_dest->val;
 	//t1 <<= id_src->val;
-	rtl_shl(&t1, &t1, &id_src->val);
-	operand_write(id_dest, &t1);
+	rtl_shl(&t2, &t1, &id_src->val);
+	operand_write(id_dest, &t2);
 	rtl_update_ZFSF(&id_dest->val, id_dest->width);
   
 	print_asm_template2(shl);
@@ -84,9 +84,9 @@ make_EHelper(shr) {
   //TODO();
   // unnecessary to update CF and OF in NEMU
 	t1 = id_dest->val;
-	rtl_shr(&t1, &t1, &id_src->val);
+	rtl_shr(&t2, &t1, &id_src->val);
 	//t1 >>= id_src->val;
-	operand_write(id_dest, &t1);
+	operand_write(id_dest, &t2);
 	rtl_update_ZFSF(&id_dest->val, id_dest->width);
 
   print_asm_template2(shr);
