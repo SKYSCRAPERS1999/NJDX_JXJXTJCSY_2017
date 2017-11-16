@@ -16,12 +16,13 @@ _RegSet* do_syscall(_RegSet *r) {
 			int fd = a[1];
 			char *buf = (char*)a[2];
 			size_t count = a[3];
+			int i = 0;
 			if (fd == 1 || fd == 2){
-				for (int i = 0; i < count; i++){
+				for (i = 0; i < count; i++){
 					_putc(buf[i]);
 				}
 			}
-			SYSCALL_ARG1(r) = count;
+			SYSCALL_ARG1(r) = i;
 			break;
 		}
 		case SYS_exit: {
