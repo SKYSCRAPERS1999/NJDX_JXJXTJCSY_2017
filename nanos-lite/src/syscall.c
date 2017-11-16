@@ -21,8 +21,8 @@ _RegSet* do_syscall(_RegSet *r) {
 				for (i = 0; i < count; i++){
 					_putc(buf[i]);
 				}
-				SYSCALL_ARG1(r) = count;
 			}
+			SYSCALL_ARG1(r) = count;
 			//Log("SYSCALL_ARG2 = %d\n", SYSCALL_ARG2(r));
 			break;
 		}
