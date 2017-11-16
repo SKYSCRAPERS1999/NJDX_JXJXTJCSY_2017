@@ -20,7 +20,6 @@ _RegSet* do_syscall(_RegSet *r) {
 				for (int i = 0; i < count; i++){
 					_putc(buf[i]);
 				}
-				Log("ENTER\n");
 			}
 			SYSCALL_ARG1(r) = count;
 			break;
