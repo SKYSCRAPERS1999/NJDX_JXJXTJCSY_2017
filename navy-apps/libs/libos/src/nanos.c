@@ -10,7 +10,7 @@
 #ifndef __ISA_NATIVE__
 
 // FIXME: this is temporary
-extern uintptr_t end;
+extern void* end;
 
 int _syscall_(int type, uintptr_t a0, uintptr_t a1, uintptr_t a2){
   int ret = -1;
@@ -31,7 +31,7 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-	intptr_t bk = end;
+	intptr_t bk = (intptr_t)end;
 	intptr_t addr = bk + increment;
 	_syscall_(SYS_brk, addr, 0, 0);
   return (void*)bk;
