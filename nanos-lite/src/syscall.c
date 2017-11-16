@@ -25,7 +25,7 @@ _RegSet* do_syscall(_RegSet *r) {
 			}else{
 				SYSCALL_ARG1(r) = -1;
 			}
-			Log("SYSCALL_ARG1 = %d\n", SYSCALL_ARG1(r));
+			Log("SYSCALL_ARG2 = %d\n", SYSCALL_ARG2(r));
 			break;
 		}
 		case SYS_exit: {
