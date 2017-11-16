@@ -20,7 +20,7 @@ _RegSet* do_syscall(_RegSet *r) {
 					_putc(buf[i]);
 				}
 			}
-			SYSCALL_ARG1(r) = count;
+			SYSCALL_ARG1(r) = SYS_write;
 			break;
 		}
 		case SYS_exit: {
