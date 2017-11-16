@@ -26,6 +26,7 @@ _RegSet* do_syscall(_RegSet *r) {
 			//Log("SYSCALL_ARG2 = %d\n", SYSCALL_ARG2(r));
 			break;
 		}
+
 		case SYS_exit: {
 			//SYSCALL_ARG1(r) = SYS_exit;
 			Log("status = %d\n", a[1]);
