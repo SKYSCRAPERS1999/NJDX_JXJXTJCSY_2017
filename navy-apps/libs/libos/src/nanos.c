@@ -11,6 +11,8 @@
 
 // FIXME: this is temporary
 
+void _putc(char ch);
+
 int _syscall_(int type, uintptr_t a0, uintptr_t a1, uintptr_t a2){
   int ret = -1;
   asm volatile("int $0x80": "=a"(ret): "a"(type), "b"(a0), "c"(a1), "d"(a2));
@@ -26,7 +28,13 @@ int _open(const char *path, int flags, mode_t mode) {
 }
 
 int _write(int fd, void *buf, size_t count){
+	if (fd == 1 || fd == 2){
+		for (int i = 0; i < count; i++){
+			_putc((char*)(buf + i));
+		}
+	}
   _exit(SYS_write);
+	return count;
 }
 
 void *_sbrk(intptr_t increment){
