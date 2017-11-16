@@ -74,6 +74,7 @@ make_EHelper(shl) {
 	t1 = id_dest->val;
 	//t1 <<= id_src->val;
 	rtl_shl(&t2, &t1, &id_src->val);
+	//
 	id_dest->val = (uint32_t)t2;
 	//operand_write(id_dest, &t2);
 	rtl_update_ZFSF(&id_dest->val, id_dest->width);
@@ -87,7 +88,9 @@ make_EHelper(shr) {
 	t1 = id_dest->val;
 	rtl_shr(&t2, &t1, &id_src->val);
 	//t1 >>= id_src->val;
-	operand_write(id_dest, &t2);
+	//operand_write(id_dest, &t2);
+	id_dest->val = (uint32_t)t2;
+	//
 	rtl_update_ZFSF(&id_dest->val, id_dest->width);
 
   print_asm_template2(shr);
