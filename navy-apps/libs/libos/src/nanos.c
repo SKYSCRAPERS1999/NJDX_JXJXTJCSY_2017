@@ -31,10 +31,10 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-	intptr_t bk = (intptr_t)end;
-	uintptr_t addr = bk + increment;
+	void* bk = end;
+	uintptr_t addr = (intptr_t)bk + increment;
 	_syscall_(SYS_brk, addr, 0, 0);
-  return (void*)bk;
+  return bk;
 	//return (void *)-1;
 }
 
