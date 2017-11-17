@@ -10,7 +10,7 @@
 #ifndef __ISA_NATIVE__
 
 // FIXME: this is temporary
-extern char end;
+extern uintptr_t end;
 
 int _syscall_(int type, uintptr_t a0, uintptr_t a1, uintptr_t a2){
   int ret = -1;
