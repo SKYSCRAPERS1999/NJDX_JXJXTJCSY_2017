@@ -38,7 +38,7 @@ void init_fs() {
 
 int fs_open(const char* pathname, int flags, int mode){
 	int i = 0;
-	for (i = FD_FB; i < NR_FILES; i++){
+	for (i = 0; i < NR_FILES; i++){
 		if (strcmp(pathname, file_table[i].name) == 0){
 			break;
 		}
@@ -53,9 +53,9 @@ int fs_read(int fd, void* buf, size_t len){
 			len = file_table[fd].size - file_table[fd].open_offset;
 	}
 	switch(fd){
-		case FD_STDIN: 
-		case FD_STDOUT:
-		case FD_STDERR:
+		case FD_STDIN: break;
+		case FD_STDOUT: break;
+		case FD_STDERR: break;
 		case FD_FB: break;
 		case FD_DISPINFO :{
 			dispinfo_read(buf, file_table[FD_DISPINFO].open_offset, len);
