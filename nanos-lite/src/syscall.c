@@ -28,7 +28,7 @@ _RegSet* do_syscall(_RegSet *r) {
 				}
 			}
 			SYSCALL_ARG1(r) = count;
-			Log("_heap.end = %p\n", _heap.end);
+			//Log("_heap.end = %p\n", _heap.end);
 			break;
 		}
 
@@ -41,7 +41,7 @@ _RegSet* do_syscall(_RegSet *r) {
 		
 		case SYS_brk: {
 			_heap.end = (void*)a[1];
-			Log("_heap.end = %p\n, _end = %p, end = %p\n", _heap.end, &_end, &end);
+			//Log("_heap.end = %p\n, _end = %p, end = %p\n", _heap.end, &_end, &end);
 			SYSCALL_ARG1(r) = 0;
 			break;
 		}
