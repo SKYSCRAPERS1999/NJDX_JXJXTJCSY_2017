@@ -23,7 +23,7 @@ void dispinfo_read(void *buf, off_t offset, size_t len) {
 }
 
 void fb_write(const void *buf, off_t offset, size_t len) {
-	memcpy((uint32_t*)(fb + offset / sizeof(uint32_t)), buf, len);	
+	memcpy((uint32_t*)(fb + offset * sizeof(uint32_t)), buf, len);	
 }
 
 void init_device() {
