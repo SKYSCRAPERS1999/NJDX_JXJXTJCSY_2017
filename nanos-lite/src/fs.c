@@ -59,7 +59,7 @@ int fs_read(int fd, void* buf, size_t len){
 		case FD_FB: break;
 		case FD_DISPINFO :{
 			dispinfo_read(buf, file_table[FD_DISPINFO].open_offset, len);
-			Log("buf = %s\n", buf);
+			//Log("buf = %s\n", buf);
 			file_table[FD_DISPINFO].open_offset += len;
 			break;
 		}
