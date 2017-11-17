@@ -39,7 +39,7 @@ _RegSet* do_syscall(_RegSet *r) {
 		case SYS_brk: {
 			_heap.end = (void*)SYSCALL_ARG2(r);
 			//end = SYSCALL_ARG2(r);
-			Log("_heap.end = %p\n", _heap.end);
+			Log("_heap.end = %p ## &end = %p\n", _heap.end, &end);
 			SYSCALL_ARG1(r) = 0;
 			break;
 		}
