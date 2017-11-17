@@ -1,4 +1,7 @@
 #include "fs.h"
+#define W 400
+#define H 300
+extern void _ioe_init();
 extern void ramdisk_read(void*, off_t, size_t);
 extern void ramdisk_write(const void*, off_t, size_t);
 typedef struct {
@@ -27,6 +30,9 @@ static Finfo file_table[] __attribute__((used)) = {
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
+	_ioe_init();
+	file_table[FD_FB].size = W * H * sizeof(uint32_t);	
+	
 }
 
 int fs_open(const char* pathname, int flags, int mode){
@@ -57,6 +63,7 @@ int fs_write(int fd, void* buf, size_t len){
 			break;
 		}
 		case FD_FB: {
+
 			break;
 		}
 		default: {
@@ -98,3 +105,5 @@ off_t fs_lseek(int fd, off_t offset, int whence){
 	}
 	return file_table[fd].open_offset;
 }
+
+

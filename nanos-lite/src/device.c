@@ -1,4 +1,6 @@
 #include "common.h"
+#define W 400
+#define H 300
 
 #define NAME(key) \
   [_KEY_##key] = #key,
@@ -18,6 +20,9 @@ void dispinfo_read(void *buf, off_t offset, size_t len) {
 }
 
 void fb_write(const void *buf, off_t offset, size_t len) {
+	//off_t xx, yy;
+	//xx = 	offset % W; yy = offset / W;
+	
 }
 
 void init_device() {
