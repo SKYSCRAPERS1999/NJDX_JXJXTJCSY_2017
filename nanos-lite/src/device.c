@@ -1,7 +1,7 @@
 #include "common.h"
 #define W 400
 #define H 300
-
+extern uint32_t* const fb;
 #define NAME(key) \
   [_KEY_##key] = #key,
 
@@ -20,9 +20,7 @@ void dispinfo_read(void *buf, off_t offset, size_t len) {
 }
 
 void fb_write(const void *buf, off_t offset, size_t len) {
-	//off_t xx, yy;
-	//xx = 	offset % W; yy = offset / W;
-	
+	memcpy((uint32_t*)(fb + offset), buf, len);	
 }
 
 void init_device() {
