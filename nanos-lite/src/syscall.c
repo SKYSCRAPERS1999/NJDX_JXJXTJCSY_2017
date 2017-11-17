@@ -1,6 +1,6 @@
 #include "common.h"
 #include "syscall.h"
-
+extern intptr_t end;
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
   a[0] = SYSCALL_ARG1(r);
@@ -36,7 +36,7 @@ _RegSet* do_syscall(_RegSet *r) {
 		}
 		
 		case SYS_brk: {
-			_heap.end = (void*)SYSCALL_ARG2(r);
+	    //_heap.end = (void*)SYSCALL_ARG2(r);
 			Log("_heap.end = %p\n", _heap.end);
 			SYSCALL_ARG1(r) = 0;
 			break;
