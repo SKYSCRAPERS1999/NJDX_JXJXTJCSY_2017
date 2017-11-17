@@ -30,6 +30,7 @@ void init_device() {
   _ioe_init();
   char* tmp = "WIDTH:640\nHEIGHT:480\n";
 	memcpy(dispinfo, tmp, strlen(tmp));
+	printf("dispinfo = %s\n", dispinfo);
 	//fs_read(FD_DISPINFO, dispinfo, 128);
 
 	// TODO: print the string to array `dispinfo` with the format
