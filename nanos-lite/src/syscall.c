@@ -37,9 +37,9 @@ _RegSet* do_syscall(_RegSet *r) {
 		}
 		
 		case SYS_brk: {
-			Log("end_origun = %p\n", &end);
 			end = SYSCALL_ARG2(r);
-			Log("end_modified = %p\n", &end);
+			Log("end = %p\n", &end);
+			Log("end = %p\n", end);
 			SYSCALL_ARG1(r) = 0;
 			break;
 		}
