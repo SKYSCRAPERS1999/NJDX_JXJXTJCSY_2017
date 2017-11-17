@@ -27,15 +27,13 @@ int _open(const char *path, int flags, mode_t mode) {
 }
 
 int _write(int fd, void *buf, size_t count){
-	int ret = _syscall_(SYS_write, fd, buf, count);
-	return ret;
+	 _syscall_(SYS_write, fd, buf, count);
 }
 
 void *_sbrk(intptr_t increment){
 	void* bk = end;
 	uintptr_t addr = (uintptr_t)bk + increment;
 	_syscall_(SYS_brk, addr, 0, 0);
-  end = (void*)addr;
 	return bk;
 	//return (void *)-1;
 }
