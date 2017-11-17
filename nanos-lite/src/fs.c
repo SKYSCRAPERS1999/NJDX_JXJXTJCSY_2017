@@ -4,6 +4,8 @@
 extern void _ioe_init();
 extern void ramdisk_read(void*, off_t, size_t);
 extern void ramdisk_write(const void*, off_t, size_t);
+extern void dispinfo_read(void*, off_t, size_t);
+extern void fb_write(const void*, off_t, size_t);
 typedef struct {
   char *name;
   size_t size;
@@ -48,22 +50,32 @@ int fs_open(const char* pathname, int flags, int mode){
 }
 
 int fs_read(int fd, void* buf, size_t len){
-	if (file_table[fd].open_offset + len > file_table[fd].size){
-		len = file_table[fd].size - file_table[fd].open_offset;
+	switch(fd){
+		case FD_STDIN: 
+		case FD_STDOUT:
+		case FD_STDERR:
+		case FD_FB: break;
+		case FD_DISPINFO :{
+			dispinfo_read(buf, file_table[FD_DISPINFO].open_offset, len);
+			break;
+		}
+		default:{
+			if (file_table[fd].open_offset + len > file_table[fd].size){
+				len = file_table[fd].size - file_table[fd].open_offset;
+			}
+			ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
+			file_table[fd].open_offset += len;
+		}
 	}
-	ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
-	file_table[fd].open_offset += len;
 	return len;
 }
 
 int fs_write(int fd, void* buf, size_t len){
 	switch(fd){
 		case FD_STDOUT:
-		case FD_STDERR: {
-			break;
-		}
+		case FD_STDERR: break;
 		case FD_FB: {
-
+			fb_write(buf, file_table[FD_FB].open_offset, len);
 			break;
 		}
 		default: {
