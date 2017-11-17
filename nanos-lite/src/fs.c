@@ -1,5 +1,6 @@
 #include "fs.h"
-
+extern void ramdisk_read(void*, off_t, size_t);
+extern void ramdisk_write(const void*, off_t, size_t);
 typedef struct {
   char *name;
   size_t size;
@@ -37,4 +38,18 @@ int fs_open(const char* pathname, int flags, int mode){
 	}
 	assert(i < NR_FILES);
 	return i;
+}
+
+int fs_read(int fd, void* buf, size_t len){
+	ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
+	return len;
+}
+
+int fs_write(int fd, void* buf, size_t len){
+	ramdisk_write(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
+	return len;
+}
+
+int fs_close(int fd){
+	return 0;
 }

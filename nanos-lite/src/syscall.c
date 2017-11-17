@@ -2,7 +2,8 @@
 #include "syscall.h"
 extern intptr_t end, _end;
 extern int fs_open(const char*, int, int);
-
+extern int fs_read(int, void*, size_t);
+extern int fs_close(int);
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
   a[0] = SYSCALL_ARG1(r);
@@ -50,7 +51,16 @@ _RegSet* do_syscall(_RegSet *r) {
 			Log("OPENed\n");
 			break;
 		}
+		
+		case SYS_read: {
+			SYSCALL_ARG1(r) = fs_read(a[1], (void*)(a[2]), a[3]);
+			break;
+		}
 
+		case SYS_close: {
+			SYSCALL_ARG1(r) = fs_close(a[1]);
+			break;
+		}
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
