@@ -47,6 +47,7 @@ _RegSet* do_syscall(_RegSet *r) {
 		case SYS_open: {
 			const char* path = (const char*)a[1];
 			SYSCALL_ARG1(r) = fs_open(path, 0, 0);
+			Log("OPENed\n");
 			break;
 		}
 
