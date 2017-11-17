@@ -79,7 +79,8 @@ int fs_write(int fd, void* buf, size_t len){
 	}
 	switch(fd){
 		case FD_STDOUT:
-		case FD_STDERR: break;
+		case FD_STDERR:
+		case FD_DISPINFO: break;
 		case FD_FB: {
 			fb_write(buf, file_table[FD_FB].open_offset, len);
 			file_table[FD_FB].open_offset += len;
