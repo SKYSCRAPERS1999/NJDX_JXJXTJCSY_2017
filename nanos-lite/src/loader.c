@@ -13,6 +13,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
   //return (uintptr_t)DEFAULT_ENTRY;
 	Log("%s loaded\n", filename);	
 	int fd = fs_open(filename, 0, 0);
+	Log("FDSFSFefew\n");
 	fs_read(fd, DEFAULT_ENTRY, fs_filesz(fd));
 	fs_close(fd);
 	return (uintptr_t)DEFAULT_ENTRY;

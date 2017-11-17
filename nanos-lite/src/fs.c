@@ -36,7 +36,7 @@ int fs_open(const char* pathname, int flags, int mode){
 			break;
 		}
 	}
-	//assert(i < NR_FILES);
+	assert(i < NR_FILES);
 	return i;
 }
 
