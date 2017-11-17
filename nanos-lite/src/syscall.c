@@ -37,11 +37,12 @@ _RegSet* do_syscall(_RegSet *r) {
 		}
 		
 		case SYS_brk: {
-			//_heap.end = (void*)SYSCALL_ARG2(r);
+			_heap.end = (void*)SYSCALL_ARG2(r);
 			Log("_heap.end = %p\n, _end = %p, end = %p\n", _heap.end, &_end, &end);
 			SYSCALL_ARG1(r) = 0;
 			break;
 		}
+
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 

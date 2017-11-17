@@ -32,9 +32,9 @@ int _write(int fd, void *buf, size_t count){
 }
 
 void *_sbrk(intptr_t increment){
-	intptr_t old_end = now_end;
-	now_end += increment;
-	if (_syscall_(SYS_brk, now_end, 0, 0) == 0) return (void*)old_end;
+	//intptr_t old_end = now_end;
+	//now_end += increment;
+	//if (_syscall_(SYS_brk, now_end, 0, 0) == 0) return (void*)old_end;
 	return (void *)-1;
 }
 
