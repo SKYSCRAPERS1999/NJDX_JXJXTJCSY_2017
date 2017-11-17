@@ -53,3 +53,7 @@ int fs_write(int fd, void* buf, size_t len){
 int fs_close(int fd){
 	return 0;
 }
+
+int fs_filesz(int fd){
+	return file_table[fd].size;
+}
