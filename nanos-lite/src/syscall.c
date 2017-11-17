@@ -3,6 +3,7 @@
 extern intptr_t end, _end;
 extern int fs_open(const char*, int, int);
 extern int fs_read(int, void*, size_t);
+extern int fs_write(int, void*, size_t);
 extern int fs_close(int);
 extern int fs_lseek(int, off_t, int);
 _RegSet* do_syscall(_RegSet *r) {
@@ -26,8 +27,10 @@ _RegSet* do_syscall(_RegSet *r) {
 				for (i = 0; i < count; i++){
 					_putc(buf[i]);
 				}
+				SYSCALL_ARG1(r) = count;
+			}else{
+				SYSCALL_ARG1(r) = fs_write(fd, buf, count);
 			}
-			SYSCALL_ARG1(r) = count;
 			//Log("_heap.end = %p\n", _heap.end);
 			break;
 		}
