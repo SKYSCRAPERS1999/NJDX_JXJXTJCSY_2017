@@ -28,9 +28,9 @@ void fb_write(const void *buf, off_t offset, size_t len) {
 
 void init_device() {
   _ioe_init();
-  char* tmp = "WIDTH:640\nHEIGHT:480\n";
-	memcpy(dispinfo, tmp, strlen(tmp));
-	//fs_read(FD_DISPINFO, dispinfo, 128);
+  //char* tmp = "WIDTH:640\nHEIGHT:480\n";
+	//memcpy(dispinfo, tmp, strlen(tmp));
+	fs_read(FD_DISPINFO, dispinfo, 128);
 
 	// TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
