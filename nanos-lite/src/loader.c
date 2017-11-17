@@ -11,7 +11,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
   //TODO();
 	//ramdisk_read(DEFAULT_ENTRY, 0, get_ramdisk_size());
   //return (uintptr_t)DEFAULT_ENTRY;
-	
+	Log("%s loaded\n", filename);	
 	int fd = fs_open(filename, 0, 0);
 	fs_read(fd, DEFAULT_ENTRY, fs_filesz(fd));
 	fs_close(fd);
