@@ -38,7 +38,7 @@ void init_fs() {
 
 int fs_open(const char* pathname, int flags, int mode){
 	int i = 0;
-	for (i = 0; i < NR_FILES; i++){
+	for (i = FD_FB; i < NR_FILES; i++){
 		if (strcmp(pathname, file_table[i].name) == 0){
 			break;
 		}
