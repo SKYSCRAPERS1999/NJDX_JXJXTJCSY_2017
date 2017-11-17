@@ -59,6 +59,7 @@ int fs_read(int fd, void* buf, size_t len){
 		case FD_FB: break;
 		case FD_DISPINFO :{
 			dispinfo_read(buf, file_table[FD_DISPINFO].open_offset, len);
+			file_table[FD_DISPINFO].open_offset += len;
 			break;
 		}
 		default:{
@@ -81,6 +82,7 @@ int fs_write(int fd, void* buf, size_t len){
 		case FD_STDERR: break;
 		case FD_FB: {
 			fb_write(buf, file_table[FD_FB].open_offset, len);
+			file_table[FD_FB].open_offset += len;
 			break;
 		}
 		default: {
