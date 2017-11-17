@@ -70,10 +70,12 @@ int fs_filesz(int fd){
 off_t fs_lseek(int fd, off_t offset, int whence){
 	switch(whence){
 		case SEEK_SET:{
+			if (offset > file_table[fd].size) { offset = file_table[fd].size;}
 			file_table[fd].open_offset = offset;
 			break;
 		}
 		case SEEK_CUR:{
+			if (offset + file_table[fd].open_offset > file_table[fd].size) {offset = file_table[fd].size - file_table[fd].open_offset;}
 			file_table[fd].open_offset += offset;
 			break;
 		}
