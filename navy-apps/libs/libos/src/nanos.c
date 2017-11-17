@@ -10,8 +10,8 @@
 #ifndef __ISA_NATIVE__
 
 // FIXME: this is temporary
-extern uintptr_t end;
-intptr_t now_end = (intptr_t)&end;
+extern uintptr_t _end;
+intptr_t now_end = (intptr_t)&_end;
 
 int _syscall_(int type, uintptr_t a0, uintptr_t a1, uintptr_t a2){
   int ret = -1;
