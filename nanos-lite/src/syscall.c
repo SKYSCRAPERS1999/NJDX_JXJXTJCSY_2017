@@ -1,6 +1,5 @@
 #include "common.h"
 #include "syscall.h"
-extern uintptr_t end; 
 
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
