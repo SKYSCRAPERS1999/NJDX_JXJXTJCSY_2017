@@ -24,7 +24,7 @@ _RegSet* do_syscall(_RegSet *r) {
 				}
 			}
 			SYSCALL_ARG1(r) = count;
-			Log("SYSCALL_ARG2 = %d\n", SYSCALL_ARG2(r));
+			Log("_heap.end = %p\n", _heap.end);
 			break;
 		}
 
