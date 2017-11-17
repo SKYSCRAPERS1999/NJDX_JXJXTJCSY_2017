@@ -32,8 +32,7 @@ static Finfo file_table[] __attribute__((used)) = {
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
-	//file_table[FD_FB].size = W * H * sizeof(uint32_t);	
-	file_table[FD_FB].size = 640 * 480 * sizeof(uint32_t);	
+	file_table[FD_FB].size = W * H * sizeof(uint32_t);	
 	
 }
 
