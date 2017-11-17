@@ -34,7 +34,7 @@ _RegSet* do_syscall(_RegSet *r) {
 
 		case SYS_exit: {
 			SYSCALL_ARG1(r) = SYS_exit;
-			Log("status = %d\n", a[1]);
+			Log("Exited : status = %d\n", a[1]);
 			_halt(a[1]);
 			break;
 		}
@@ -49,22 +49,25 @@ _RegSet* do_syscall(_RegSet *r) {
 		case SYS_open: {
 			const char* path = (const char*)a[1];
 			SYSCALL_ARG1(r) = fs_open(path, 0, 0);
-			Log("OPENed\n");
+			Log("Opened\n");
 			break;
 		}
 		
 		case SYS_read: {
 			SYSCALL_ARG1(r) = fs_read(a[1], (void*)(a[2]), a[3]);
+			Log("Readed\n");
 			break;
 		}
 
 		case SYS_close: {
 			SYSCALL_ARG1(r) = fs_close(a[1]);
+			Log("Closed\n");
 			break;
 		}
 
 		case SYS_lseek:{
 			SYSCALL_ARG1(r) = fs_lseek(a[1], a[2], a[3]);
+			Log("Lseeked\n");
 			break;
 		}
     default: panic("Unhandled syscall ID = %d", a[0]);
