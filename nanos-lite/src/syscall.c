@@ -1,6 +1,5 @@
 #include "common.h"
 #include "syscall.h"
-extern _Area _heap;
 extern intptr_t end, _end;
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
