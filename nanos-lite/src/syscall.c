@@ -4,6 +4,7 @@ extern intptr_t end, _end;
 extern int fs_open(const char*, int, int);
 extern int fs_read(int, void*, size_t);
 extern int fs_close(int);
+extern int fs_lseek(int, off_t, int);
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
   a[0] = SYSCALL_ARG1(r);
@@ -59,6 +60,11 @@ _RegSet* do_syscall(_RegSet *r) {
 
 		case SYS_close: {
 			SYSCALL_ARG1(r) = fs_close(a[1]);
+			break;
+		}
+
+		case SYS_lseek:{
+			SYSCALL_ARG1(r) = fs_lseek(a[1], a[2], a[3]);
 			break;
 		}
     default: panic("Unhandled syscall ID = %d", a[0]);
