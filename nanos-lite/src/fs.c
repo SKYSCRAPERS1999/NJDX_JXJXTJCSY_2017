@@ -50,6 +50,9 @@ int fs_open(const char* pathname, int flags, int mode){
 }
 
 int fs_read(int fd, void* buf, size_t len){
+	if (file_table[fd].open_offset + len > file_table[fd].size){
+			len = file_table[fd].size - file_table[fd].open_offset;
+	}
 	switch(fd){
 		case FD_STDIN: 
 		case FD_STDOUT:
@@ -60,9 +63,9 @@ int fs_read(int fd, void* buf, size_t len){
 			break;
 		}
 		default:{
-			if (file_table[fd].open_offset + len > file_table[fd].size){
-				len = file_table[fd].size - file_table[fd].open_offset;
-			}
+			//if (file_table[fd].open_offset + len > file_table[fd].size){
+			//	len = file_table[fd].size - file_table[fd].open_offset;
+			//}
 			ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
 			file_table[fd].open_offset += len;
 		}
