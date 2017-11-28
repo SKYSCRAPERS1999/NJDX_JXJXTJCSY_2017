@@ -2,7 +2,7 @@
 #define W 400
 #define H 300
 #define FD_DISPINFO 5
-extern uint32_t* const fb;
+extern uint32_t* fb;
 extern int fs_read(int, void*, size_t);
 #define NAME(key) \
   [_KEY_##key] = #key,
@@ -23,7 +23,7 @@ void dispinfo_read(void *buf, off_t offset, size_t len) {
 }
 
 void fb_write(const void *buf, off_t offset, size_t len) {
-	memcpy((uint32_t*)fb + offset / 4, buf, len);	
+	memcpy((uint32_t*)(fb + offset / 4), buf, len);	
 }
 
 void init_device() {
