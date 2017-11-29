@@ -4,7 +4,7 @@
 #define FD_DISPINFO 5
 extern uint32_t* fb;
 extern int fs_read(int, void*, size_t);
-extern int read_key();
+extern int _read_key();
 extern unsigned long _uptime();
 #define NAME(key) \
   [_KEY_##key] = #key,
