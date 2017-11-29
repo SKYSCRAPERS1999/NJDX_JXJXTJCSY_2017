@@ -21,7 +21,7 @@ size_t events_read(void *buf, size_t len) {
 		if (code > 0x8000){
 			sprintf(buf, "kd %s\n", keyname[code - 0x8000]);
 		}else{
-			sprintf(buf, "kd %s\n", keyname[code]);
+			sprintf(buf, "ku %s\n", keyname[code]);
 		}
 	}
 	else{
