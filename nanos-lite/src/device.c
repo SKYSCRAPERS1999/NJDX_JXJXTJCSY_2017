@@ -17,11 +17,11 @@ static const char *keyname[256] __attribute__((used)) = {
 size_t events_read(void *buf, size_t len) {
 	int key = _read_key();
 	if ((key & 0xff) != _KEY_NONE){
-		memcpy(buf, &key, len);
+		memcpy(buf, &key, 1);
 	}
 	else{
 		unsigned long time = _uptime();
-		memcpy(buf, &time, len);
+		memcpy(buf, &time, 8);
 	}
 	//printf("%s\n", buf);
 	return strlen(buf);
