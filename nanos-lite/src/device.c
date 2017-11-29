@@ -17,7 +17,7 @@ size_t events_read(void *buf, size_t len) {
 	if ((key & 0xff) != _KEY_NONE){
 		sprintf(buf, "%d", key);
 	}
-	else sprintf(buf, "%d", _uptime());
+	else sprintf(buf, "%lld", _uptime());
 	return strlen(buf);
 }
 
