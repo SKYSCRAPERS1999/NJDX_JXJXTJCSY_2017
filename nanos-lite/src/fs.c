@@ -57,13 +57,13 @@ int fs_read(int fd, void* buf, size_t len){
 	switch(fd){
 		case FD_STDIN: 
 		case FD_STDOUT:
-		case FD_STDERR:
+		case FD_STDERR: 
+		case FD_FB: break;
 		case FD_EVENTS:{
 			events_read(buf, len);
 			file_table[FD_EVENTS].open_offset += len;
 			break;
 		}
-		case FD_FB: break;
 		case FD_DISPINFO :{
 			dispinfo_read(buf, file_table[FD_DISPINFO].open_offset, len);
 			//Log("buf = %s\n", buf);
