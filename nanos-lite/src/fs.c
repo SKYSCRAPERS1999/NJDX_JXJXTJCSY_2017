@@ -60,7 +60,7 @@ int fs_read(int fd, void* buf, size_t len){
 		case FD_STDERR:
 		case FD_EVENTS:{
 			events_read(buf, len);
-			file_table[FD_EVENTS].open_offset += len;
+			//file_table[FD_EVENTS].open_offset += len;
 			break;
 		}
 		case FD_FB: break;
