@@ -16,7 +16,7 @@ static const char *keyname[256] __attribute__((used)) = {
 
 size_t events_read(void *buf, size_t len) {
 	int code = _read_key() & 0xff;
-	printf("code = %d\n", code);
+	//printf("code = %d\n", code);
 	if (code != _KEY_NONE){
 		if (code > 0x8000){
 			sprintf(buf, "kd %s\n", keyname[code - 0x8000]);
@@ -28,7 +28,7 @@ size_t events_read(void *buf, size_t len) {
 		unsigned long time = _uptime();
 		sprintf(buf, "t %d\n", time);
 	}
-	printf("buf = %s\n", buf);
+	//printf("buf = %s\n", buf);
 	return strlen(buf);
 }
 
