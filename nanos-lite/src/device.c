@@ -18,11 +18,15 @@ size_t events_read(void *buf, size_t len) {
 	int code = _read_key() & 0xff;
 	printf("code = %d\n", code);
 	if (code != _KEY_NONE){
-		memcpy(buf, keyname[code], len);
+		if (code > 0x8000){
+			sprintf(buf, "kd %s\n", keyname[code - 0x8000]);
+		}else{
+			sprintf(buf, "kd %s\n", keyname[code]);
+		}
 	}
 	else{
 		unsigned long time = _uptime();
-		memcpy(buf, &time, len);
+		sprintf(buf, "t %d\n", time);
 	}
 	printf("buf = %s\n", buf);
 	return strlen(buf);
