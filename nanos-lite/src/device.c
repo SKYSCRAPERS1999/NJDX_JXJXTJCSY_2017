@@ -23,7 +23,7 @@ size_t events_read(void *buf, size_t len) {
 		unsigned long time = _uptime();
 		memcpy(buf, &time, len);
 	}
-	printf("%s\n", buf);
+	//printf("%s\n", buf);
 	return strlen(buf);
 }
 
