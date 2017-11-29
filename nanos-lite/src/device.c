@@ -4,6 +4,8 @@
 #define FD_DISPINFO 5
 extern uint32_t* fb;
 extern int fs_read(int, void*, size_t);
+extern int read_key();
+extern unsigned long _uptime();
 #define NAME(key) \
   [_KEY_##key] = #key,
 
@@ -15,11 +17,11 @@ static const char *keyname[256] __attribute__((used)) = {
 size_t events_read(void *buf, size_t len) {
 	int key = _read_key();
 	if ((key & 0xff) != _KEY_NONE){
-		memcpy(buf, &key, 2);
+		memcpy(buf, &key, len);
 	}
 	else{
 		unsigned long time = _uptime();
-		memcpy(buf, &time, 8);
+		memcpy(buf, &time, len);
 	}
 	return strlen(buf);
 }
