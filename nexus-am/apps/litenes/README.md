@@ -6,7 +6,7 @@ Nintendo Entertainment System模拟器。故意做了一些错误的实现以提
 
 操作方式:
 
-* T — SELECT
+
 * Y — START
 * G — A键
 * H — B键
