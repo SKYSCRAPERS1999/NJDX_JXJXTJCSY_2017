@@ -15,9 +15,12 @@ static const char *keyname[256] __attribute__((used)) = {
 size_t events_read(void *buf, size_t len) {
 	int key = _read_key();
 	if ((key & 0xff) != _KEY_NONE){
-		sprintf(buf, "%d", key);
+		memcpy(buf, &key, len);
 	}
-	else sprintf(buf, "%lld", _uptime());
+	else{
+		unsigned long time = _uptime();
+		memcpy(buf, &time, len);
+	}
 	return strlen(buf);
 }
 
