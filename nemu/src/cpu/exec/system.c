@@ -19,6 +19,7 @@ make_EHelper(lidt) {
 
 make_EHelper(mov_r2cr) {
   //TODO();
+	Log("id_dest = %d\n", id_dest->val);
 	if (id_dest->val == 0) {
 		cpu.cr0.val = id_src->val;
 	}else if (id_dest->val == 3){
