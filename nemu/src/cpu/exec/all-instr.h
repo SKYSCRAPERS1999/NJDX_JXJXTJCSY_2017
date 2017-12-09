@@ -20,6 +20,8 @@ make_EHelper(lea);
 make_EHelper(leave);
 make_EHelper(movsx);
 make_EHelper(movzx);
+make_EHelper(mov_r2cr);
+make_EHelper(mov_cr2r);
 
 make_EHelper(sub);
 make_EHelper(add);
