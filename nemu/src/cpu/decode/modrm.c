@@ -111,3 +111,80 @@ void read_ModR_M(vaddr_t *eip, Operand *rm, bool load_rm_val, Operand *reg, bool
     }
   }
 }
+
+
+void read_ModR_M_cr(vaddr_t *eip, Operand *rm, bool load_rm_val, Operand *reg, bool load_reg_val) {
+  ModR_M m;
+  m.val = instr_fetch(eip, 1);
+  decoding.ext_opcode = m.opcode;
+  if (reg != NULL) {
+    reg->type = OP_TYPE_REG;
+    reg->reg = m.reg;
+    if (load_reg_val) {
+      rtl_lr(&reg->val, reg->reg, reg->width);
+    }
+
+#ifdef DEBUG
+    snprintf(reg->str, OP_STR_SIZE, "%%%s", reg_name(reg->reg, reg->width));
+#endif
+  }
+
+  if (m.mod == 3) {
+    rm->type = OP_TYPE_REG;
+    rm->reg = m.reg;
+    if (load_rm_val) {
+      rtl_lr(&rm->val, m.reg, rm->width);
+    }
+
+#ifdef DEBUG
+    sprintf(rm->str, "%%%s", reg_name(m.R_M, rm->width));
+#endif
+  }
+  else {
+    load_addr(eip, &m, rm);
+    if (load_rm_val) {
+      rtl_lm(&rm->val, &rm->addr, rm->width);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

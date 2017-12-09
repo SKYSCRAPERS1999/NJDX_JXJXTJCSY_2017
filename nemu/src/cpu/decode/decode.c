@@ -101,6 +101,9 @@ static inline void decode_op_rm(vaddr_t *eip, Operand *rm, bool load_rm_val, Ope
   read_ModR_M(eip, rm, load_rm_val, reg, load_reg_val);
 }
 
+static inline void decode_op_rm_cr(vaddr_t *eip, Operand *rm, bool load_rm_val, Operand *reg, bool load_reg_val) {
+  read_ModR_M_cr(eip, rm, load_rm_val, reg, load_reg_val);
+}
 /* Ob, Ov */
 static inline make_DopHelper(O) {
   op->type = OP_TYPE_MEM;
@@ -125,6 +128,9 @@ make_DHelper(mov_G2E) {
   decode_op_rm(eip, id_dest, false, id_src, true);
 }
 
+make_DHelper(mov_G2E_cr) {
+  decode_op_rm_cr(eip, id_dest, false, id_src, true);
+}
 /* Gb <- Eb
  * Gv <- Ev
  */
@@ -134,6 +140,10 @@ make_DHelper(E2G) {
 
 make_DHelper(mov_E2G) {
   decode_op_rm(eip, id_src, true, id_dest, false);
+}
+
+make_DHelper(mov_E2G_cr) {
+  decode_op_rm_cr(eip, id_src, true, id_dest, false);
 }
 
 make_DHelper(lea_M2G) {
