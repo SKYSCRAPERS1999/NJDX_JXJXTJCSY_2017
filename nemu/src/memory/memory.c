@@ -15,12 +15,12 @@ void mmio_write(paddr_t, int, uint32_t, int);
 
 uint32_t page_translate(vaddr_t addr, bool is_write) {
 	uint32_t pde_base = PTE_ADDR(cpu.cr3);
-	uint32_t pde_off = PDX(addr) << 12;
+	uint32_t pde_off = PDX(addr);
 	uint32_t pde = paddr_read(pde_base + 4 * pde_off, 4);
 	//Log("pde_base = %x\n", pde_base);
 	//Log("addr = %x\n", addr);
 	//Log("pde_off = %x\n", pde_off);
-	//Log("pde = %x\n", pde);
+	Log("pde = %x\n", pde);
 	assert((pde&1) == 1);	
 	
 	uint32_t pte_base = PTE_ADDR(pde);
