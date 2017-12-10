@@ -129,7 +129,7 @@ make_DHelper(mov_G2E) {
 }
 
 make_DHelper(mov_G2E_cr) {
-  decode_op_rm_cr(eip, id_dest, false, id_src, true);
+  decode_op_rm_cr(eip, id_dest, true, id_src, true);
 }
 /* Gb <- Eb
  * Gv <- Ev
@@ -143,7 +143,7 @@ make_DHelper(mov_E2G) {
 }
 
 make_DHelper(mov_E2G_cr) {
-  decode_op_rm_cr(eip, id_src, true, id_dest, false);
+  decode_op_rm_cr(eip, id_src, true, id_dest, true);
 }
 
 make_DHelper(lea_M2G) {
