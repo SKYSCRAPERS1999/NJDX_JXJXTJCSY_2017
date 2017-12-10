@@ -58,6 +58,8 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 uint32_t cross_pg_read(vaddr_t addr, int len){
 	uint32_t n1 = PGSIZE - OFF(addr);
 	uint32_t n2 = OFF(addr + len - 1);
+	assert(OFF(addr) + n1 == PGSIZE);
+	assert(addr + len == PGSIZE + n2);
 	uint32_t data;
 	uint8_t *data_array = (uint8_t*)&data;
 	int p = 0;
