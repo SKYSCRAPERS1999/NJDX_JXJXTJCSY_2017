@@ -24,6 +24,8 @@ make_EHelper(mov_r2cr) {
 	}else if (id_dest->reg == 3){
 		cpu.cr3.val = id_src->val; 
 	}else{assert(0);}
+	Log("cr3 = %x\n", cpu.cr3.val);
+	Log("cr0 = %x\n", cpu.cr0.val);
   print_asm("movl %%%s,%%cr%d", reg_name(id_src->reg, 4), id_dest->reg);
 }
 
@@ -31,7 +33,7 @@ make_EHelper(mov_cr2r) {
   //TODO();
 	if (id_src->reg == 0) {
 		operand_write(id_dest, &cpu.cr0.val);
-	}else if (id_src->reg == 3){
+		}else if (id_src->reg == 3){
 		operand_write(id_dest, &cpu.cr3.val);
 	}else{assert(0);}
   print_asm("movl %%cr%d,%%%s", id_src->reg, reg_name(id_dest->reg, 4));
