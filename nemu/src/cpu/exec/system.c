@@ -21,11 +21,11 @@ make_EHelper(mov_r2cr) {
   //TODO();
 	if (id_dest->reg == 0) {
 		cpu.cr0.val = id_src->val;
+		Log("cr0 = %x\n", cpu.cr0.val);
 	}else if (id_dest->reg == 3){
 		cpu.cr3.val = id_src->val; 
+		Log("cr3 = %x\n", cpu.cr3.val);
 	}else{assert(0);}
-	Log("cr3 = %x\n", cpu.cr3.val);
-	Log("cr0 = %x\n", cpu.cr0.val);
   print_asm("movl %%%s,%%cr%d", reg_name(id_src->reg, 4), id_dest->reg);
 }
 
