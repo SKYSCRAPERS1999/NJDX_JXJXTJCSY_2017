@@ -39,13 +39,13 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 }
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
-	uint32_t addr_low = OFF(addr);
-	if (addr_low <= PGSIZE && addr_low + len > PGSIZE) {
-		assert(0);
-	}else{
+	//uint32_t addr_low = OFF(addr);
+	//if (addr_low <= PGSIZE && addr_low + len > PGSIZE) {
+	//	assert(0);
+	//}else{
 		//paddr_t paddr = page_translate(addr);
 		return paddr_read(addr, len);
-	}
+	//}
 }
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
