@@ -66,7 +66,7 @@ void _switch(_Protect *p) {
 }
 
 void _map(_Protect *p, void *va, void *pa) {
-	uint32_t pde_base = (uint32_t)p->ptr;	
+	uint32_t pde_base = (uint32_t)p->ptr << PGSHFT;	
 	uint32_t pde_off = PDX(va);
 	uint32_t pte_off = PTX(va);
 	uint32_t addr_off = OFF(va);
