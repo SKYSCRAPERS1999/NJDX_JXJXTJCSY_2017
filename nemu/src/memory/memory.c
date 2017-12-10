@@ -70,6 +70,13 @@ uint32_t cross_pg_read(vaddr_t addr, int len){
 	return data;
 }
 
+void cross_pg_write(vaddr_t addr, int len, uint32_t data){
+	uint8_t *data_array = (uint8_t*)&data;	
+	for (int i = 0; i < len; i++) {
+		paddr_write(page_translate(addr + i, true), 1, data_array[i]);
+	}
+}
+
 uint32_t vaddr_read(vaddr_t addr, int len) {
 	if (((cpu.cr0 & 0x1) == 0) || ((cpu.cr0 & 0x80000000) == 0)) return paddr_read(addr, len);
 	uint32_t ok = PTE_ADDR((addr)^(addr + len - 1));
@@ -91,7 +98,8 @@ void vaddr_write(vaddr_t addr, int len, uint32_t data) {
 	uint32_t ok = PTE_ADDR((addr)^(addr + len - 1));
 	if (ok != 0) {
 		Log("addr = %u\n", addr);
-		assert(0);
+		cross_pg_write(addr, len, data);
+		//assert(0);
 	}else{
 		paddr_t paddr = page_translate(addr, true);
 		paddr_write(paddr, len, data);
