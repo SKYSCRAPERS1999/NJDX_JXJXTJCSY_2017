@@ -56,7 +56,7 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 }
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
-	if (cpu.cr0.paging == 0 || cpu.cr0.protect_enable == 0) return paddr_read(addr, len);
+	if (((cpu.cr0 & 0x1) == 0) || ((cpu.cr0 & 0x80000000) == 0)) return paddr_read(addr, len);
 	uint32_t ok = PTE_ADDR((addr)^(addr + len - 1));
 	if (ok != 0) {
 		Log("addr = %u\n", addr);
@@ -68,7 +68,7 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
 }
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
-	if (cpu.cr0.paging == 0 || cpu.cr0.protect_enable == 0) {
+	if (((cpu.cr0 & 0x1) == 0) || ((cpu.cr0 & 0x80000000) == 0)) {
 		paddr_write(addr, len, data);
 		return;
 	}

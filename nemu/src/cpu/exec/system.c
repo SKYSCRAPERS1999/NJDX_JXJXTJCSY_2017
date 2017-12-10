@@ -20,8 +20,8 @@ make_EHelper(lidt) {
 make_EHelper(mov_r2cr) {
   //TODO();
 	if (id_dest->reg == 0) {
-		cpu.cr0.val = id_src->val;
-		Log("cr0 = %x\n", cpu.cr0.val);
+		cpu.cr0 = id_src->val;
+		Log("cr0 = %x\n", cpu.cr0);
 	}else if (id_dest->reg == 3){
 		cpu.cr3 = id_src->val; 
 		Log("cr3 = %x\n", cpu.cr3);
@@ -32,7 +32,7 @@ make_EHelper(mov_r2cr) {
 make_EHelper(mov_cr2r) {
   //TODO();
 	if (id_src->reg == 0) {
-		operand_write(id_dest, &cpu.cr0.val);
+		operand_write(id_dest, &cpu.cr0);
 		}else if (id_src->reg == 3){
 		operand_write(id_dest, &cpu.cr3);
 	}else{assert(0);}
