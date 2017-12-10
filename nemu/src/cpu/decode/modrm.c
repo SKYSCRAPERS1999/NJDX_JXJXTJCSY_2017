@@ -137,7 +137,7 @@ void read_ModR_M_cr(vaddr_t *eip, Operand *rm, bool load_rm_val, Operand *reg, b
     }
 
 #ifdef DEBUG
-    sprintf(rm->str, "%%%s", reg_name(m.R_M, rm->width));
+    sprintf(rm->str, "%%%s", reg_name(m.reg, rm->width));
 #endif
   }
   else {
