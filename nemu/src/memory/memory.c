@@ -14,7 +14,7 @@ void mmio_write(paddr_t, int, uint32_t, int);
 /* Memory accessing interfaces */
 
 uint32_t page_translate(vaddr_t addr) {
-	uint32_t pde_base = cpu.cr3.page_directory_base;
+	uint32_t pde_base = (uint32_t)cpu.cr3.page_directory_base;
 	uint32_t pde_off = PDX(addr);
 	uint32_t pde = paddr_read(pde_base + 4 * pde_off, 4);
 	assert((pde&1) == 1);	
@@ -23,7 +23,7 @@ uint32_t page_translate(vaddr_t addr) {
 	uint32_t pte_off = PTX(addr);
 	uint32_t pte = paddr_read(pte_base + 4 * pte_off, 4);
 	assert((pte&1) == 1);
-	uint32_t paddr = PTE_ADDR(addr) | pte; 
+	paddr_t paddr = PTE_ADDR(addr) | pte; 
 	return paddr;
 }
 
