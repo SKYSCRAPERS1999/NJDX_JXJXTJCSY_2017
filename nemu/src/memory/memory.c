@@ -49,25 +49,25 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 }
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
+	if (cpu.cr0.paging == 0) return paddr_read(addr, len);
 	uint32_t addr_low = OFF(addr);
 	if (addr_low <= PGSIZE && addr_low + len > PGSIZE) {
 		Log("addr_low = %u\n", addr_low);
 		assert(0);
 	}else{
-		paddr_t paddr = addr;
-		if (cpu.cr0.paging == 1) paddr = page_translate(addr);
+	  paddr_t paddr = page_translate(addr);
 		return paddr_read(paddr, len);
 	}
 }
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
+	if (cpu.cr0.paging == 0) paddr_write(addr, len, data);
 	uint32_t addr_low = OFF(addr);
 	if (addr_low <= PGSIZE && addr_low + len > PGSIZE) {
 		Log("addr_low = %u\n", addr_low);
 		assert(0);
 	}else{
-		paddr_t paddr = addr;
-		if (cpu.cr0.paging == 1) paddr = page_translate(addr);
+		paddr_t paddr = page_translate(addr);
 		paddr_write(paddr, len, data);
 	}
 }
