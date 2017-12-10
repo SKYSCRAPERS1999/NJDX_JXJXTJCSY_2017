@@ -57,9 +57,9 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
 	if (cpu.cr0.paging == 0 || cpu.cr0.protect_enable == 0) return paddr_read(addr, len);
-	uint32_t addr_low = OFF(addr);
-	if (addr_low <= PGSIZE && addr_low + len > PGSIZE) {
-		Log("addr_low = %u\n", addr_low);
+	uint32_t ok = PTE_ADDR((addr)^(addr + len - 1));
+	if (ok) {
+		Log("addr = %u\n", addr);
 		assert(0);
 	}else{
 	  paddr_t paddr = page_translate(addr, false);
@@ -72,9 +72,9 @@ void vaddr_write(vaddr_t addr, int len, uint32_t data) {
 		paddr_write(addr, len, data);
 		return;
 	}
-	uint32_t addr_low = OFF(addr);
-	if (addr_low <= PGSIZE && addr_low + len > PGSIZE) {
-		Log("addr_low = %u\n", addr_low);
+	uint32_t ok = PTE_ADDR((addr)^(addr + len - 1));
+	if (ok) {
+		Log("addr = %u\n", addr);
 		assert(0);
 	}else{
 		paddr_t paddr = page_translate(addr, true);
