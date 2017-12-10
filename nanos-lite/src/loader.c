@@ -18,6 +18,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
 	fs_close(fd);
 	void* ENTRY = NULL;
 	_map(as, DEFAULT_ENTRY, ENTRY);
+	Log("ENTRY = 0x%x\n", (uint32_t)ENTRY);
 	return (uintptr_t)ENTRY;
 	//return (uintptr_t)DEFAULT_ENTRY;
 }
