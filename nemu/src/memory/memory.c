@@ -14,8 +14,17 @@ void mmio_write(paddr_t, int, uint32_t, int);
 /* Memory accessing interfaces */
 
 uint32_t page_translate(vaddr_t addr) {
-		
-	return 0;
+	uint32_t pde_base = cpu.cr3.page_directory_base;
+	uint32_t pde_off = PDX(addr);
+	uint32_t pde = paddr_read(pde_base + 4 * pde_off, 4);
+	assert((pde&1) == 1);	
+	
+	uint32_t pte_base = pde;
+	uint32_t pte_off = PTX(addr);
+	uint32_t pte = paddr_read(pte_base + 4 * pte_off, 4);
+	assert((pte&1) == 1);
+	uint32_t paddr = PTE_ADDR(addr) | pte; 
+	return paddr;
 }
 
 uint32_t paddr_read(paddr_t addr, int len) {
@@ -44,12 +53,21 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
 		Log("addr_low = %u\n", addr_low);
 		assert(0);
 	}else{
-		//paddr_t paddr = page_translate(addr);
-		return paddr_read(addr, len);
+		paddr_t paddr = addr;
+		if (cpu.cr0.paging == 1) paddr = page_translate(addr);
+		return paddr_read(paddr, len);
 	}
 }
 
 void vaddr_write(vaddr_t addr, int len, uint32_t data) {
-  paddr_write(addr, len, data);
+	uint32_t addr_low = OFF(addr);
+	if (addr_low <= PGSIZE && addr_low + len > PGSIZE) {
+		Log("addr_low = %u\n", addr_low);
+		assert(0);
+	}else{
+		paddr_t paddr = addr;
+		if (cpu.cr0.paging == 1) paddr = page_translate(addr);
+		paddr_write(paddr, len, data);
+	}
 }
 
