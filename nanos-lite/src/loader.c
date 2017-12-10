@@ -1,6 +1,6 @@
 #include "common.h"
-
-#define DEFAULT_ENTRY ((void *)0x4000000)
+//HERE HAS BEEN CHANGED
+#define DEFAULT_ENTRY ((void *)0x8048000)
 void ramdisk_read(void *buf, off_t offset, size_t len);
 size_t get_ramdisk_size();
 extern int fs_filesz(int);
