@@ -24,7 +24,7 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	uint32_t pte_off = PTX(addr);
 	uint32_t pte = PTE_ADDR(paddr_read(pte_base + 4 * pte_off, 4));
 	assert((pte&1) == 1);
-	paddr_t paddr = PTE_ADDR(addr) | pte; 
+	paddr_t paddr = (pte << PTXSHFT) | OFF(addr); 
 	
 	paddr_write(pde_base + 4 * pde_off, 4, pde | 0x20);	
 	paddr_write(pte_base + 4 * pte_off, 4, pte | 0x20);	
