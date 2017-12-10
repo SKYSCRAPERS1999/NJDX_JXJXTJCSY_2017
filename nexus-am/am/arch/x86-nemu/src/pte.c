@@ -6,7 +6,6 @@ static PDE kpdirs[NR_PDE] PG_ALIGN;
 static PTE kptabs[PMEM_SIZE / PGSIZE] PG_ALIGN;
 static void* (*palloc_f)();
 static void (*pfree_f)(void*);
-//extern uint32_t vaddr_read(vaddr_t, int);
 
 _Area segments[] = {      // Kernel memory mappings
   {.start = (void*)0,          .end = (void*)PMEM_SIZE}
@@ -72,7 +71,7 @@ void _map(_Protect *p, void *va, void *pa) {
 	
 	uint32_t pda = kpdirs[pde_off];
 	uint32_t pta_base = PTE_ADDR(pda);
-	uint32_t pta = kptabs[pta_base + 4 * pte_off];
+	uint32_t pta = kptabs[pta_base | pte_off];
 	
 	pa = (uint32_t*)(PTE_ADDR(pta) | addr_off);
 }
