@@ -40,8 +40,8 @@ void paddr_write(paddr_t addr, int len, uint32_t data) {
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
 	uint32_t addr_low = OFF(addr);
-	Log("addr_low = %u\n", addr_low);
 	if (addr_low <= PGSIZE && addr_low + len > PGSIZE) {
+		Log("addr_low = %u\n", addr_low);
 		assert(0);
 	}else{
 		//paddr_t paddr = page_translate(addr);
