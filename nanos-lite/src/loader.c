@@ -15,7 +15,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
 	Log("ENTER!\n");
 	int fd = fs_open(filename, 0, 0);
 	int N = (fs_filesz(fd) + PGSIZE - 1) / PGSIZE;
-	for (int i = 0; i <= N; i++){
+	for (int i = 0; i <= N + 5; i++){
 		void* ENTRY = new_page();
 		_map(as, DEFAULT_ENTRY + i * PGSIZE, ENTRY);
 		//Log("ENTRY = 0x%x\n", (uint32_t)ENTRY);
