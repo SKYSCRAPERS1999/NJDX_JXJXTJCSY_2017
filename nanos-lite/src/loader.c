@@ -7,6 +7,7 @@ extern int fs_filesz(int);
 extern int fs_open(const char*, int, int);
 extern int fs_read(int, void*, size_t);
 extern int fs_close(int);
+extern bool fs_end(int);
 extern void _map(_Protect *, void* , void*);
 extern void* new_page(void);
 uintptr_t loader(_Protect *as, const char *filename) {
@@ -22,6 +23,14 @@ uintptr_t loader(_Protect *as, const char *filename) {
 		//fs_read(fd, ENTRY, fs_filesz(fd));
 		//fs_read(fd, ENTRY, PGSIZE);
 	//}
+	int i = 0;
+	while (!fs_end(fd)){
+		void* ENTRY = new_page();
+		_map(as, DEFAULT_ENTRY + i * PGSIZE, ENTRY);
+		i++;
+		//Log("ENTRY = 0x%x\n", (uint32_t)ENTRY);
+		fs_read(fd, ENTRY, PGSIZE);
+	}
 	fs_close(fd);
 	Log("%s loaded\n", filename);
 	return (uintptr_t)DEFAULT_ENTRY;
