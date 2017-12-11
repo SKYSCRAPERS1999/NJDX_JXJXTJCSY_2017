@@ -38,7 +38,7 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	}
 	assert((pte&1) == 1);
 	
-	paddr_t paddr = PTE_ADDR(pte) + 4 *  OFF(addr); 
+	paddr_t paddr = PTE_ADDR(pte) | OFF(addr); 
 	
 	paddr_write(pde_base + 4 * pde_off, 4, pde | 0x20);	
 	paddr_write(pte_base + 4 * pte_off, 4, pte | 0x20);	
