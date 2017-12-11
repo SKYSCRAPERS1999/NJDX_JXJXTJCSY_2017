@@ -12,14 +12,16 @@ extern void* new_page(void);
 uintptr_t loader(_Protect *as, const char *filename) {
   //TODO();
 	//ramdisk_read(DEFAULT_ENTRY, 0, get_ramdisk_size());
-	void* ENTRY = new_page();
-	_map(as, DEFAULT_ENTRY, ENTRY);
-	Log("ENTRY = 0x%x\n", (uint32_t)ENTRY);
-	Log("%s loaded\n", filename);	
 	int fd = fs_open(filename, 0, 0);
-	//fs_read(fd, ENTRY, fs_filesz(fd));
-	fs_read(fd, ENTRY, PGSIZE);
+	int N = (fs_filesz(fd) + PGSIZE - 1) / PGSIZE;
+	for (int i = 0; i < N; i++){
+		void* ENTRY = new_page();
+		_map(as, DEFAULT_ENTRY + i * PGSIZE, ENTRY);
+		Log("ENTRY = 0x%x\n", (uint32_t)ENTRY);
+		//fs_read(fd, ENTRY, fs_filesz(fd));
+		fs_read(fd, ENTRY, PGSIZE);
+	}
 	fs_close(fd);
-	return (uintptr_t)ENTRY;
-	//return (uintptr_t)DEFAULT_ENTRY;
+	Log("%s loaded\n", filename);	
+	return (uintptr_t)DEFAULT_ENTRY;
 }
