@@ -21,16 +21,14 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	//Log("addr = %x\n", addr);
 	//Log("pde_off = %x\n", pde_off);
 	//Log("pde = %x\n", pde);
-	
-	//assert((pde&1) == 1);	
+	assert((pde&1) == 1);	
 	
 	uint32_t pte_base = PTE_ADDR(pde);
 	uint32_t pte_off = PTX(addr);
 	uint32_t pte = paddr_read(pte_base + 4 * pte_off, 4);
 	
-	if ((pte & 1) == 0) Log("pte = 0x%x\n", pte);
-	
-	//assert((pte&1) == 1);
+	if ((pte & 1) == 0) Log("pde = 0x%x\npte = 0x%x\n",pde, pte);
+	assert((pte&1) == 1);
 	
 	paddr_t paddr = PTE_ADDR(pte) | OFF(addr); 
 	
