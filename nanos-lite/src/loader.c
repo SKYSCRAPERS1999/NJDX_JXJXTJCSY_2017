@@ -11,11 +11,11 @@ extern void _map(_Protect *, void* , void*);
 extern void* new_page();
 uintptr_t loader(_Protect *as, const char *filename) {
   //TODO();
-	//ramdisk_read(DEFAULT_ENTRY, 0, get_ramdisk_size());
   //return (uintptr_t)DEFAULT_ENTRY;
 	void* ENTRY = new_page();
 	_map(as, DEFAULT_ENTRY, ENTRY);
 	Log("ENTRY = 0x%x\n", (uint32_t)ENTRY);
+	ramdisk_read(ENTRY, 0, get_ramdisk_size());
 	Log("%s loaded\n", filename);	
 	int fd = fs_open(filename, 0, 0);
 	fs_read(fd, ENTRY, fs_filesz(fd));
