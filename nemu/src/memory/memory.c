@@ -33,7 +33,7 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 		}
 		Log("pde_base = 0x%x\npde_off = 0x%x\npde = 0x%x\npte_base = 0x%x\npte_off = 0x%x\npte = 0x%x\n",pde_base, pde_off, pde, pte_base, pte_off,  pte);
 		for (int i = 0x190; i < 0x200; i++){
-			Log("pte = 0x%x\n", paddr_read(pte_base + 4 * i, 4));
+			Log("pte[%d] = 0x%x\n",i, paddr_read(pte_base + 4 * i, 4));
 		}
 	}
 	assert((pte&1) == 1);
