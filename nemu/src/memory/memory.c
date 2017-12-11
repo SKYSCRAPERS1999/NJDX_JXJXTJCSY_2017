@@ -68,6 +68,7 @@ uint32_t cross_pg_read(vaddr_t addr, int len){
 	uint32_t n2 = OFF(addr + len - 1) + 1;
 	assert(OFF(addr) + n1 == PGSIZE);
 	assert(OFF(addr) + len == PGSIZE + n2);
+	assert(n1 + n2 == len);
 	uint32_t data;
 	uint8_t *data_array = (uint8_t*)&data;
 	int p = 0;
