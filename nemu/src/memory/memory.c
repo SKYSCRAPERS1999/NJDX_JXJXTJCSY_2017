@@ -16,7 +16,7 @@ void mmio_write(paddr_t, int, uint32_t, int);
 uint32_t page_translate(vaddr_t addr, bool is_write) {
 	uint32_t pde_base = PTE_ADDR(cpu.cr3);
 	uint32_t pde_off = PDX(addr);
-	uint32_t pde = paddr_read(pde_base + 4 * pde_off, 4);
+	uint32_t pde = vaddr_read(pde_base + 4 * pde_off, 4);
 	//Log("pde_base = %x\n", pde_base);
 	//Log("addr = %x\n", addr);
 	//Log("pde_off = %x\n", pde_off);
@@ -25,7 +25,7 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	
 	uint32_t pte_base = PTE_ADDR(pde);
 	uint32_t pte_off = PTX(addr);
-	uint32_t pte = paddr_read(pte_base + 4 * pte_off, 4);
+	uint32_t pte = vaddr_read(pte_base + 4 * pte_off, 4);
 	
 	if ((pte & 1) == 0){
 		for (int i = 0; i < 30; i++){
@@ -72,7 +72,7 @@ uint32_t cross_pg_read(vaddr_t addr, int len){
 	assert(OFF(addr) + n1 == PGSIZE);
 	assert(OFF(addr) + len == PGSIZE + n2);
 	uint32_t data;
-	uint8_t *data_array = (void*)&data;
+	uint8_t *data_array = (uint8_t*)&data;
 	int p = 0;
 	for (int i = 0; i < n1; i++) {
 		data_array[p++] = vaddr_read(addr + i, 1);
