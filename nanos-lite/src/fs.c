@@ -54,6 +54,7 @@ int fs_read(int fd, void* buf, size_t len){
 	if (file_table[fd].open_offset + len > file_table[fd].size){
 			len = file_table[fd].size - file_table[fd].open_offset;
 	}
+	Log("len = %d\n", len);
 	switch(fd){
 		case FD_STDIN: 
 		case FD_STDOUT:
