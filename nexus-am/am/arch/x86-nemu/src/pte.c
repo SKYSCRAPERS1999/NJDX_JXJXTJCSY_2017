@@ -70,14 +70,14 @@ void _map(_Protect *p, void *va, void *pa) {
 	uint32_t pte_off = PTX(va);
 	pde += pde_off;
 	PTE *pte;
-	uint32_t present = (*pde) & 0x1;
+	uint32_t present = (*pde) & PTE_P;
 	if (present == 0){
 		pte = (PTE*)(palloc_f());
-		*pde = PTE_ADDR(pte) | 0x1;
+		*pde = PTE_ADDR(pte) | PTE_P;
 	}else{
 		pte = (PTE*)(PTE_ADDR(*pde));
 	}
-	pte[pte_off] = PTE_ADDR(pa) | 0x1;
+	pte[pte_off] = PTE_ADDR(pa) | PTE_P;
 }
 
 void _unmap(_Protect *p, void *va) {
