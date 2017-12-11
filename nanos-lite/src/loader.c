@@ -14,14 +14,14 @@ uintptr_t loader(_Protect *as, const char *filename) {
 	//ramdisk_read(DEFAULT_ENTRY, 0, get_ramdisk_size());
 	Log("ENTER!\n");
 	int fd = fs_open(filename, 0, 0);
-  int N = (2 * fs_filesz(fd) + PGSIZE - 1) / PGSIZE;
-	for (int i = 0; i < N ; i++){
-		void* ENTRY = new_page();
-		_map(as, DEFAULT_ENTRY + i * PGSIZE, ENTRY);
+  //int N = (2 * fs_filesz(fd) + PGSIZE - 1) / PGSIZE;
+	//for (int i = 0; i < N ; i++){
+		//void* ENTRY = new_page();
+		//_map(as, DEFAULT_ENTRY + i * PGSIZE, ENTRY);
 		//Log("ENTRY = 0x%x\n", (uint32_t)ENTRY);
 		//fs_read(fd, ENTRY, fs_filesz(fd));
-		fs_read(fd, ENTRY, PGSIZE);
-	}
+		//fs_read(fd, ENTRY, PGSIZE);
+	//}
 	fs_close(fd);
 	Log("%s loaded\n", filename);
 	return (uintptr_t)DEFAULT_ENTRY;
