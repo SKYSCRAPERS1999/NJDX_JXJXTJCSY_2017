@@ -28,7 +28,8 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	uint32_t pte = paddr_read(pte_base + 4 * pte_off, 4);
 	
 	if ((pte & 1) == 0) Log("pte = 0x%x\n", pte);
-	assert((pte&1) == 1);
+	
+	//assert((pte&1) == 1);
 	
 	paddr_t paddr = PTE_ADDR(pte) | OFF(addr); 
 	
