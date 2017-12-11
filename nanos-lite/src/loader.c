@@ -20,6 +20,6 @@ uintptr_t loader(_Protect *as, const char *filename) {
 	int fd = fs_open(filename, 0, 0);
 	fs_read(fd, ENTRY, fs_filesz(fd));
 	fs_close(fd);
-	return (uintptr_t)ENTRY;
+	return (uintptr_t)DEFAULT_ENTRY;
 	//return (uintptr_t)DEFAULT_ENTRY;
 }
