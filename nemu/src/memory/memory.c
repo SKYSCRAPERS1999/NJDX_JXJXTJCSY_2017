@@ -40,9 +40,9 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	
 	paddr_t paddr = PTE_ADDR(pte) | OFF(addr); 
 	
-	//paddr_write(pde_base + 4 * pde_off, 4, pde | 0x20);	
-	//paddr_write(pte_base + 4 * pte_off, 4, pte | 0x20);	
-	//if (is_write) paddr_write(pte_base + 4 * pte_off, 4, pte | 0x60);
+	paddr_write(pde_base + 4 * pde_off, 4, pde | 0x20);	
+	paddr_write(pte_base + 4 * pte_off, 4, pte | 0x20);	
+	if (is_write) paddr_write(pte_base + 4 * pte_off, 4, pte | 0x60);
 	return paddr;
 }
 
@@ -72,7 +72,7 @@ uint32_t cross_pg_read(vaddr_t addr, int len){
 	assert(OFF(addr) + n1 == PGSIZE);
 	assert(OFF(addr) + len == PGSIZE + n2);
 	uint32_t data;
-	uint8_t *data_array = (uint8_t*)&data;
+	uint8_t *data_array = (void*)&data;
 	int p = 0;
 	for (int i = 0; i < n1; i++) {
 		data_array[p++] = vaddr_read(addr + i, 1);
