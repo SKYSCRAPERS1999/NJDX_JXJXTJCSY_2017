@@ -4,8 +4,7 @@ void _map(_Protect*, void*, void*);
 static void *pf = NULL;
 
 void* new_page(void) {
-  Log("NEW\n");
-	assert(pf < (void *)_heap.end);
+  assert(pf < (void *)_heap.end);
   void *p = pf;
   pf += PGSIZE;
   return p;
