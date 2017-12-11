@@ -40,9 +40,9 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	
 	paddr_t paddr = PTE_ADDR(pte) | OFF(addr); 
 	
-	paddr_write(pde_base + 4 * pde_off, 4, pde | 0x20);	
-	paddr_write(pte_base + 4 * pte_off, 4, pte | 0x20);	
-	if (is_write) paddr_write(pte_base + 4 * pte_off, 4, pte | 0x60);
+	//paddr_write(pde_base + 4 * pde_off, 4, pde | 0x20);	
+	//paddr_write(pte_base + 4 * pte_off, 4, pte | 0x20);	
+	//if (is_write) paddr_write(pte_base + 4 * pte_off, 4, pte | 0x60);
 	return paddr;
 }
 
