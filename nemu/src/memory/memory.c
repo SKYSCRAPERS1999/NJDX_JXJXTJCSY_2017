@@ -87,7 +87,7 @@ uint32_t vaddr_read(vaddr_t addr, int len) {
 		return cross_pg_read(addr, len);
 		//assert(0);
 	}else{
-		Log("read_addr = %u\n", addr);
+		//Log("read_addr = %u\n", addr);
 	  paddr_t paddr = page_translate(addr, false);
 		return paddr_read(paddr, len);
 	}
