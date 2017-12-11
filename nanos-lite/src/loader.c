@@ -18,7 +18,7 @@ uintptr_t loader(_Protect *as, const char *filename) {
 	Log("%s loaded\n", filename);	
 	int fd = fs_open(filename, 0, 0);
 	//fs_read(fd, ENTRY, fs_filesz(fd));
-	fs_read(fd, (void*)((uint32_t)ENTRY & (~0xfff)), PGSIZE);
+	fs_read(fd, ENTRY, PGSIZE);
 	fs_close(fd);
 	return (uintptr_t)ENTRY;
 	//return (uintptr_t)DEFAULT_ENTRY;
