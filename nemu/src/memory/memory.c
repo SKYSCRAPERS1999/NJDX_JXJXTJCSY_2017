@@ -25,12 +25,9 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	
 	uint32_t pte_base = PTE_ADDR(pde);
 	uint32_t pte_off = PTX(addr);
-	uint32_t pte = paddr_read(pte_base + 4 * pte_off, 4);
+	uint32_t pte = paddr_read(pte_base + 4 * pte_off - 4, 4);
 	
 	if ((pte & 1) == 0){
-		for (int i = 0; i < 30; i++){
-			Log("pde = 0x%x\n", paddr_read(pde_base + 4 * i, 4));
-		}
 		Log("pde_base = 0x%x\npde_off = 0x%x\npde = 0x%x\npte_base = 0x%x\npte_off = 0x%x\npte = 0x%x\n",pde_base, pde_off, pde, pte_base, pte_off,  pte);
 		for (int i = 0; i <= pte_off; i++){
 			Log("pte[%d] = 0x%x\n",i, paddr_read(pte_base + 4 * i, 4));
@@ -38,7 +35,7 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	}
 	assert((pte&1) == 1);
 	
-	paddr_t paddr = PTE_ADDR(pte) +  OFF(addr); 
+	paddr_t paddr = PTE_ADDR(pte) | OFF(addr); 
 	
 	paddr_write(pde_base + 4 * pde_off, 4, pde | 0x20);	
 	paddr_write(pte_base + 4 * pte_off, 4, pte | 0x20);	
