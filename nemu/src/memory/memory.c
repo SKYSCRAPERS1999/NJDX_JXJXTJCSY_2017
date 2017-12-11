@@ -20,7 +20,7 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	//Log("pde_base = %x\n", pde_base);
 	//Log("addr = %x\n", addr);
 	//Log("pde_off = %x\n", pde_off);
-	Log("pde = %x\n", pde);
+	//Log("pde = %x\n", pde);
 	assert((pde&1) == 1);	
 	
 	uint32_t pte_base = PTE_ADDR(pde);
