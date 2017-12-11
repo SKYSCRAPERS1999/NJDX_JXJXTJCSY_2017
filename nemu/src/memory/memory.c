@@ -25,7 +25,7 @@ uint32_t page_translate(vaddr_t addr, bool is_write) {
 	
 	uint32_t pte_base = PTE_ADDR(pde);
 	uint32_t pte_off = PTX(addr);
-	uint32_t pte = paddr_read(pte_base + 4 * pte_off - 4, 4);
+	uint32_t pte = paddr_read(pte_base + 4 * pte_off, 4);
 	
 	if ((pte & 1) == 0){
 		Log("pde_base = 0x%x\npde_off = 0x%x\npde = 0x%x\npte_base = 0x%x\npte_off = 0x%x\npte = 0x%x\n",pde_base, pde_off, pde, pte_base, pte_off,  pte);
