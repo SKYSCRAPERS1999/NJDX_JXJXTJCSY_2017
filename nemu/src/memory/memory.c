@@ -104,7 +104,7 @@ void vaddr_write(vaddr_t addr, int len, uint32_t data) {
 		cross_pg_write(addr, len, data);
 		//assert(0);
 	}else{
-		Log("write_data = %u\n", addr);
+		//Log("write_data = %u\n", addr);
 		paddr_t paddr = page_translate(addr, true);
 		paddr_write(paddr, len, data);
 	}
