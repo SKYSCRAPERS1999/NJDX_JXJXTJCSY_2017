@@ -68,14 +68,14 @@ void _map(_Protect *p, void *va, void *pa) {
 	PDE* pde = (PDE*)(p->ptr);
 	uint32_t pde_off = PDX(va);
 	uint32_t pte_off = PTX(va);
-	pde += pde_off;
+	//pde += pde_off;
 	PTE *pte;
-	uint32_t present = (*pde) & 0x1;
+	uint32_t present = (pde[pde_off]) & 0x1;
 	if (present == 0){
 		pte = (PTE*)(palloc_f());
-		*pde = PTE_ADDR(pte) | 0x1;
+		pde[pde_off] = PTE_ADDR(pte) | 0x1;
 	}else{
-		pte = (PTE*)(PTE_ADDR(*pde));
+		pte = (PTE*)(PTE_ADDR(pde[pde_off]));
 	}
 	pte[pte_off] = PTE_ADDR(pa) | 0x1;
 }
