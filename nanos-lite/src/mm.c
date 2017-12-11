@@ -21,9 +21,9 @@ int mm_brk(uint32_t new_brk) {
 	}else{
 		if (new_brk > current->max_brk){
 			int N = (new_brk - current->max_brk + PGSIZE - 1)	/ PGSIZE;
-			for (int i = 0; i < N; i++) { 
+			for (int i = 0; i <= N; i++) { 
 				void* pa = new_page();
-				_map(&current->as, (void*)(current->max_brk + i * PGSIZE), pa);
+				_map(&(current->as), (void*)(current->max_brk + i * PGSIZE), pa);
 			}
 			current->max_brk = new_brk;
 		}
