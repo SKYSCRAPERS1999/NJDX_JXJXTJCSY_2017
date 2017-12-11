@@ -6,7 +6,7 @@ static PCB pcb[MAX_NR_PROC];
 static int nr_proc = 0;
 PCB *current = NULL;
 
-uintptr_t loader(_Protect *as, const char *filename);
+uintptr_t loader(_Protect *, const char *);
 
 void load_prog(const char *filename) {
   int i = nr_proc ++;
@@ -17,9 +17,8 @@ void load_prog(const char *filename) {
   // TODO: remove the following three lines after you have implemented _umake()
   _switch(&pcb[i].as);
   current = &pcb[i];
-	Log("enter\n");
   ((void (*)(void))entry)();
-
+	
   _Area stack;
   stack.start = pcb[i].stack;
   stack.end = stack.start + sizeof(pcb[i].stack);
