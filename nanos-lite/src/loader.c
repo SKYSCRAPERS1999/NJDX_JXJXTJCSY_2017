@@ -13,7 +13,8 @@ uintptr_t loader(_Protect *as, const char *filename) {
   //TODO();
 	//ramdisk_read(DEFAULT_ENTRY, 0, get_ramdisk_size());
 	int fd = fs_open(filename, 0, 0);
-	int N = (fs_filesz(fd) + PGSIZE - 1) / PGSIZE;
+	//int N = (fs_filesz(fd) + PGSIZE - 1) / PGSIZE;
+	int N = (fs_filesz(fd)) / PGSIZE;
 	for (int i = 0; i < N; i++){
 		void* ENTRY = new_page();
 		_map(as, DEFAULT_ENTRY + i * PGSIZE, ENTRY);
@@ -22,6 +23,6 @@ uintptr_t loader(_Protect *as, const char *filename) {
 		fs_read(fd, ENTRY, PGSIZE);
 	}
 	fs_close(fd);
-	Log("%s loaded\n", filename);	
+	Log("%s loaded\n", filename);
 	return (uintptr_t)DEFAULT_ENTRY;
 }
