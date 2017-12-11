@@ -23,5 +23,5 @@ uintptr_t loader(_Protect *as, const char *filename) {
 	}
 	fs_close(fd);
 	Log("%s loaded\n", filename);
-	return (uintptr_t)(DEFAULT_ENTRY + N * PGSIZE);
+	return (uintptr_t)DEFAULT_ENTRY;
 }
