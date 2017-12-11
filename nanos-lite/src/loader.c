@@ -19,8 +19,8 @@ uintptr_t loader(_Protect *as, const char *filename) {
 	for (int i = 0; i < N; i++){
 		void* ENTRY = new_page();
 		_map(as, (void*)(DEFAULT_ENTRY + i * PGSIZE), ENTRY - PGSIZE);
-		Log("ENTRY[%d] = 0x%x\n",i, (uint32_t)ENTRY);
-		fs_read(fd, ENTRY, PGSIZE);
+		Log("ENTRY[%d] = 0x%x\n",i, (uint32_t)ENTRY - PGSIZE);
+		fs_read(fd, ENTRY - PGSIZE, PGSIZE);
 	}
 	/*
 	int i = 0;
