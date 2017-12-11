@@ -19,12 +19,12 @@ void load_prog(const char *filename) {
   current = &pcb[i];
   ((void (*)(void))entry)();
 	
+	Log("ENTERENTER\n");
   _Area stack;
   stack.start = pcb[i].stack;
   stack.end = stack.start + sizeof(pcb[i].stack);
 
   pcb[i].tf = _umake(&pcb[i].as, stack, stack, (void *)entry, NULL, NULL);
-	Log("ENTERENTER\n");
 }
 
 _RegSet* schedule(_RegSet *prev) {
