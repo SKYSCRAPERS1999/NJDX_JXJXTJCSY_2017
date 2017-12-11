@@ -65,15 +65,19 @@ void _switch(_Protect *p) {
 }
 
 void _map(_Protect *p, void *va, void *pa) {
+	PDE* pde = (PDE*)p->ptr;
 	uint32_t pde_off = PDX(va);
 	uint32_t pte_off = PTX(va);
-	uint32_t addr_off = OFF(va);
-	
-	uint32_t pda = kpdirs[pde_off];
-	uint32_t pta_base = PTE_ADDR(pda);
-	uint32_t pta = kptabs[pta_base | pte_off];
-	
-	pa = (uint32_t*)(PTE_ADDR(pta) | addr_off);
+	pde += pde_off;
+	PTE *pte;
+	uint32_t present = *pde & 0x1;
+	if (present == 0){
+		pte = (PTE*)(palloc_f());
+		*pde = PTE_ADDR(pte) | 0x1;
+	}else{
+		pte = (PTE*)(PTE_ADDR(pde));
+	}
+	pte[pte_off] = PTE_ADDR(pa) | 0x1;
 }
 
 void _unmap(_Protect *p, void *va) {
