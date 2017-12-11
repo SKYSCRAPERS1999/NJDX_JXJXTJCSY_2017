@@ -12,7 +12,6 @@ extern void* new_page(void);
 uintptr_t loader(_Protect *as, const char *filename) {
   //TODO();
 	//ramdisk_read(DEFAULT_ENTRY, 0, get_ramdisk_size());
-  //return (uintptr_t)DEFAULT_ENTRY;
 	void* ENTRY = new_page();
 	_map(as, DEFAULT_ENTRY, ENTRY);
 	Log("ENTRY = 0x%x\n", (uint32_t)ENTRY);
