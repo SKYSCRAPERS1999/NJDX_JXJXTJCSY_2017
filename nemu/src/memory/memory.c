@@ -81,7 +81,7 @@ void cross_pg_write(vaddr_t addr, int len, uint32_t data){
 
 uint32_t vaddr_read(vaddr_t addr, int len) {
 	if (((cpu.cr0 & 0x1) == 0) || ((cpu.cr0 & 0x80000000) == 0)) return paddr_read(addr, len);
-	uint32_t ok = PTE_ADDR((addr)^(addr + len - 1));
+	uint32_t ok = PTE_ADDR((addr)^(addr + len));
 	if (ok != 0) {
 		//Log("addr = %u\n", addr);
 		return cross_pg_read(addr, len);
