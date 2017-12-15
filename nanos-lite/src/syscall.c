@@ -6,6 +6,7 @@ extern int fs_read(int, void*, size_t);
 extern int fs_write(int, void*, size_t);
 extern int fs_close(int);
 extern int fs_lseek(int, off_t, int);
+extern int mm_brk(uint32_t);
 _RegSet* do_syscall(_RegSet *r) {
   uintptr_t a[4];
   a[0] = SYSCALL_ARG1(r);
@@ -45,7 +46,8 @@ _RegSet* do_syscall(_RegSet *r) {
 		case SYS_brk: {
 			_heap.end = (void*)a[1];
 			//Log("_heap.end = %p\n, _end = %p, end = %p\n", _heap.end, &_end, &end);
-			SYSCALL_ARG1(r) = 0;
+			SYSCALL_ARG1(r) = mm_brk(a[1]);
+			
 			break;
 		}
 		
