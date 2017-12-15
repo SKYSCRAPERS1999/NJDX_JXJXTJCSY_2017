@@ -6,6 +6,9 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 			do_syscall(r);
 			break;
 		}
+		case 7:{
+			
+		}
     default: panic("Unhandled event ID = %d", e.event);
   }
 
