@@ -7,7 +7,8 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 			break;
 		}
 		case 7:{
-			
+			Log("Hello!\n");
+			break;
 		}
     default: panic("Unhandled event ID = %d", e.event);
   }
