@@ -1,5 +1,7 @@
 #include "proc.h"
 #include "memory.h"
+#define PTE_ADDR(pte) ((uint32_t)(pte) & ~0xfff)
+
 void _map(_Protect*, void*, void*);
 static void *pf = NULL;
 
@@ -23,7 +25,7 @@ int mm_brk(uint32_t new_brk) {
 		current->cur_brk = current->max_brk = new_brk;
 	}else{
 		if (new_brk > current->max_brk){
-			int N = (new_brk - current->max_brk + PGSIZE - 1)	/ PGSIZE;
+			int N = (PTE_ADDR(new_brk) - PTE_ADDR(current->max_brk) + 1) / PGSIZE;
 			for (int i = 0; i < N; i++) { 	
 				void* pa = new_page();
 				_map(&current->as, (void*)(current->max_brk + i * PGSIZE), pa);
