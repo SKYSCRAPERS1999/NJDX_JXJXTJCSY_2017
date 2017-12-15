@@ -44,8 +44,7 @@ _RegSet* do_syscall(_RegSet *r) {
 		}
 		
 		case SYS_brk: {
-			//_heap.end = (void*)a[1];
-			_end = a[1];
+			_heap.end = (void*)a[1];
 			//Log("_heap.end = %p\n, _end = %p, end = %p\n", _heap.end, &_end, &end);
 			SYSCALL_ARG1(r) = mm_brk(a[1]);
 			

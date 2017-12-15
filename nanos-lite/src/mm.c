@@ -26,7 +26,7 @@ int mm_brk(uint32_t new_brk) {
 	}else{
 		if (new_brk > current->max_brk){
 			int N = (PTE_ADDR(new_brk) - PTE_ADDR(current->max_brk) + PGSIZE - 1) / PGSIZE;
-			for (int i = 0; i < N; i++) {
+			for (int i = 0; i <= N; i++) {
 				//if (current->max_brk + i * PGSIZE > new_brk) break;
 				void* pa = new_page();
 				_map(&current->as, (void*)(PTE_ADDR(current->max_brk) + i * PGSIZE), pa);
