@@ -22,16 +22,6 @@ uintptr_t loader(_Protect *as, const char *filename) {
 		Log("ENTRY[%d] = 0x%x\n",i, (uint32_t)ENTRY);
 		fs_read(fd, ENTRY, PGSIZE);
 	}
-	/*
-	int i = 0;
-	while (!fs_end(fd)){
-		void* ENTRY = new_page();
-		_map(as, DEFAULT_ENTRY + i * PGSIZE, ENTRY);
-		i++;
-		//Log("ENTRY = 0x%x\n", (uint32_t)ENTRY);
-		fs_read(fd, ENTRY, PGSIZE);
-	}
-	*/
 	fs_close(fd);
 	Log("%s loaded\n", filename);
 	return (uintptr_t)DEFAULT_ENTRY;
