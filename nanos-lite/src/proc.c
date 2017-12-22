@@ -31,8 +31,8 @@ _RegSet* schedule(_RegSet *prev) {
 
 	current = &pcb[0];
 	
-	_switch(&pcb[0].as);
+	_switch(&current->as);
 	
-	return pcb[0].tf;
+	return current->tf;
 	//return NULL;
 }
