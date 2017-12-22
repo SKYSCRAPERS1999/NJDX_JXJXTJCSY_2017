@@ -86,10 +86,12 @@ void _unmap(_Protect *p, void *va) {
 _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *const argv[], char *const envp[]) {
 	uint32_t* ST = (uint32_t*)ustack.start;
 	ST -= 3 * 4;
+	_RegSet* ret = (_RegSet*)ST;
 	*(ST - 4) = 0x200;
 	*(ST - 8) = 8;
-	ST -= 14 * 4;
-	*(ST) = (uint32_t)entry;
-	return (_RegSet*)ST;
+	//*(ST - 12) = (uint32_t)entry;
+	ST -= 13 * 4;
+	*ST = (uint32_t)entry;
+	return ret;
 	//return NULL;
 }
