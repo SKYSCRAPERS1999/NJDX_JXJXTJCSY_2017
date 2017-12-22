@@ -98,6 +98,5 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 
 	ST--; *ST = (uintptr_t)entry; //ret val
 	ST--; *ST = (uintptr_t)ebp2; //old ebp
-  ST--;
 	return (_RegSet*)ST;
 }
