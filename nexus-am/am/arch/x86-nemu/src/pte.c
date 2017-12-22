@@ -89,7 +89,7 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 	*(ST - 4) = 0x200;
 	*(ST - 8) = 8;
 	*(ST - 12) = (uint32_t)entry;
-	ST -= 14 * 4;
+	ST -= 12 * 4;
 	return (_RegSet*)ST;
 	//return NULL;
 }
