@@ -30,7 +30,8 @@ _RegSet* schedule(_RegSet *prev) {
   current->tf = prev;
 	cnt++; Log("cnt = %d\n", cnt);
 	current = ((current == &pcb[0]) ? &pcb[1] : &pcb[0]);
-	
+	if (current == &pcb[0]) Log("current at 0\n");
+	else Log("current at 1\n");
 	_switch(&current->as);
 	
 	return current->tf;
