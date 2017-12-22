@@ -88,14 +88,13 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 	for (int i = 0; i < 4; i++){
 		ST--; *ST = 0;
 	}              //3 arg and ret val.
-	ST--; *ST = 0; //old ebp
 	uintptr_t* ebp2 = ST; 
 	
 	ST--; *ST = 0x00000200;
 	ST--; *ST = 0x8;
 	ST--; *ST = (uintptr_t)entry; // 3 arg
-	for (int i = 0; i < 9; i++) ST--; // 10 arg
-
+	for (int i = 0; i < 10; i++) ST--; // 10 arg
+	*(ST + 4 * 3) = ebp2;
 	//ST--; *ST = (uintptr_t)entry; //ret val
 	//ST--; *ST = (uintptr_t)ebp2; //old ebp
 	//return (_RegSet*)ST;
