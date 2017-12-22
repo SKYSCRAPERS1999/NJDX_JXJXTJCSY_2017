@@ -50,9 +50,7 @@ _RegSet *_make(_Area stack, void *entry, void *arg) {
 
 void _trap() {
 	//vectrap();
-	while (1) {
-		asm volatile("int $0x81");
-	}
+	asm volatile("int $0x81");
 }
 
 int _istatus(int enable) {
