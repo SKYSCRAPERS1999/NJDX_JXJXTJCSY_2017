@@ -14,6 +14,7 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 			_RegSet* regs = schedule(r);	
 			//return regs;
 			return regs;
+			break;
 		}
 	
     default: panic("Unhandled event ID = %d", e.event);
