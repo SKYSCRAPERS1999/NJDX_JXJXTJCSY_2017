@@ -11,7 +11,8 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 		
 		case 7:{
 			Log("Hello!\n");
-			return schedule(r);	
+			//return 
+			schedule(r);	
 			break;
 		}
 	
