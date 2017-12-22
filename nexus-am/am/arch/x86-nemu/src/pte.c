@@ -85,11 +85,11 @@ void _unmap(_Protect *p, void *va) {
 
 _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *const argv[], char *const envp[]) {
 	uintptr_t* END = (uintptr_t*)ustack.end;
-	END -= 4 * 4;
-	*(END - 4) = 0xffffffff;
-	*(END - 8) = 8;
-	*(END - 12) = (uintptr_t)entry;
-	END -= 3 * 4;
+	END -= 5 * 4;
+	*(END) = 0xffffffff;
+	*(END - 4) = 8;
+	*(END - 8) = (uintptr_t)entry;
+	END -= 2 * 4;
 	return (_RegSet*)END;
 	//return NULL;
 }
