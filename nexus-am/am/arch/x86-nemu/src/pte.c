@@ -84,8 +84,8 @@ void _unmap(_Protect *p, void *va) {
 }
 
 _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *const argv[], char *const envp[]) {
-	_RegSet* regs = (_RegSet*)ustack.end;
-	regs -= 17 * 4;
+	_RegSet* regs = (_RegSet*)ustack.start;
+	regs -= 16 * 4;
 	regs->eflags  = 0x00000200;
 	regs->cs = 8;
 	regs->eip = (uint32_t)entry;
