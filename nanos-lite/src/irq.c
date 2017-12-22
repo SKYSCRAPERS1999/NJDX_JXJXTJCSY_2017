@@ -5,15 +5,19 @@ _RegSet* do_syscall(_RegSet*);
 static _RegSet* do_event(_Event e, _RegSet* r) {
   switch (e.event) {
 		case 8:{
-			//return do_syscall(r);
-			return schedule(do_syscall(r));
+			return do_syscall(r);
+			//return schedule(do_syscall(r));
 		}
 		
 		case 7:{
 			//Log("Hello!\n");
 			return schedule(r);	
 		}
-	
+		
+		case 0:{
+			Log("TIMER_IRQ\n");
+			return schedule(r);
+		}
     default: panic("Unhandled event ID = %d", e.event);
   }
 

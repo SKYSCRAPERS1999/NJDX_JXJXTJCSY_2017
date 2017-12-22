@@ -10,6 +10,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 	rtl_push(&cpu.EFLAGS);
 	rtl_push((uint32_t*)&cpu.cs);
 	rtl_push(&ret_addr);
+	cpu.IF = 0;
 	uint32_t base = cpu.IDT_base;
 	uint32_t idt_data[2];
 	idt_data[0] = vaddr_read(base + 8 * NO, 4);
@@ -22,4 +23,6 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 }
 
 void dev_raise_intr() {
+	cpu.INTR = true;
 }
+
