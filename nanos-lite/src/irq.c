@@ -15,7 +15,7 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 		}
 		
 		case 3:{
-			Log("TIMER_IRQ\n");
+			//Log("TIMER_IRQ\n");
 			return schedule(r);
 		}
     default: panic("Unhandled event ID = %d", e.event);
