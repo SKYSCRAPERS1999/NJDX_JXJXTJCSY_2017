@@ -87,7 +87,8 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 	uint32_t* ST = (uint32_t*)ustack.start;
 	for (int i = 0; i < 4; i++){
 		ST--; *ST = 0;
-	}              //3 arg and ret val.
+	}//3 arg and ret val.
+	ST--;
 	ST--; *ST = 0x00000200;
 	ST--; *ST = 0x00000008;
 	ST--; *ST = (uint32_t)entry; // 3 arg
