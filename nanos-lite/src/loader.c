@@ -13,7 +13,7 @@ extern void* new_page(void);
 uintptr_t loader(_Protect *as, const char *filename) {
   //TODO();
 	//ramdisk_read(DEFAULT_ENTRY, 0, get_ramdisk_size());
-	Log("ENTER!\n");
+	//Log("ENTER!\n");
 	int fd = fs_open(filename, 0, 0);
   int N = (fs_filesz(fd) + PGSIZE - 1) / PGSIZE;
 	for (int i = 0; i < N; i++){
