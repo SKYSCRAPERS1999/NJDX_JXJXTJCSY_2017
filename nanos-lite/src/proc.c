@@ -11,7 +11,7 @@ uintptr_t loader(_Protect *, const char *);
 void load_prog(const char *filename) {
   int i = nr_proc ++;
   _protect(&pcb[i].as);
-
+	printf("%d\n", i);	
   uintptr_t entry = loader(&pcb[i].as, filename);
 
   // TODO: remove the following three lines after you have implemented _umake()
