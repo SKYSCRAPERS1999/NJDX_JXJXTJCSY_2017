@@ -11,7 +11,7 @@ asm_trap:
 	
 	movl %eax, %esp
   
-	addl $4, %esp
+	#addl $4, %esp
 
   popal
   addl $8, %esp
