@@ -88,7 +88,7 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 	for (int i = 0; i < 4; i++){
 		ST--; *ST = 0;
 	}
-	ST--; *ST = 0; //old ebp
+	ST--; *ST = (uintptr_t)ustack.start; //old ebp
 	uintptr_t* ebp2 = ST;
 	ST--; ST--; ST--;
 
