@@ -32,7 +32,8 @@ _RegSet* schedule(_RegSet *prev) {
 	current = &pcb[0];
 	
 	_switch(&pcb[0].as);
-
+	
+	Log("scheduled!\n");
 	return pcb[0].tf;
 	//return NULL;
 }
