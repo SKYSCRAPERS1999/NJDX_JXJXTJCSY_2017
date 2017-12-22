@@ -28,6 +28,8 @@ void load_prog(const char *filename) {
 int cnt = 0;
 _RegSet* schedule(_RegSet *prev) {
   current->tf = prev;
+	//void* buf; 
+	//int current_game = events_read(buf, 4);
 	cnt++; //Log("cnt = %d\n", cnt);
 	if (cnt % 100 == 0){
 		current = &pcb[1];
