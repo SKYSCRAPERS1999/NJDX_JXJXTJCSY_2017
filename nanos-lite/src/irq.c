@@ -12,7 +12,7 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 		case 7:{
 			Log("Hello!\n");
 			_RegSet* regs schedule(r);	
-			return _RegSet(e, r);
+			return *(e, r);
 		}
 	
     default: panic("Unhandled event ID = %d", e.event);
