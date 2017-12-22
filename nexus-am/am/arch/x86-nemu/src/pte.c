@@ -97,7 +97,6 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 	for (int i = 0; i < 10; i++) ST--;
 	ST--; *ST = (uintptr_t)ebp2;
 	ST--; *ST = (uintptr_t)entry;
-	ST--; ST--; ST--;
 
 	return (_RegSet*)ST;
 }
