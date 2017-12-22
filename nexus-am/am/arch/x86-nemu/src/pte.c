@@ -94,7 +94,7 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 	ST--; *ST = 0x00000200;
 	ST--; *ST = 0x8;
 	ST--; *ST = (uintptr_t)entry; // 3 arg
-	for (int i = 0; i < 10; i++) ST--; // 10 arg
+	for (int i = 0; i < 9; i++) ST--; // 10 arg
 	_RegSet ret = ST;
 
 	ST--; *ST = (uintptr_t)entry; //ret val
