@@ -11,8 +11,8 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 		
 		case 7:{
 			Log("Hello!\n");
-			schedule(r);	
-			break;
+			return schedule(r);	
+			//break;
 		}
 	
     default: panic("Unhandled event ID = %d", e.event);
