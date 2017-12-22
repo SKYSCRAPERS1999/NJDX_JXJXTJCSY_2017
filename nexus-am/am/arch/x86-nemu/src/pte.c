@@ -84,7 +84,7 @@ void _unmap(_Protect *p, void *va) {
 }
 
 _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *const argv[], char *const envp[]) {
-	uintptr_t* ST = (uintptr_t*)ustack.end;
+	uintptr_t* ST = (uintptr_t*)ustack.start;
 	for (int i = 0; i < 4; i++){
 		ST--; *ST = 0;
 	}              //3 arg and ret val.
@@ -98,5 +98,6 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 
 	ST--; *ST = (uintptr_t)entry; //ret val
 	ST--; *ST = (uintptr_t)ebp2; //old ebp
-	return (_RegSet*)ST;
+	//return (_RegSet*)ST;
+	return NULL;
 }
