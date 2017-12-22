@@ -1,4 +1,6 @@
 #include "common.h"
+_RegSet* schedule(_RegSet*);
+
 _RegSet* do_syscall(_RegSet*);
 static _RegSet* do_event(_Event e, _RegSet* r) {
   switch (e.event) {
@@ -9,6 +11,7 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 		
 		case 7:{
 			Log("Hello!\n");
+			
 			break;
 		}
 	
