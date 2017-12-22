@@ -14,7 +14,7 @@ static _RegSet* do_event(_Event e, _RegSet* r) {
 			return schedule(r);	
 		}
 		
-		case 0:{
+		case 3:{
 			Log("TIMER_IRQ\n");
 			return schedule(r);
 		}
