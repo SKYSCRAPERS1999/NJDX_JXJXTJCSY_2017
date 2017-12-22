@@ -88,7 +88,7 @@ _RegSet *_umake(_Protect *p, _Area ustack, _Area kstack, void *entry, char *cons
 	for (int i = 0; i < 8; i++){
 		*ST-- = 0;
 	}              //3 arg and ret val.
-	*ST-- = 0x00000200;
+	*ST-- = 0x202;
 	*ST-- = 0x8;
 	*ST-- = (uint32_t)entry; // 3 arg
 	*ST-- = 0x0;
