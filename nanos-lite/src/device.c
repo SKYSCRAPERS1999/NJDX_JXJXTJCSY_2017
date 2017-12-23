@@ -14,14 +14,16 @@ static const char *keyname[256] __attribute__((used)) = {
   _KEYS(NAME)
 };
 
+int current_game = 0;
 size_t events_read(void *buf, size_t len) {
 	int code = _read_key();
 	//printf("code = %d\n", code);
 	if (code != _KEY_NONE){
 		if (code > 0x8000){
 			sprintf(buf, "kd %s\n", keyname[code - 0x8000]);
-			
-			printf("buf = %s\n", buf);
+			if (code == _KEY_F12) {
+				current_game = (current_game == 0 ? 2 : 0);
+			}
 		}else{
 			sprintf(buf, "ku %s\n", keyname[code]);
 		}

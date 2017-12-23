@@ -25,18 +25,16 @@ void load_prog(const char *filename) {
   pcb[i].tf = _umake(&pcb[i].as, stack, stack, (void *)entry, NULL, NULL);
 }
 
+extern int current_game;
 extern size_t events_read(void*, size_t);
 int cnt = 0;
 _RegSet* schedule(_RegSet *prev) {
   current->tf = prev;
-	void* buf = NULL; 
-	//int current_game = 
-	events_read(buf, 4);
-	cnt++; //Log("cnt = %d\n", cnt);
+	cnt++; 
 	if (cnt % 100 == 0){
 		current = &pcb[1];
 	}else{
-		current = &pcb[0];
+		current = &pcb[current_game];
 	}
   //current = ((current == &pcb[0]) ? &pcb[1] : &pcb[0]);
 	//if (current == &pcb[0]) Log("current at 0\n");
