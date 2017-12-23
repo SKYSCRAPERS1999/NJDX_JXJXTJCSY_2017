@@ -28,7 +28,7 @@ size_t events_read(void *buf, size_t len) {
 		unsigned long time = _uptime();
 		sprintf(buf, "t %d\n", time);
 	}
-	//printf("buf = %s\n", buf);
+	printf("buf = %s\n", buf);
 	return strlen(buf);
 }
 
