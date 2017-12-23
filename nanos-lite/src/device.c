@@ -20,6 +20,8 @@ size_t events_read(void *buf, size_t len) {
 	if (code != _KEY_NONE){
 		if (code > 0x8000){
 			sprintf(buf, "kd %s\n", keyname[code - 0x8000]);
+			
+			printf("buf = %s\n", buf);
 		}else{
 			sprintf(buf, "ku %s\n", keyname[code]);
 		}
@@ -28,7 +30,6 @@ size_t events_read(void *buf, size_t len) {
 		unsigned long time = _uptime();
 		sprintf(buf, "t %d\n", time);
 	}
-	if (code != _KEY_NONE) printf("buf = %s\n", buf);
 	return strlen(buf);
 }
 
