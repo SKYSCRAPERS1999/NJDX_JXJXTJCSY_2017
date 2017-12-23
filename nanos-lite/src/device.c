@@ -21,7 +21,7 @@ size_t events_read(void *buf, size_t len) {
 	if (code != _KEY_NONE){
 		if (code > 0x8000){
 			sprintf(buf, "kd %s\n", keyname[code - 0x8000]);
-			if (code == _KEY_F12) {
+			if (code - 0x8000 == _KEY_F12) {
 				printf("_KEY_F12 = %d\n", _KEY_F12);
 				current_game = (current_game == 0 ? 2 : 0);
 			}
